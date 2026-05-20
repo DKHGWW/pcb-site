@@ -1,4 +1,244 @@
-
+@ -1,266 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>四川井明电子 | 精密PCB智造专家</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; line-height: 1.5; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+        .navbar {
+            background: #ffffff;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #eef2f6;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 16px 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .logo h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #0f2b5e, #1e4a7a);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 2px;
+        }
+        .logo span { 
+            font-size: 0.7rem; 
+            color: #4b5563; 
+            display: block;
+            letter-spacing: 0.3px;
+        }
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #ffffff;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            min-width: 200px;
+            padding: 8px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+            transition: all 0.2s ease;
+            z-index: 200;
+            border: 1px solid #eef2f6;
+        }
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .dropdown-menu a {
+            display: block;
+            padding: 8px 20px;
+            color: #334155;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .dropdown-menu a:hover {
+            background: #f1f5f9;
+            color: #2563eb;
+        }
+        .nav-links { display: flex; gap: 28px; list-style: none; flex-wrap: wrap; align-items: center; }
+        .nav-links > li > a { text-decoration: none; font-weight: 500; color: #1e293b; transition: 0.2s; display: inline-block; padding: 8px 0; }
+        .nav-links > li > a:hover, .nav-links > li > a.active { color: #2563eb; }
+        .lang-btn {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-radius: 40px;
+            padding: 6px 14px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #1e293b;
+            margin-left: 8px;
+        }
+        .lang-btn:hover {
+            background: #e2e8f0;
+            border-color: #2563eb;
+            color: #2563eb;
+        }
+        .menu-icon { display: none; font-size: 1.6rem; cursor: pointer; }
+        .page-section { display: none; animation: fadeIn 0.3s ease; padding: 60px 0 20px 0; border-bottom: 1px solid #e9eef3; }
+        .page-section.active-page { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* 轮播图样式 */
+        .carousel {
+            position: relative;
+            width: 100%;
+            border-radius: 28px;
+            overflow: hidden;
+            margin-bottom: 48px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+        }
+        .carousel-inner { position: relative; width: 100%; height: 400px; }
+        .carousel-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            background-color: #1e293b;
+        }
+        .carousel-item.active { opacity: 1; }
+        .carousel-caption {
+            background: rgba(0,0,0,0.5);
+            padding: 20px;
+            border-radius: 20px;
+            max-width: 80%;
+            backdrop-filter: blur(4px);
+        }
+        .carousel-caption h3 { font-size: 2rem; margin-bottom: 10px; }
+        .carousel-caption p { font-size: 1rem; }
+        .carousel-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            z-index: 10;
+        }
+        .carousel-indicators span {
+            width: 12px;
+            height: 12px;
+            background-color: rgba(255,255,255,0.6);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .carousel-indicators span.active { background-color: #2563eb; transform: scale(1.2); }
+        @media (max-width: 768px) {
+            .carousel-inner { height: 280px; }
+            .carousel-caption h3 { font-size: 1.2rem; }
+            .carousel-caption p { font-size: 0.8rem; }
+        }
+        
+        .sub-section {
+            scroll-margin-top: 100px;
+            margin-bottom: 60px;
+            background: white;
+            border-radius: 28px;
+            padding: 32px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            border: 1px solid #eef2f8;
+        }
+        .sub-section h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #0f2b5e;
+            margin-bottom: 20px;
+            border-left: 4px solid #2563eb;
+            padding-left: 16px;
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 24px;
+        }
+        .info-card {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 20px;
+            transition: 0.2s;
+        }
+        .info-card h3 { margin-bottom: 12px; color: #1e4a7a; }
+        .section-title { font-size: 2rem; font-weight: 700; margin-bottom: 40px; text-align: center; color: #0f2b5e; position: relative; }
+        .section-title:after { content: ''; display: block; width: 70px; height: 4px; background: #2563eb; margin: 12px auto 0; border-radius: 2px; }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; }
+        .card { background: #ffffff; border-radius: 24px; padding: 24px; box-shadow: 0 8px 20px rgba(0,0,0,0.02); border: 1px solid #eef2f8; transition: 0.25s; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1); }
+        .table-wrapper { overflow-x: auto; border-radius: 20px; border: 1px solid #e9edf2; background: white; margin-top: 20px; }
+        .capability-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .capability-table th { background: #f0f4fa; padding: 14px 12px; text-align: center; font-weight: 600; color: #1e3a5f; }
+        .capability-table td { padding: 12px; border-bottom: 1px solid #eef2f8; text-align: center; }
+        .device-icon { font-size: 2.5rem; color: #2563eb; margin-bottom: 12px; }
+        .device-params { font-size: 0.8rem; color: #4b5563; margin-top: 12px; border-top: 1px solid #eef2f8; padding-top: 12px; }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            font-family: inherit;
+            margin-bottom: 16px;
+        }
+        .contact-form button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 40px;
+            cursor: pointer;
+        }
+        /* 底部社会责任声明 */
+        .social-statement {
+            background: #eef2ff;
+            border-radius: 28px;
+            padding: 40px 28px;
+            margin: 60px auto 0;
+            text-align: center;
+            max-width: 1200px;
+        }
+        .social-statement h3 {
+            font-size: 1.5rem;
+            color: #0f2b5e;
+            margin-bottom: 20px;
+        }
+        .social-statement p {
+            color: #334155;
+            line-height: 1.7;
+            max-width: 900px;
             margin: 0 auto;
         }
         /* 底部链接区域（多列） */
@@ -93,9 +333,84 @@
         .footer-links-col h4:after {
             content: '';
             position: absolute;
-        }
+@ -276,22 +324,36 @@
         .footer-links-col li {
             margin-bottom: 10px;
         }
         .footer-links-col a {
             text-decoration: none;
+            color: #4b5563;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+        .footer-links-col a:hover {
+            color: #2563eb;
+            padding-left: 4px;
+        }
+        @media (max-width: 768px) {
+            .footer-links-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        footer { background: #0f172a; color: #cbd5e1; padding: 48px 0 24px; text-align: center; margin-top: 0; }
+        .footer-links-col a {
+            text-decoration: none;
+            color: rgba(219, 234, 254, 0.78);
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+        .footer-links-col a:hover {
+            color: #ffffff;
+            padding-left: 4px;
+        }
+        @media (max-width: 768px) {
+            .footer-brand {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .footer-brand-mark {
+                width: 100%;
+            }
+            .footer-links-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        footer {
+            background: linear-gradient(180deg, rgba(8, 26, 58, 0.92), rgba(6, 19, 44, 0.98));
+            color: #cbd5e1;
+            padding: 24px 0 30px;
+            text-align: center;
+            margin-top: 0;
+            border-top: 1px solid rgba(191, 219, 254, 0.16);
+        }
+        .btn-outline { border: 1px solid #2563eb; background: transparent; padding: 10px 24px; border-radius: 40px; font-weight: 500; display: inline-block; text-decoration: none; color: #2563eb; transition: 0.2s; }
+        .btn-outline:hover { background: #2563eb; color: white; }
+        @media (max-width: 768px) {
+@ -383,12 +445,21 @@
+    </div>
+</div>
+<!-- 底部多列链接区域 -->
+<div class="footer-links">
+    <div class="container">
+        <div class="footer-links-grid" id="footerLinksGrid"></div>
+    </div>
+</div>
+<footer>
+<div class="footer-links">
+    <div class="container">
+        <div class="footer-brand">
+            <div class="footer-brand-mark">
+                <img src="footer-logo.png" alt="Sichuan Kinming Electronics Co., Ltd.">
+            </div>
+            <div class="footer-brand-copy">
+                <h3>Precision PCB Manufacturing</h3>
+                <p>Reliable process control, responsive engineering support, and stable delivery for industrial and high-performance electronics.</p>
+            </div>
+        </div>
+        <div class="footer-links-grid" id="footerLinksGrid"></div>
+    </div>
+</div>
+<footer>
+    <div class="container">
+        <div>© 2025 四川井明电子有限公司 | 精密PCB 智造全球</div>
+        <div>地址：四川省遂宁市经济技术开发区渠河南路188号电子电路标准厂房一期3号楼 | 通过ISO9001 & IATF16949</div>
