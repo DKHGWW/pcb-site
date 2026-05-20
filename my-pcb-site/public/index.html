@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>四川井明电子</title>
+    <meta charset="utf-8">
+    <style>
+        body { font-family: Arial; text-align: center; padding: 50px; }
+        h1 { color: #1e4a7a; }
+    </style>
+</head>
+<body>
+    <h1>四川井明电子</h1>
+    <p>动态网站部署成功！</p>
+    <p id="api-data">加载中...</p>
+    <script>
+        fetch('/api/info')
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('api-data').innerText = data.message;
+            });
+    </script>
+</body>
+</html>
