@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>四川井明电子 | 精密PCB智造专家 - 独立二级页面</title>
+    <title>四川井明电子 | 精密PCB智造专家 - 极致透明玻璃</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -173,25 +173,25 @@
             .carousel-caption p { font-size: 0.8rem; }
         }
         
-        /* ========== 二级页面内容区块 - 半透明毛玻璃 + 按钮级交互效果 ========== */
+        /* ========== 极致透明 + 毛玻璃 + 按钮悬浮效果 ========== */
         .sub-section {
             scroll-margin-top: 100px;
             margin-bottom: 60px;
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(18px);
+            background: rgba(255, 255, 255, 0.08);  /* 极度透明，仅保留8%白色 */
+            backdrop-filter: blur(28px);            /* 强模糊，增强玻璃质感 */
             border-radius: 28px;
             padding: 32px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             cursor: pointer;
         }
-        /* 悬浮按钮效果：上浮、阴影增强、边框发光 */
+        /* 悬浮时稍微提高亮度，上浮，边框高亮 */
         .sub-section:hover {
             transform: translateY(-6px);
-            background: rgba(255, 255, 255, 0.45);
-            backdrop-filter: blur(24px);
-            box-shadow: 0 20px 30px -12px rgba(37, 99, 235, 0.3);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(32px);
+            box-shadow: 0 20px 35px -12px rgba(37, 99, 235, 0.35);
             border-color: rgba(37, 99, 235, 0.6);
         }
         .sub-section h2 {
@@ -204,18 +204,18 @@
             transition: 0.2s;
         }
         .sub-section:hover h2 {
-            transform: translateX(4px);
+            transform: translateX(5px);
             color: #1e40af;
         }
         .sub-section p, .sub-section li, .sub-section td {
             color: #1e293b;
             font-weight: 500;
         }
-        /* 表格背景也适配透明风格 */
+        /* 表格背景也需透明 */
         .table-wrapper {
             overflow-x: auto;
             border-radius: 20px;
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.25);
             backdrop-filter: blur(4px);
             margin-top: 20px;
         }
@@ -225,7 +225,7 @@
             font-size: 0.85rem;
         }
         .capability-table th {
-            background: rgba(240, 244, 250, 0.8);
+            background: rgba(240, 244, 250, 0.7);
             padding: 14px 12px;
             text-align: center;
             font-weight: 600;
@@ -233,9 +233,9 @@
         }
         .capability-table td {
             padding: 12px;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(0,0,0,0.08);
             text-align: center;
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.4);
         }
         .grid-2col {
             display: grid;
@@ -244,34 +244,34 @@
             margin-top: 24px;
         }
         .info-card {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(8px);
             border-radius: 20px;
             padding: 20px;
             transition: 0.25s;
-            border: 1px solid rgba(255,255,255,0.4);
+            border: 1px solid rgba(255,255,255,0.3);
         }
         .info-card:hover {
             transform: scale(1.02);
-            background: rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.4);
             border-color: #2563eb;
             box-shadow: 0 12px 20px -8px rgba(37,99,235,0.2);
         }
-        /* 首页表单同样透明玻璃风格 */
+        /* 首页表单透明玻璃 */
         .home-form-large {
             max-width: 700px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
             border-radius: 32px;
             padding: 48px 40px;
             box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.6);
+            border: 1px solid rgba(255,255,255,0.5);
             transition: 0.3s;
         }
         .home-form-large:hover {
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.3);
             transform: translateY(-4px);
         }
         .home-form-large input, .home-form-large textarea, .contact-form input, .contact-form textarea {
@@ -282,12 +282,6 @@
             margin-bottom: 20px;
             background: rgba(255,255,255,0.9);
             font-family: inherit;
-            transition: 0.2s;
-        }
-        .home-form-large input:focus, .contact-form input:focus {
-            border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
-            outline: none;
         }
         .home-form-large button, .contact-form button {
             background: #2563eb;
@@ -303,10 +297,9 @@
         .home-form-large button:hover, .contact-form button:hover {
             background: #1e4a7a;
             transform: translateY(-2px);
-            box-shadow: 0 8px 18px rgba(37,99,235,0.4);
         }
         .social-statement {
-            background: rgba(238, 242, 255, 0.7);
+            background: rgba(238, 242, 255, 0.6);
             backdrop-filter: blur(12px);
             border-radius: 28px;
             padding: 40px 28px;
@@ -314,7 +307,7 @@
             text-align: center;
         }
         .footer-links {
-            background: rgba(255,255,255,0.9);
+            background: #ffffff;
             border-top: 1px solid #d9e6f7;
             border-bottom: 1px solid #d9e6f7;
             padding: 48px 0;
@@ -403,7 +396,6 @@
             form_title: "获取宣传册/报价",
             form_desc: "“以客户为中心”是井明的核心价值观之一，请填写信息获取宣传册或报价。",
             name_placeholder: "姓名*", email_placeholder: "邮箱*", company_placeholder: "公司名/留言", phone_placeholder: "电话", submit: "提交", thank_you: "感谢您的留言，我们会尽快联系您。",
-            // 关于井明子页面
             about_detail: {
                 intro: "公司简介", intro_text: "四川井明电子有限公司始创于2012年，前身为遂宁豪尔思电子科技有限公司，坐落于遂宁经开区电子电路产业园，现有员工500余人，是一家专业从事PCB电路板研发、设计、精密生产与配套服务的综合性制造企业。公司深耕线路板行业十余年，主营多层板、高精密HDI板、高多层板、金属基板、IC载板，产品广泛应用于汽车电子、网络通信、工控医疗、军工配套、智能终端等领域，可提供一站式定制量产解决方案。企业资质齐全，拥有IATF16949、ISO9001、ISO14001、UL、CQC权威认证，产品符合RoHS环保标准，全程严格品控，满足工业、汽车及高端精密设备使用要求。",
                 capability: "制程能力", capability_table: { headers: ["核心技术项", "井明标准能力", "特级能力"], rows: [["最大生产层数","24层","30层"],["最小线宽/线距","75/75μm","60/60μm"],["最小机械孔径","0.2mm","0.15mm"],["最大纵横比","20:1","25:1"],["阻抗控制公差","±10%","±7%"],["板翘控制","<0.75%","<0.5%"]] },
@@ -412,7 +404,6 @@
                 structure: "组织架构", structure_text: "设有市场中心、研发中心、制造中心、品控中心、供应链管理部及海外事业部。",
                 quality: "品质保证", quality_text: "从IQC进料检验到成品可靠性测试，全程SPC监控，配备AOI、飞针测试、X-ray、显微镜等先进设备。"
             },
-            // 行业市场子页面详情 (每个二级独立)
             industry_detail: {
                 network: "网络通信", network_desc: "高速光模块、路由器、基站天线PCB，采用低损耗高频材料，精准阻抗控制，支持25G/100G高速信号传输。",
                 auto: "汽车电子", auto_desc: "车规级PCB，满足IATF16949，应用于BMS电池管理、ECU控制单元、车载娱乐系统及ADAS辅助驾驶。",
@@ -421,7 +412,6 @@
                 power: "电源", power_desc: "厚铜电源板、金属基板，最大铜厚12oz，优异散热性能，适用于大功率电源模块。",
                 consumer: "消费电子", consumer_desc: "高集成度HDI板，满足轻薄化需求，广泛应用于智能家居、无人机、VR设备等领域。"
             },
-            // 产品技术子页面
             products_detail: {
                 std_pcb: "常规电路板", std_pcb_desc: "单双面及多层板，FR-4材料，快速打样及批量生产，最小线宽3mil。",
                 hdi: "高密度互联板", hdi_desc: "任意层互连，盲埋孔技术，线宽线距2.5/2.5mil，阶数1～3阶，适用于旗舰智能设备。",
@@ -431,14 +421,11 @@
                 prod_device: "生产设备", prod_list: ["数字钻孔机 (6轴)", "填孔脉冲电镀线", "真空蚀刻机", "高层压合机(30层)", "LDI激光直接成像"],
                 test_device: "检测设备", test_list: ["AOI自动光学检测", "飞针测试机(精度1μm)", "X-ray镀层测厚仪", "金相显微镜", "阻抗测试仪(TDR)"]
             },
-            // 新闻中心子页面
             news_detail: {
                 company_news: "公司新闻", company_news_list: ["井明电子荣获国家级专精特新小巨人", "井明电子通过IATF16949换版审核", "井明电子举办年度供应商大会", "井明新一代HDI产线正式投产"],
                 industry_news: "行业动态", industry_news_list: ["PCB行业迎来5G+AI新机遇", "新能源汽车带动车用PCB需求增长", "高频高速材料技术研讨会召开", "全球PCB产值2026年预计突破千亿美元"]
             },
-            // 社会责任子页面
             social_detail: { environment: "环境保护", environment_desc: "井明电子坚持绿色制造，严格遵守RoHS、REACH指令，投资建设先进的废水处理系统，实现中水回用率60%，厂区光伏发电覆盖率已达30%。我们采用无铅、无卤素材料，并通过ISO14001环境管理体系认证，承诺2030年实现碳减排35%。" },
-            // 联系我们子页面
             contact_detail: { offices: "服务据点", office_list: ["总部：四川省遂宁市经济技术开发区渠河南路188号电子电路标准厂房一期3号楼", "华南办事处：深圳南山区科技园", "华东办事处：苏州工业园区星汉街"], message_title: "在线留言", name_placeholder: "您的姓名", email_placeholder: "邮箱地址", msg_placeholder: "留言内容", submit: "提交留言" }
         },
         en: {
@@ -524,7 +511,7 @@
         if(page === 'about') {
             const d = t('about_detail');
             if(sub === 'intro') innerHtml += `<div class="container"><div class="sub-section"><h2>${d.intro}</h2><p>${d.intro_text}</p></div></div>`;
-            else if(sub === 'capability') { const cap = d.capability_table; innerHtml += `<div class="container"><div class="sub-section"><h2>${d.capability}</h2><div class="table-wrapper"><table class="capability-table"><thead><tr>${cap.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${cap.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div></div>`; }
+            else if(sub === 'capability') { const cap = d.capability_table; innerHtml += `<div class="container"><div class="sub-section"><h2>${d.capability}</h2><div class="table-wrapper"><table class="capability-table"><thead><tr>${cap.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${cap.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</table>`).join('')}</tr>`).join('')}</tbody></table></div></div></div>`; }
             else if(sub === 'management') innerHtml += `<div class="container"><div class="sub-section"><h2>${d.management}</h2><p>${d.management_text}</p></div></div>`;
             else if(sub === 'honor') innerHtml += `<div class="container"><div class="sub-section"><h2>${d.honor}</h2><ul>${d.honor_list.map(h=>`<li>${h}</li>`).join('')}</ul></div></div>`;
             else if(sub === 'structure') innerHtml += `<div class="container"><div class="sub-section"><h2>${d.structure}</h2><p>${d.structure_text}</p></div></div>`;
@@ -570,10 +557,8 @@
         const contentHtml = renderIndependentPage(page, sub);
         document.getElementById('app').innerHTML = contentHtml;
         initCarousel();
-        // 提交表单处理
         const form = document.getElementById('brochureForm');
         if(form) form.onsubmit = (e)=>{ e.preventDefault(); alert(t('thank_you')); form.reset(); };
-        // 更新底部及导航高亮
         document.getElementById('socialStatement').innerHTML = `<h3>${t('statement_title')}</h3><p>${t('statement_content')}</p>`;
         document.getElementById('footerAddress').innerText = t('footer_address');
         buildFooterLinks();
