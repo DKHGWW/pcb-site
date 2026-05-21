@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>四川井明电子 | 精密PCB智造专家</title>
+    <title>四川井明电子 | 精密PCB智造专家 - 独立二级页面</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -56,7 +56,7 @@
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(12px);
             border-radius: 20px;
-            min-width: 200px;
+            min-width: 210px;
             padding: 12px 8px;
             opacity: 0;
             visibility: hidden;
@@ -108,7 +108,6 @@
         }
         .menu-icon { display: none; font-size: 1.6rem; cursor: pointer; }
         
-        /* 主要内容区域 */
         .main-content {
             min-height: 60vh;
             padding: 60px 0 40px 0;
@@ -196,7 +195,7 @@
         .capability-table th { background: #f0f4fa; padding: 14px 12px; text-align: center; font-weight: 600; color: #1e3a5f; }
         .capability-table td { padding: 12px; border-bottom: 1px solid #eef2f8; text-align: center; }
         .grid-2col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 24px; }
-        .info-card { background: #f8fafc; border-radius: 20px; padding: 20px; }
+        .info-card { background: #f8fafc; border-radius: 20px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
         .home-form-large {
             max-width: 700px;
             margin: 0 auto;
@@ -326,7 +325,7 @@
 </footer>
 
 <script>
-    // ---------- 多语言数据库 ----------
+    // ---------- 完整的多语言内容库 (包含所有二级页面独立描述) ----------
     const langText = {
         zh: {
             nav_about: "关于井明", nav_industry: "行业市场", nav_products: "产品技术", nav_news: "新闻中心", nav_social: "社会责任", nav_contact: "联系我们",
@@ -334,52 +333,85 @@
             statement_title: "🌿 践行绿色制造，共创可持续未来",
             statement_content: "井明电子始终将环境保护与社会责任融入企业发展战略。我们严格遵守 RoHS、REACH 等国际环保指令，投资建设先进的废水处理与中水回用系统，厂区光伏发电覆盖率已达30%。同时，我们积极参与社区公益，关爱员工成长，致力于成为负责任、有温度的行业标杆。未来，我们将持续加大环保投入，推动低碳生产，与合作伙伴共同守护绿水青山。",
             form_title: "获取宣传册/报价",
-            form_desc: "“以客户为中心”是井明的核心价值观之一，我们致力于为客户提供高质高效的服务。请填写您的姓名和电子邮件地址以获取宣传册/报价。",
-            name_placeholder: "姓名*", email_placeholder: "邮箱*", company_placeholder: "公司名/网址/留言", phone_placeholder: "电话", submit: "提交", thank_you: "感谢您的留言，我们会尽快联系您。",
+            form_desc: "“以客户为中心”是井明的核心价值观之一，请填写信息获取宣传册或报价。",
+            name_placeholder: "姓名*", email_placeholder: "邮箱*", company_placeholder: "公司名/留言", phone_placeholder: "电话", submit: "提交", thank_you: "感谢您的留言，我们会尽快联系您。",
+            // 关于井明子页面
             about_detail: {
-                intro: "公司简介", intro_text: "四川井明电子有限公司始创于2012年，前身为遂宁豪尔思电子科技有限公司，坐落于遂宁经开区电子电路产业园，现有员工500余人，是一家专业从事PCB电路板研发、设计、精密生产与配套服务的综合性制造企业。公司深耕线路板行业十余年，主营多层板、高精密HDI板、高多层板、金属基板、IC载板，产品广泛应用于汽车电子、网络通信、工控医疗、军工配套、智能终端等领域，可提供一站式定制量产解决方案。企业资质齐全，拥有IATF16949、ISO9001、ISO14001、UL、CQC权威认证，产品符合RoHS环保标准，全程严格品控，满足工业、汽车及高端精密设备使用要求。公司持续深耕高端PCB领域，以精工品质与稳定交付，致力打造为全国优质线路板制造品牌。",
+                intro: "公司简介", intro_text: "四川井明电子有限公司始创于2012年，前身为遂宁豪尔思电子科技有限公司，坐落于遂宁经开区电子电路产业园，现有员工500余人，是一家专业从事PCB电路板研发、设计、精密生产与配套服务的综合性制造企业。公司深耕线路板行业十余年，主营多层板、高精密HDI板、高多层板、金属基板、IC载板，产品广泛应用于汽车电子、网络通信、工控医疗、军工配套、智能终端等领域，可提供一站式定制量产解决方案。企业资质齐全，拥有IATF16949、ISO9001、ISO14001、UL、CQC权威认证，产品符合RoHS环保标准，全程严格品控，满足工业、汽车及高端精密设备使用要求。",
                 capability: "制程能力", capability_table: { headers: ["核心技术项", "井明标准能力", "特级能力"], rows: [["最大生产层数","24层","30层"],["最小线宽/线距","75/75μm","60/60μm"],["最小机械孔径","0.2mm","0.15mm"],["最大纵横比","20:1","25:1"],["阻抗控制公差","±10%","±7%"],["板翘控制","<0.75%","<0.5%"]] },
                 management: "管理体系", management_text: "通过IATF16949、ISO9001、ISO14001、UL、CQC等权威认证，实施全流程数字化质量管控。",
                 honor: "井明荣誉", honor_list: ["国家高新技术企业", "四川省专精特新企业", "遂宁市PCB工程技术研究中心", "中国电子电路行业协会理事单位"],
                 structure: "组织架构", structure_text: "设有市场中心、研发中心、制造中心、品控中心、供应链管理部及海外事业部。",
                 quality: "品质保证", quality_text: "从IQC进料检验到成品可靠性测试，全程SPC监控，配备AOI、飞针测试、X-ray、显微镜等先进设备。"
             },
-            industry_detail: { network: "网络通信", network_desc: "高速光模块、路由器、基站天线PCB，低损耗材料，精准阻抗控制。", auto: "汽车电子", auto_desc: "车规级PCB，满足IATF16949，应用于BMS、ECU、车载娱乐系统。", smart: "智能终端", smart_desc: "智能手机、平板、可穿戴设备高密度互连板，薄型化设计。", medical: "工控医疗", medical_desc: "工业控制主板、医疗影像设备PCB，高可靠性长寿命。", power: "电源", power_desc: "厚铜电源板、金属基板，优异散热性能。", consumer: "消费电子", consumer_desc: "提供高集成度HDI板，满足轻薄化需求。" },
-            products_detail: {
-                std_pcb: "常规电路板", std_pcb_desc: "单双面、多层板，FR-4材料，快速打样。", hdi: "高密度互联板", hdi_desc: "任意层互连，盲埋孔技术，线宽线距2.5/2.5mil。", high_layer: "高多层电路板", high_layer_desc: "10-30层，背板、服务器主板，高可靠性。", metal_base: "金属基板", metal_base_desc: "铝基、铜基板，大功率LED、电源模块。",
-                process_cap: "制程能力", process_table: { headers: ["项目", "能力"], rows: [["最小线宽", "2.5mil"], ["最小孔径", "0.15mm"], ["最大板厚", "8.0mm"], ["表面处理", "沉金/沉银/OSP/镀金"]] },
-                prod_device: "生产设备", prod_list: ["数字钻孔机", "填孔脉冲电镀线", "真空蚀刻机", "高层压合机", "LDI曝光机"],
-                test_device: "检测设备", test_list: ["AOI自动光学检测", "飞针测试机", "X-ray镀层测厚仪", "显微镜", "阻抗测试仪"]
+            // 行业市场子页面详情 (每个二级独立)
+            industry_detail: {
+                network: "网络通信", network_desc: "高速光模块、路由器、基站天线PCB，采用低损耗高频材料，精准阻抗控制，支持25G/100G高速信号传输。",
+                auto: "汽车电子", auto_desc: "车规级PCB，满足IATF16949，应用于BMS电池管理、ECU控制单元、车载娱乐系统及ADAS辅助驾驶。",
+                smart: "智能终端", smart_desc: "智能手机、平板、可穿戴设备高密度互连板，薄型化设计，线宽线距可达2.5/2.5mil，支持任意层互连。",
+                medical: "工控医疗", medical_desc: "工业控制主板、医疗影像设备、监护仪PCB，高可靠性长寿命，满足Class 3医疗等级要求。",
+                power: "电源", power_desc: "厚铜电源板、金属基板，最大铜厚12oz，优异散热性能，适用于大功率电源模块。",
+                consumer: "消费电子", consumer_desc: "高集成度HDI板，满足轻薄化需求，广泛应用于智能家居、无人机、VR设备等领域。"
             },
-            news_detail: { company_news: "公司新闻", company_news_list: ["井明电子荣获国家级专精特新小巨人", "井明电子通过IATF16949换版审核", "井明电子举办年度供应商大会"], industry_news: "行业动态", industry_news_list: ["PCB行业迎来5G+AI新机遇", "新能源汽车带动车用PCB需求增长", "高频高速材料技术研讨会召开"] },
-            social_detail: { environment: "环境保护", environment_desc: "井明电子坚持绿色制造，严格遵守RoHS、REACH指令，投资建设先进的废水处理系统，实现中水回用，厂区光伏发电覆盖率已达30%。我们采用无铅、无卤素材料，并通过ISO14001环境管理体系认证。" },
-            contact_detail: { offices: "服务据点", office_list: ["总部：四川省遂宁市经济技术开发区渠河南路188号电子电路标准厂房一期3号楼", "华南办事处：深圳南山区", "华东办事处：苏州工业园区"], message_title: "在线留言", name_placeholder: "您的姓名", email_placeholder: "邮箱地址", msg_placeholder: "留言内容", submit: "提交留言" }
+            // 产品技术子页面
+            products_detail: {
+                std_pcb: "常规电路板", std_pcb_desc: "单双面及多层板，FR-4材料，快速打样及批量生产，最小线宽3mil。",
+                hdi: "高密度互联板", hdi_desc: "任意层互连，盲埋孔技术，线宽线距2.5/2.5mil，阶数1～3阶，适用于旗舰智能设备。",
+                high_layer: "高多层电路板", high_layer_desc: "10-30层，背板、服务器主板，高可靠性，阻抗公差±7%，满足高速数字信号要求。",
+                metal_base: "金属基板", metal_base_desc: "铝基、铜基板，大功率LED、电源模块，导热系数1.0～3.0W/m·K。",
+                process_cap: "制程能力", process_table: { headers: ["项目", "能力"], rows: [["最小线宽", "2.5mil"], ["最小孔径", "0.15mm"], ["最大板厚", "8.0mm"], ["表面处理", "沉金/沉银/OSP/镀金"]] },
+                prod_device: "生产设备", prod_list: ["数字钻孔机 (6轴)", "填孔脉冲电镀线", "真空蚀刻机", "高层压合机(30层)", "LDI激光直接成像"],
+                test_device: "检测设备", test_list: ["AOI自动光学检测", "飞针测试机(精度1μm)", "X-ray镀层测厚仪", "金相显微镜", "阻抗测试仪(TDR)"]
+            },
+            // 新闻中心子页面
+            news_detail: {
+                company_news: "公司新闻", company_news_list: ["井明电子荣获国家级专精特新小巨人", "井明电子通过IATF16949换版审核", "井明电子举办年度供应商大会", "井明新一代HDI产线正式投产"],
+                industry_news: "行业动态", industry_news_list: ["PCB行业迎来5G+AI新机遇", "新能源汽车带动车用PCB需求增长", "高频高速材料技术研讨会召开", "全球PCB产值2026年预计突破千亿美元"]
+            },
+            // 社会责任子页面
+            social_detail: { environment: "环境保护", environment_desc: "井明电子坚持绿色制造，严格遵守RoHS、REACH指令，投资建设先进的废水处理系统，实现中水回用率60%，厂区光伏发电覆盖率已达30%。我们采用无铅、无卤素材料，并通过ISO14001环境管理体系认证，承诺2030年实现碳减排35%。" },
+            // 联系我们子页面
+            contact_detail: { offices: "服务据点", office_list: ["总部：四川省遂宁市经济技术开发区渠河南路188号电子电路标准厂房一期3号楼", "华南办事处：深圳南山区科技园", "华东办事处：苏州工业园区星汉街"], message_title: "在线留言", name_placeholder: "您的姓名", email_placeholder: "邮箱地址", msg_placeholder: "留言内容", submit: "提交留言" }
         },
         en: {
             nav_about: "About Kinming", nav_industry: "Markets", nav_products: "Products & Tech", nav_news: "News", nav_social: "CSR", nav_contact: "Contact",
             footer_address: "Address: Building 3, Phase I, Electronic Circuit Standard Plant, No.188 Quhe South Road, Suining City, Sichuan Province | ISO9001 & IATF16949",
             statement_title: "🌿 Green Manufacturing for a Sustainable Future",
-            statement_content: "Kinming Electronics integrates environmental protection and social responsibility into our strategy. We strictly comply with RoHS, REACH, have built advanced wastewater treatment and reuse systems, and achieve 30% solar power coverage. We actively participate in community welfare and care for employee growth.",
-            form_title: "Get Brochure / Quote", form_desc: "Customer-centric is one of Kinming's core values. Please fill in your name and email address to receive our brochure/quote.",
-            name_placeholder: "Name*", email_placeholder: "Email*", company_placeholder: "Company/Website/Message", phone_placeholder: "Phone", submit: "Submit", thank_you: "Thank you! We will contact you soon.",
+            statement_content: "Kinming Electronics integrates environmental protection and social responsibility. We comply with RoHS/REACH, advanced water treatment & reuse, 30% solar power, and care for community.",
+            form_title: "Get Brochure / Quote",
+            form_desc: "Customer-centric is core value. Fill in info to receive brochure/quote.",
+            name_placeholder: "Name*", email_placeholder: "Email*", company_placeholder: "Company/Message", phone_placeholder: "Phone", submit: "Submit", thank_you: "Thank you! We will contact you soon.",
             about_detail: {
-                intro: "Company Profile", intro_text: "Sichuan Kinming Electronics Co., Ltd. was founded in 2012 (formerly Suining Haoersi Electronic Technology). Located in Suining Economic Development Zone, 500+ employees, specializing in PCB R&D, design, production. Main products: multilayer, HDI, high multilayer, metal core, IC substrates. Certifications: IATF16949, ISO9001, ISO14001, UL, CQC, RoHS compliant.",
+                intro: "Company Profile", intro_text: "Sichuan Kinming Electronics Co., Ltd. founded in 2012 (formerly Suining Haoersi). 500+ employees, specializing in PCB R&D and production: multilayer, HDI, high-multilayer, metal core. Certifications: IATF16949, ISO9001, ISO14001, UL, CQC, RoHS.",
                 capability: "Process Capability", capability_table: { headers: ["Technology", "Standard", "Special"], rows: [["Max Layers","24","30"],["Line/Space","75/75μm","60/60μm"],["Min Hole","0.2mm","0.15mm"],["Aspect Ratio","20:1","25:1"],["Impedance","±10%","±7%"],["Warpage","<0.75%","<0.5%"]] },
                 management: "Management System", management_text: "Certified IATF16949, ISO9001, ISO14001, UL, CQC. Full digital quality control.",
-                honor: "Honors", honor_list: ["National High-tech Enterprise", "Sichuan Specialized & Sophisticated", "Suining PCB Engineering Center", "CPCA Member"],
+                honor: "Honors", honor_list: ["National High-tech Enterprise", "Sichuan Specialized & Sophisticated Enterprise", "Suining PCB Engineering Center", "CPCA Member"],
                 structure: "Organization", structure_text: "Departments: Marketing, R&D, Manufacturing, QC, Supply Chain, Overseas.",
-                quality: "Quality Assurance", quality_text: "From IQC to reliability test, SPC monitoring. Equipped with AOI, flying probe, X-ray, microscope."
+                quality: "Quality Assurance", quality_text: "SPC monitoring from IQC to reliability test. Equipped with AOI, flying probe, X-ray, microscope."
             },
-            industry_detail: { network: "Telecom & Networking", network_desc: "High-speed optical modules, routers, base station PCBs.", auto: "Automotive Electronics", auto_desc: "IATF16949 certified PCBs for BMS, ECU, infotainment.", smart: "Smart Devices", smart_desc: "HDI for smartphones, tablets, wearables.", medical: "Industrial & Medical", medical_desc: "High-reliability PCBs for industrial control and medical imaging.", power: "Power Supply", power_desc: "Heavy copper, metal core for excellent heat dissipation.", consumer: "Consumer Electronics", consumer_desc: "High-integration HDI PCBs for slim devices." },
+            industry_detail: {
+                network: "Telecom & Networking", network_desc: "High-speed optical modules, routers, base station PCBs, low-loss materials, precise impedance control.",
+                auto: "Automotive Electronics", auto_desc: "IATF16949 certified PCBs for BMS, ECU, infotainment & ADAS.",
+                smart: "Smart Devices", smart_desc: "HDI for smartphones, tablets, wearables, line/space 2.5/2.5mil, any-layer.",
+                medical: "Industrial & Medical", medical_desc: "High-reliability PCBs for industrial control and medical imaging, long-life.",
+                power: "Power Supply", power_desc: "Heavy copper & metal core PCB, up to 12oz copper, excellent heat dissipation.",
+                consumer: "Consumer Electronics", consumer_desc: "High-integration HDI for smart home, drones, VR devices."
+            },
             products_detail: {
-                std_pcb: "Standard PCB", std_pcb_desc: "Single/double/multilayer, FR-4, quick-turn.", hdi: "HDI PCB", hdi_desc: "Any-layer, microvias, 2.5/2.5mil line/space.", high_layer: "High Multilayer", high_layer_desc: "10-30 layers, backplanes, server boards.", metal_base: "Metal Core PCB", metal_base_desc: "Aluminum/Copper base for high-power LEDs.",
+                std_pcb: "Standard PCB", std_pcb_desc: "Single/double/multilayer, FR-4, quick-turn, min line 3mil.",
+                hdi: "HDI PCB", hdi_desc: "Any-layer, microvias, 2.5/2.5mil line/space, 1-3 steps.",
+                high_layer: "High Multilayer", high_layer_desc: "10-30 layers, backplanes, server boards, impedance ±7%.",
+                metal_base: "Metal Core PCB", metal_base_desc: "Aluminum/Copper base for high-power LEDs, thermal conductivity 1.0~3.0W/m·K.",
                 process_cap: "Capability", process_table: { headers: ["Item", "Capability"], rows: [["Min Line", "2.5mil"], ["Min Hole", "0.15mm"], ["Max Thickness", "8.0mm"], ["Finishes", "ENIG/ImmAg/OSP/Hard Gold"]] },
-                prod_device: "Production Equipment", prod_list: ["CNC Drilling", "Pulse Plating", "Vacuum Etching", "High Layer Press", "LDI"],
-                test_device: "Testing Equipment", test_list: ["AOI", "Flying Probe", "X-ray", "Microscope", "Impedance Tester"]
+                prod_device: "Production Equipment", prod_list: ["CNC Drilling (6-spindle)", "Pulse Plating", "Vacuum Etching", "High Layer Press (30L)", "LDI"],
+                test_device: "Testing Equipment", test_list: ["AOI", "Flying Probe (1μm)", "X-ray Thickness", "Metallurgical Microscope", "TDR Impedance Tester"]
             },
-            news_detail: { company_news: "Company News", company_news_list: ["Kinming awarded National 'Little Giant'", "Kinming passed IATF16949 recertification", "Kinming held annual supplier conference"], industry_news: "Industry Trends", industry_news_list: ["PCB industry embraces 5G+AI", "EV drives automotive PCB demand", "High-frequency materials seminar"] },
-            social_detail: { environment: "Environmental Protection", environment_desc: "Kinming is committed to green manufacturing, strictly following RoHS and REACH. Advanced wastewater treatment and reuse, 30% solar power, ISO14001 certified." },
-            contact_detail: { offices: "Service Locations", office_list: ["HQ: Building 3, Phase I, Electronic Circuit Standard Plant, No.188 Quhe South Road, Suining", "Shenzhen Office: Nanshan District", "Suzhou Office: SIP"], message_title: "Online Message", name_placeholder: "Your Name", email_placeholder: "Email", msg_placeholder: "Message", submit: "Submit" }
+            news_detail: {
+                company_news: "Company News", company_news_list: ["Kinming awarded National 'Little Giant'", "Kinming passed IATF16949 recertification", "Annual supplier conference held", "New HDI production line launched"],
+                industry_news: "Industry Trends", industry_news_list: ["PCB industry embraces 5G+AI", "EV drives automotive PCB demand", "High-frequency materials seminar", "Global PCB market to exceed $100B by 2026"]
+            },
+            social_detail: { environment: "Environmental Protection", environment_desc: "Kinming commits to green manufacturing, RoHS/REACH, advanced wastewater treatment (60% reuse), 30% solar power, ISO14001, target 35% carbon reduction by 2030." },
+            contact_detail: { offices: "Service Locations", office_list: ["HQ: Building 3, Phase I, Electronic Circuit Standard Plant, No.188 Quhe South Road, Suining", "Shenzhen Office: Nanshan District", "Suzhou Office: Suzhou Industrial Park"], message_title: "Online Message", name_placeholder: "Your Name", email_placeholder: "Email", msg_placeholder: "Message", submit: "Submit" }
         }
     };
 
@@ -387,29 +419,41 @@
     function getUrlLang() { const urlParams = new URLSearchParams(window.location.search); return urlParams.get('lang') === 'en' ? 'en' : 'zh'; }
     function t(key) { const keys = key.split('.'); let val = langText[currentLang]; for(let k of keys) if(val && val[k] !== undefined) val = val[k]; else return key; return val; }
 
-    // 轮播数据
-    const carouselData = { about:[], industry:[], products:[], news:[], social:[], contact:[] };
-    function buildCarouselData() { const pages = ['about','industry','products','news','social','contact']; pages.forEach(p=>{ carouselData[p] = [ { image:"https://picsum.photos/id/20/1600/500", title: currentLang==='zh'?"精密智造":"Precision Manufacturing", desc: currentLang==='zh'?"高精度PCB生产线":"Industry 4.0" }, { image:"https://picsum.photos/id/26/1600/500", title: currentLang==='zh'?"创新驱动":"Innovation Driven", desc: currentLang==='zh'?"研发投入8%":"8% R&D" } ]; }); }
-    
-    function renderCarousel(pageKey) { 
-        const items = carouselData[pageKey] || [];
-        if(!items.length) return '';
+    // 动态轮播图数据 (根据页面主题)
+    const carouselMap = {
+        about: ["https://picsum.photos/id/20/1600/500","https://picsum.photos/id/26/1600/500","https://picsum.photos/id/96/1600/500"],
+        industry: ["https://picsum.photos/id/0/1600/500","https://picsum.photos/id/106/1600/500","https://picsum.photos/id/116/1600/500"],
+        products: ["https://picsum.photos/id/91/1600/500","https://picsum.photos/id/38/1600/500","https://picsum.photos/id/42/1600/500"],
+        news: ["https://picsum.photos/id/29/1600/500","https://picsum.photos/id/43/1600/500","https://picsum.photos/id/55/1600/500"],
+        social: ["https://picsum.photos/id/144/1600/500","https://picsum.photos/id/13/1600/500"],
+        contact: ["https://picsum.photos/id/15/1600/500","https://picsum.photos/id/89/1600/500"]
+    };
+    function renderCarousel(pageKey) {
+        const images = carouselMap[pageKey] || carouselMap.about;
         let indicators='', itemsHtml='';
-        items.forEach((item,idx)=>{ indicators+=`<span class="${idx===0?'active':''}" data-index="${idx}"></span>`; itemsHtml+=`<div class="carousel-item ${idx===0?'active':''}" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${item.image}');"><div class="carousel-caption"><h3>${item.title}</h3><p>${item.desc}</p></div></div>`; });
+        const titles = currentLang==='zh'?['智能工厂','研发中心','全球服务']:['Smart Factory','R&D Center','Global Service'];
+        images.forEach((img,idx)=>{
+            indicators+=`<span class="${idx===0?'active':''}" data-index="${idx}"></span>`;
+            itemsHtml+=`<div class="carousel-item ${idx===0?'active':''}" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${img}');"><div class="carousel-caption"><h3>${titles[idx%titles.length]}</h3><p>${currentLang==='zh'?'领先PCB制造技术':'Advanced PCB Manufacturing'}</p></div></div>`;
+        });
         return `<div class="carousel" id="pageCarousel"><div class="carousel-inner">${itemsHtml}</div><div class="carousel-indicators">${indicators}</div></div>`;
     }
-    function initCarousel() { const carouselDiv = document.getElementById('pageCarousel'); if(!carouselDiv) return; const items = carouselDiv.querySelectorAll('.carousel-item'), indicators = carouselDiv.querySelectorAll('.carousel-indicators span'); if(!items.length) return; let current=0, interval; function goTo(idx){ items[current].classList.remove('active'); indicators[current].classList.remove('active'); current=idx; items[current].classList.add('active'); indicators[current].classList.add('active'); } function startTimer(){ if(interval) clearInterval(interval); interval = setInterval(()=>{ let next = (current+1)%items.length; goTo(next); },4000); } indicators.forEach((ind,i)=>{ ind.addEventListener('click',()=>{ clearInterval(interval); goTo(i); startTimer(); }); }); startTimer(); }
+    function initCarousel() { 
+        const carouselDiv = document.getElementById('pageCarousel'); 
+        if(!carouselDiv) return; 
+        const items = carouselDiv.querySelectorAll('.carousel-item'), indicators = carouselDiv.querySelectorAll('.carousel-indicators span'); 
+        if(!items.length) return; 
+        let current=0, interval; 
+        function goTo(idx){ items[current].classList.remove('active'); indicators[current].classList.remove('active'); current=idx; items[current].classList.add('active'); indicators[current].classList.add('active'); } 
+        function startTimer(){ if(interval) clearInterval(interval); interval = setInterval(()=>{ let next = (current+1)%items.length; goTo(next); },4000); } 
+        indicators.forEach((ind,i)=>{ ind.addEventListener('click',()=>{ clearInterval(interval); goTo(i); startTimer(); }); }); 
+        startTimer(); 
+    }
 
-    // 生成单个子页面内容
-    function renderPageContent(page, sub) {
-        buildCarouselData();
+    // 核心：根据page和sub渲染独立页面 (二级菜单独立展示)
+    function renderIndependentPage(page, sub) {
         let innerHtml = renderCarousel(page);
         if(page === 'about') {
-            if(!sub) { // 首页表单模式
-                innerHtml += `<div class="container"><div class="home-form-large"><h3>${t('form_title')}</h3><p>${t('form_desc')}</p><form id="brochureForm"><input type="text" placeholder="${t('name_placeholder')}" required><input type="email" placeholder="${t('email_placeholder')}" required><input type="text" placeholder="${t('company_placeholder')}"><input type="tel" placeholder="${t('phone_placeholder')}"><button type="submit">${t('submit')}</button></form></div></div>`;
-                setTimeout(()=>{ const f=document.getElementById('brochureForm'); if(f) f.onsubmit=(e)=>{ e.preventDefault(); alert(t('thank_you')); f.reset(); }; },100);
-                return innerHtml;
-            }
             const d = t('about_detail');
             if(sub === 'intro') innerHtml += `<div class="container"><div class="sub-section"><h2>${d.intro}</h2><p>${d.intro_text}</p></div></div>`;
             else if(sub === 'capability') { const cap = d.capability_table; innerHtml += `<div class="container"><div class="sub-section"><h2>${d.capability}</h2><div class="table-wrapper"><table class="capability-table"><thead><tr>${cap.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${cap.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div></div>`; }
@@ -417,24 +461,20 @@
             else if(sub === 'honor') innerHtml += `<div class="container"><div class="sub-section"><h2>${d.honor}</h2><ul>${d.honor_list.map(h=>`<li>${h}</li>`).join('')}</ul></div></div>`;
             else if(sub === 'structure') innerHtml += `<div class="container"><div class="sub-section"><h2>${d.structure}</h2><p>${d.structure_text}</p></div></div>`;
             else if(sub === 'quality') innerHtml += `<div class="container"><div class="sub-section"><h2>${d.quality}</h2><p>${d.quality_text}</p></div></div>`;
-        }
+            else innerHtml += `<div class="container"><div class="home-form-large"><h3>${t('form_title')}</h3><p>${t('form_desc')}</p><form id="brochureForm"><input placeholder="${t('name_placeholder')}" required><input type="email" placeholder="${t('email_placeholder')}" required><input placeholder="${t('company_placeholder')}"><input placeholder="${t('phone_placeholder')}"><button type="submit">${t('submit')}</button></form></div></div>`;
+        } 
         else if(page === 'industry') {
             const d = t('industry_detail');
             if(sub && d[sub]) innerHtml += `<div class="container"><div class="sub-section"><h2>${d[sub]}</h2><p>${d[sub+'_desc']}</p></div></div>`;
-            else { let all = ''; for(let key of ['network','auto','smart','medical','power','consumer']) all+=`<div class="sub-section"><h2>${d[key]}</h2><p>${d[key+'_desc']}</p></div>`; innerHtml+=`<div class="container">${all}</div>`; }
+            else innerHtml += `<div class="container"><div class="sub-section"><h2>${t('nav_industry')}</h2><p>请从菜单选择具体细分市场。</p></div></div>`;
         }
         else if(page === 'products') {
             const d = t('products_detail');
-            const prodMap = { std_pcb:d.std_pcb_desc, hdi:d.hdi_desc, high_layer:d.high_layer_desc, metal_base:d.metal_base_desc, process_cap:'', prod_device:'', test_device:'' };
-            if(sub && prodMap[sub] !== undefined) {
-                if(sub === 'process_cap') { const pt = d.process_table; innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.process_cap}</h2><div class="table-wrapper"><table class="capability-table"><thead><tr>${pt.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${pt.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div></div>`; }
-                else if(sub === 'prod_device') innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.prod_device}</h2><div class="grid-2col">${d.prod_list.map(dev=>`<div class="info-card"><i class="fas fa-microchip"></i> ${dev}</div>`).join('')}</div></div></div>`;
-                else if(sub === 'test_device') innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.test_device}</h2><div class="grid-2col">${d.test_list.map(dev=>`<div class="info-card"><i class="fas fa-chart-line"></i> ${dev}</div>`).join('')}</div></div></div>`;
-                else innerHtml+=`<div class="container"><div class="sub-section"><h2>${d[sub]}</h2><p>${d[sub+'_desc']}</p></div></div>`;
-            } else {
-                let all = `<div class="container">${['std_pcb','hdi','high_layer','metal_base'].map(k=>`<div class="sub-section"><h2>${d[k]}</h2><p>${d[k+'_desc']}</p></div>`).join('')}<div class="sub-section"><h2>${d.process_cap}</h2>${'<div class="table-wrapper"><table class="capability-table"><thead><tr><th>项目</th><th>能力</th></tr></thead><tbody>'+d.process_table.rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')+'</tbody></table></div>'}</div><div class="sub-section"><h2>${d.prod_device}</h2><div class="grid-2col">${d.prod_list.map(dev=>`<div class="info-card">${dev}</div>`).join('')}</div></div><div class="sub-section"><h2>${d.test_device}</h2><div class="grid-2col">${d.test_list.map(dev=>`<div class="info-card">${dev}</div>`).join('')}</div></div></div>`;
-                innerHtml += all;
-            }
+            if(sub === 'process_cap') { const pt = d.process_table; innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.process_cap}</h2><div class="table-wrapper"><table class="capability-table"><thead><tr>${pt.headers.map(h=>`<th>${h}</th>`).join('')}</table></thead><tbody>${pt.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div></div>`; }
+            else if(sub === 'prod_device') innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.prod_device}</h2><div class="grid-2col">${d.prod_list.map(dev=>`<div class="info-card"><i class="fas fa-microchip"></i> ${dev}</div>`).join('')}</div></div></div>`;
+            else if(sub === 'test_device') innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.test_device}</h2><div class="grid-2col">${d.test_list.map(dev=>`<div class="info-card"><i class="fas fa-chart-line"></i> ${dev}</div>`).join('')}</div></div></div>`;
+            else if(sub && d[sub]) innerHtml+=`<div class="container"><div class="sub-section"><h2>${d[sub]}</h2><p>${d[sub+'_desc']}</p></div></div>`;
+            else innerHtml+=`<div class="container"><div class="sub-section"><h2>${t('nav_products')}</h2><p>请选择产品技术子类。</p></div></div>`;
         }
         else if(page === 'news') {
             const d = t('news_detail');
@@ -449,7 +489,7 @@
         else if(page === 'contact') {
             const d = t('contact_detail');
             if(sub === 'offices') innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.offices}</h2><ul>${d.office_list.map(o=>`<li>${o}</li>`).join('')}</ul></div></div>`;
-            else if(sub === 'message') innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.message_title}</h2><form class="contact-form" id="msgForm"><input type="text" placeholder="${d.name_placeholder}" required><input type="email" placeholder="${d.email_placeholder}" required><textarea rows="4" placeholder="${d.msg_placeholder}" required></textarea><button type="submit">${d.submit}</button></form></div></div><script>document.getElementById('msgForm')?.addEventListener('submit',(e)=>{e.preventDefault(); alert('${currentLang==='zh'?'留言已发送，我们会尽快联系您。':'Message sent.'}');})<\/script>`;
+            else if(sub === 'message') innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.message_title}</h2><form class="contact-form" id="msgForm"><input placeholder="${d.name_placeholder}" required><input type="email" placeholder="${d.email_placeholder}" required><textarea rows="4" placeholder="${d.msg_placeholder}" required></textarea><button type="submit">${d.submit}</button></form></div></div><script>document.getElementById('msgForm')?.addEventListener('submit',(e)=>{e.preventDefault(); alert('${currentLang==='zh'?'留言已发送，我们会尽快联系您。':'Message sent.'});})<\/script>`;
             else innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.offices}</h2><ul>${d.office_list.map(o=>`<li>${o}</li>`).join('')}</ul></div><div class="sub-section"><h2>${d.message_title}</h2><form class="contact-form"><input placeholder="${d.name_placeholder}"><input placeholder="${d.email_placeholder}"><textarea rows="3"></textarea><button>${d.submit}</button></form></div></div>`;
         }
         return innerHtml;
@@ -458,41 +498,46 @@
     function renderFullPage() {
         const urlParams = new URLSearchParams(window.location.search);
         const page = urlParams.get('page') || 'about';
-        const sub = urlParams.get('sub');
-        const contentHtml = renderPageContent(page, sub);
+        const sub = urlParams.get('sub') || null;
+        const contentHtml = renderIndependentPage(page, sub);
         document.getElementById('app').innerHTML = contentHtml;
         initCarousel();
-        document.querySelectorAll('.nav-links > li > a').forEach(a => { if(a.getAttribute('data-page') === page) a.classList.add('active'); else a.classList.remove('active'); });
+        // 提交表单处理
+        const form = document.getElementById('brochureForm');
+        if(form) form.onsubmit = (e)=>{ e.preventDefault(); alert(t('thank_you')); form.reset(); };
+        // 更新底部及导航高亮
         document.getElementById('socialStatement').innerHTML = `<h3>${t('statement_title')}</h3><p>${t('statement_content')}</p>`;
         document.getElementById('footerAddress').innerText = t('footer_address');
-        renderFooterLinksDynamic();
+        buildFooterLinks();
+        document.querySelectorAll('.nav-links > li > a').forEach(a => { if(a.getAttribute('data-page') === page) a.classList.add('active'); else a.classList.remove('active'); });
     }
 
     function buildNavLinks() {
-        const navData = [
-            { id:'about', label:t('nav_about'), subs:['intro','capability','management','honor','structure','quality'] },
-            { id:'industry', label:t('nav_industry'), subs:['network','auto','smart','medical','power','consumer'] },
-            { id:'products', label:t('nav_products'), subs:['std_pcb','hdi','high_layer','metal_base','process_cap','prod_device','test_device'] },
-            { id:'news', label:t('nav_news'), subs:['company_news','industry_news'] },
-            { id:'social', label:t('nav_social'), subs:['environment'] },
-            { id:'contact', label:t('nav_contact'), subs:['offices','message'] }
-        ];
-        const lang = currentLang;
+        const pages = ['about','industry','products','news','social','contact'];
+        const labels = [t('nav_about'), t('nav_industry'), t('nav_products'), t('nav_news'), t('nav_social'), t('nav_contact')];
+        const subMap = {
+            about: ['intro','capability','management','honor','structure','quality'],
+            industry: ['network','auto','smart','medical','power','consumer'],
+            products: ['std_pcb','hdi','high_layer','metal_base','process_cap','prod_device','test_device'],
+            news: ['company_news','industry_news'],
+            social: ['environment'],
+            contact: ['offices','message']
+        };
         let menuHtml = '';
-        navData.forEach(item => {
+        pages.forEach((p, idx) => {
             let subsHtml = `<div class="dropdown-menu">`;
-            item.subs.forEach(subKey => {
+            subMap[p].forEach(subKey => {
                 let subLabel = '';
-                if(item.id === 'about') subLabel = t(`about_detail.${subKey}`) || subKey;
-                else if(item.id === 'industry') subLabel = t(`industry_detail.${subKey}`) || subKey;
-                else if(item.id === 'products') subLabel = t(`products_detail.${subKey}`) || subKey;
-                else if(item.id === 'news') subLabel = t(`news_detail.${subKey}`) || subKey;
-                else if(item.id === 'social') subLabel = t(`social_detail.${subKey}`) || subKey;
+                if(p === 'about') subLabel = t(`about_detail.${subKey}`) || subKey;
+                else if(p === 'industry') subLabel = t(`industry_detail.${subKey}`) || subKey;
+                else if(p === 'products') subLabel = t(`products_detail.${subKey}`) || subKey;
+                else if(p === 'news') subLabel = t(`news_detail.${subKey}`) || subKey;
+                else if(p === 'social') subLabel = t(`social_detail.${subKey}`) || subKey;
                 else subLabel = t(`contact_detail.${subKey}`) || subKey;
-                subsHtml += `<a href="?page=${item.id}&sub=${subKey}&lang=${lang}">${subLabel}</a>`;
+                subsHtml += `<a href="?page=${p}&sub=${subKey}&lang=${currentLang}">${subLabel}</a>`;
             });
             subsHtml += `</div>`;
-            menuHtml += `<li class="dropdown"><a href="?page=${item.id}&lang=${lang}" data-page="${item.id}">${item.label}</a>${subsHtml}</li>`;
+            menuHtml += `<li class="dropdown"><a href="?page=${p}&lang=${currentLang}" data-page="${p}">${labels[idx]}</a>${subsHtml}</li>`;
         });
         menuHtml += `<li><button class="lang-btn" id="langToggle">${currentLang === 'zh' ? 'English' : '中文'}</button></li>`;
         document.getElementById('navLinks').innerHTML = menuHtml;
@@ -502,39 +547,39 @@
             url.searchParams.set('lang', newLang);
             window.location.href = url.toString();
         });
-        document.querySelectorAll('.dropdown-menu a').forEach(a => a.addEventListener('click', (e)=>{ e.stopPropagation(); }));
     }
 
-    function renderFooterLinksDynamic() {
+    function buildFooterLinks() {
         const groups = [
-            { title: t('nav_about'), page:'about', items:['intro','capability','management','honor','structure','quality'], labels:['公司简介','制程能力','管理体系','井明荣誉','组织架构','品质保证'] },
-            { title: t('nav_industry'), page:'industry', items:['network','auto','smart','medical','power','consumer'], labels:['网络通信','汽车电子','智能终端','工控医疗','电源','消费电子'] },
-            { title: t('nav_products'), page:'products', items:['std_pcb','hdi','high_layer','metal_base','process_cap','prod_device','test_device'], labels:['常规电路板','高密度互联板','高多层电路板','金属基板','制程能力','生产设备','检测设备'] },
-            { title: t('nav_news'), page:'news', items:['company_news','industry_news'], labels:['公司新闻','行业动态'] },
-            { title: t('nav_social'), page:'social', items:['environment'], labels:['环境保护'] },
-            { title: t('nav_contact'), page:'contact', items:['offices','message'], labels:['服务据点','在线留言'] }
+            { page:'about', subs:['intro','capability','management','honor','structure','quality'], labelsZh:['公司简介','制程能力','管理体系','井明荣誉','组织架构','品质保证'] },
+            { page:'industry', subs:['network','auto','smart','medical','power','consumer'], labelsZh:['网络通信','汽车电子','智能终端','工控医疗','电源','消费电子'] },
+            { page:'products', subs:['std_pcb','hdi','high_layer','metal_base','process_cap','prod_device','test_device'], labelsZh:['常规电路板','高密度互联板','高多层电路板','金属基板','制程能力','生产设备','检测设备'] },
+            { page:'news', subs:['company_news','industry_news'], labelsZh:['公司新闻','行业动态'] },
+            { page:'social', subs:['environment'], labelsZh:['环境保护'] },
+            { page:'contact', subs:['offices','message'], labelsZh:['服务据点','在线留言'] }
         ];
         let html = '';
         groups.forEach(g => {
-            html += `<div class="footer-links-col"><h4>${g.title}</h4><ul>`;
-            g.items.forEach((sub,idx) => { let display = g.labels[idx]; if(currentLang==='en') display = sub; html += `<li><a href="?page=${g.page}&sub=${sub}&lang=${currentLang}">${display}</a></li>`; });
+            let title = t(`nav_${g.page}`);
+            html += `<div class="footer-links-col"><h4>${title}</h4><ul>`;
+            g.subs.forEach((sub,idx) => {
+                let display = (currentLang==='zh') ? g.labelsZh[idx] : sub;
+                html += `<li><a href="?page=${g.page}&sub=${sub}&lang=${currentLang}">${display}</a></li>`;
+            });
             html += `</ul></div>`;
         });
         document.getElementById('footerLinksGrid').innerHTML = html;
     }
 
-    function setPageFromUrl() {
-        const urlParams = new URLSearchParams(window.location.search);
-        currentLang = urlParams.get('lang') === 'en' ? 'en' : 'zh';
+    function init() {
+        currentLang = getUrlLang();
         buildNavLinks();
         renderFullPage();
-        const menuIcon = document.getElementById('menuToggle');
-        const navLinks = document.getElementById('navLinks');
-        menuIcon?.addEventListener('click', () => navLinks.classList.toggle('show'));
+        document.getElementById('menuToggle')?.addEventListener('click', () => document.getElementById('navLinks').classList.toggle('show'));
         document.getElementById('logoHome')?.addEventListener('click', (e) => { e.preventDefault(); window.location.href = `?lang=${currentLang}`; });
     }
-    setPageFromUrl();
-    window.addEventListener('popstate', () => { setPageFromUrl(); });
+    init();
+    window.addEventListener('popstate', () => { currentLang = getUrlLang(); buildNavLinks(); renderFullPage(); });
 </script>
 </body>
 </html>
