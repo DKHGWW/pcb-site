@@ -50,7 +50,7 @@
             position: absolute;
             top: 100%;
             left: 0;
-            background: rgba(255, 255, 255, 0.09);
+            background: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(12px);
             border-radius: 20px;
             min-width: 200px;
@@ -637,8 +637,7 @@
 
     let currentLang = 'zh';
     let currentPage = 'about';
-    let isDetailMode = false;
-    let detailTarget = '';
+    let currentSub = null;  // 当前显示的子模块ID
 
     function t(key) {
         const keys = key.split('.');
@@ -647,6 +646,7 @@
         return val;
     }
 
+    // 渲染主页（获取宣传册/报价表单）
     function renderHomeSimple() {
         return `
             ${renderCarousel('about', currentLang)}
@@ -666,55 +666,125 @@
         `;
     }
 
-    function renderAboutDetail(targetId = null) {
+    // 渲染关于井明的单个子模块
+    function renderAboutSingle(subId) {
         const d = t('about_detail');
         const cap = d.capability_table;
-        const sections = [
-            { id: "intro", title: d.intro, content: `<p>${d.intro_text}</p>` },
-            { id: "capability", title: d.capability, content: `<div class="table-wrapper"><table class="capability-table"><thead><tr>${cap.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${cap.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div>` },
-            { id: "management", title: d.management, content: `<p>${d.management_text}</p>` },
-            { id: "honor", title: d.honor, content: `<ul>${d.honor_list.map(h=>`<li>${h}</li>`).join('')}</ul>` },
-            { id: "structure", title: d.structure, content: `<p>${d.structure_text}</p>` },
-            { id: "quality", title: d.quality, content: `<p>${d.quality_text}</p>` }
-        ];
-        let html = `${renderCarousel('about', currentLang)}<div class="container">`;
-        for (let sec of sections) {
-            if (!targetId || sec.id === targetId) {
-                html += `<div id="${sec.id}" class="sub-section"><h2>${sec.title}</h2>${sec.content}</div>`;
-            }
-        }
-        html += `</div>`;
-        return html;
+        const sections = {
+            intro: { title: d.intro, content: `<p>${d.intro_text}</p>` },
+            capability: { title: d.capability, content: `<div class="table-wrapper"><table class="capability-table"><thead><tr>${cap.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${cap.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div>` },
+            management: { title: d.management, content: `<p>${d.management_text}</p>` },
+            honor: { title: d.honor, content: `<ul>${d.honor_list.map(h=>`<li>${h}</li>`).join('')}</ul>` },
+            structure: { title: d.structure, content: `<p>${d.structure_text}</p>` },
+            quality: { title: d.quality, content: `<p>${d.quality_text}</p>` }
+        };
+        const sec = sections[subId];
+        if (!sec) return renderHomeSimple();
+        return `${renderCarousel('about', currentLang)}<div class="container"><div class="sub-section"><h2>${sec.title}</h2>${sec.content}</div></div>`;
     }
 
-    function renderIndustry() {
+    // 渲染行业市场的单个子模块
+    function renderIndustrySingle(subId) {
+        const d = t('industry_detail');
+        const map = {
+            network: { title: d.network, desc: d.network_desc },
+            auto: { title: d.auto, desc: d.auto_desc },
+            smart: { title: d.smart, desc: d.smart_desc },
+            medical: { title: d.medical, desc: d.medical_desc },
+            power: { title: d.power, desc: d.power_desc },
+            consumer: { title: d.consumer, desc: d.consumer_desc }
+        };
+        const item = map[subId];
+        if (!item) return renderIndustry(); // fallback
+        return `${renderCarousel('industry', currentLang)}<div class="container"><div class="sub-section"><h2>${item.title}</h2><p>${item.desc}</p></div></div>`;
+    }
+
+    // 产品技术的单个子模块
+    function renderProductsSingle(subId) {
+        const d = t('products_detail');
+        const prodMap = {
+            std_pcb: { title: d.std_pcb, desc: d.std_pcb_desc },
+            hdi: { title: d.hdi, desc: d.hdi_desc },
+            high_layer: { title: d.high_layer, desc: d.high_layer_desc },
+            metal_base: { title: d.metal_base, desc: d.metal_base_desc },
+            process_cap: { title: d.process_cap, desc: null, table: d.process_table },
+            prod_device: { title: d.prod_device, desc: null, list: d.prod_list },
+            test_device: { title: d.test_device, desc: null, list: d.test_list }
+        };
+        const item = prodMap[subId];
+        if (!item) return renderProducts();
+        let content = '';
+        if (item.desc) content = `<p>${item.desc}</p>`;
+        else if (item.table) {
+            const t = item.table;
+            content = `<div class="table-wrapper"><table class="capability-table"><thead><tr>${t.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${t.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+        } else if (item.list) {
+            content = `<div class="grid-2col">${item.list.map(dev=>`<div class="info-card"><i class="fas fa-microchip"></i> ${dev}</div>`).join('')}</div>`;
+        }
+        return `${renderCarousel('products', currentLang)}<div class="container"><div class="sub-section"><h2>${item.title}</h2>${content}</div></div>`;
+    }
+
+    // 新闻中心单个子模块
+    function renderNewsSingle(subId) {
+        const d = t('news_detail');
+        if (subId === 'company_news') {
+            return `${renderCarousel('news', currentLang)}<div class="container"><div class="sub-section"><h2>${d.company_news}</h2><ul>${d.company_news_list.map(item=>`<li>${item}</li>`).join('')}</ul></div></div>`;
+        } else if (subId === 'industry_news') {
+            return `${renderCarousel('news', currentLang)}<div class="container"><div class="sub-section"><h2>${d.industry_news}</h2><ul>${d.industry_news_list.map(item=>`<li>${item}</li>`).join('')}</ul></div></div>`;
+        }
+        return renderNews();
+    }
+
+    // 社会责任单个子模块（只有一个环境保护）
+    function renderSocialSingle(subId) {
+        const d = t('social_detail');
+        if (subId === 'environment') {
+            return `${renderCarousel('social', currentLang)}<div class="container"><div class="sub-section"><h2>${d.environment}</h2><p>${d.environment_desc}</p></div></div>`;
+        }
+        return renderSocial();
+    }
+
+    // 联系我们单个子模块
+    function renderContactSingle(subId) {
+        const d = t('contact_detail');
+        if (subId === 'offices') {
+            return `${renderCarousel('contact', currentLang)}<div class="container"><div class="sub-section"><h2>${d.offices}</h2><ul>${d.office_list.map(o=>`<li>${o}</li>`).join('')}</ul></div></div>`;
+        } else if (subId === 'message') {
+            const msgHtml = `<div class="sub-section"><h2>${d.message_title}</h2><form class="contact-form" onsubmit="alert('${currentLang ==='zh'?'留言已发送，我们会尽快联系您。':'Message sent. We will contact you soon.'}'); return false;"><input type="text" placeholder="${d.name_placeholder}" required><input type="email" placeholder="${d.email_placeholder}" required><textarea rows="4" placeholder="${d.msg_placeholder}" required></textarea><button type="submit">${d.submit}</button></form></div>`;
+            return `${renderCarousel('contact', currentLang)}<div class="container">${msgHtml}</div>`;
+        }
+        return renderContact();
+    }
+
+    // 完整页面渲染（非子模块模式）
+    function renderIndustryFull() {
         const d = t('industry_detail');
         const items = ['network','auto','smart','medical','power','consumer'];
         const html = items.map(key=>`<div id="${key}" class="sub-section"><h2>${d[key]}</h2><p>${d[key+'_desc']}</p></div>`).join('');
         return `${renderCarousel('industry', currentLang)}<div class="container">${html}</div>`;
     }
-    function renderProducts() {
+    function renderProductsFull() {
         const d = t('products_detail');
         const prodKeys = ['std_pcb','hdi','high_layer','metal_base'];
         const prodHtml = prodKeys.map(k=>`<div id="${k}" class="sub-section"><h2>${d[k]}</h2><p>${d[k+'_desc']}</p></div>`).join('');
         const process = d.process_table;
-        const processHtml = `<div id="process_cap" class="sub-section"><h2>${d.process_cap}</h2><div class="table-wrapper"><table class="capability-table"><thead><tr>${process.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${process.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div>`;
+        const processHtml = `<div id="process_cap" class="sub-section"><h2>${d.process_cap}</h2><div class="table-wrapper"><table class="capability-table"><thead><tr>${process.headers.map(h=>`<th>${h}</th>`).join('')}<tr></thead><tbody>${process.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div>`;
         const prodDeviceHtml = `<div id="prod_device" class="sub-section"><h2>${d.prod_device}</h2><div class="grid-2col">${d.prod_list.map(dev=>`<div class="info-card"><i class="fas fa-microchip"></i> ${dev}</div>`).join('')}</div></div>`;
         const testDeviceHtml = `<div id="test_device" class="sub-section"><h2>${d.test_device}</h2><div class="grid-2col">${d.test_list.map(dev=>`<div class="info-card"><i class="fas fa-chart-line"></i> ${dev}</div>`).join('')}</div></div>`;
         return `${renderCarousel('products', currentLang)}<div class="container">${prodHtml}${processHtml}${prodDeviceHtml}${testDeviceHtml}</div>`;
     }
-    function renderNews() {
+    function renderNewsFull() {
         const d = t('news_detail');
         const companyHtml = `<div id="company_news" class="sub-section"><h2>${d.company_news}</h2><ul>${d.company_news_list.map(item=>`<li>${item}</li>`).join('')}</ul></div>`;
         const industryHtml = `<div id="industry_news" class="sub-section"><h2>${d.industry_news}</h2><ul>${d.industry_news_list.map(item=>`<li>${item}</li>`).join('')}</ul></div>`;
         return `${renderCarousel('news', currentLang)}<div class="container">${companyHtml}${industryHtml}</div>`;
     }
-    function renderSocial() {
+    function renderSocialFull() {
         const d = t('social_detail');
         const envHtml = `<div id="environment" class="sub-section"><h2>${d.environment}</h2><p>${d.environment_desc}</p></div>`;
         return `${renderCarousel('social', currentLang)}<div class="container">${envHtml}</div>`;
     }
-    function renderContact() {
+    function renderContactFull() {
         const d = t('contact_detail');
         const officesHtml = `<div id="offices" class="sub-section"><h2>${d.offices}</h2><ul>${d.office_list.map(o=>`<li>${o}</li>`).join('')}</ul></div>`;
         const messageHtml = `<div id="message" class="sub-section"><h2>${d.message_title}</h2><form class="contact-form" onsubmit="alert('${currentLang ==='zh'?'留言已发送，我们会尽快联系您。':'Message sent. We will contact you soon.'}'); return false;"><input type="text" placeholder="${d.name_placeholder}" required><input type="email" placeholder="${d.email_placeholder}" required><textarea rows="4" placeholder="${d.msg_placeholder}" required></textarea><button type="submit">${d.submit}</button></form></div>`;
@@ -752,39 +822,38 @@
                 e.preventDefault();
                 const page = link.getAttribute('data-page');
                 const sub = link.getAttribute('data-sub');
-                if (page) {
-                    if (currentPage !== page) {
-                        setActivePage(page);
-                        setTimeout(() => { if(sub) document.getElementById(sub)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 200);
-                    } else {
-                        if(sub) document.getElementById(sub)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                }
+                if (page) setActivePage(page, sub);
             });
         });
     }
 
     function loadPage(page, targetSub = null) {
         currentPage = page;
+        currentSub = targetSub;
         let html = '';
         if (page === 'about') {
-            if (targetSub && targetSub !== 'home') {
-                isDetailMode = true;
-                detailTarget = targetSub;
-                html = renderAboutDetail(targetSub);
-            } else {
-                isDetailMode = false;
-                detailTarget = '';
-                html = renderHomeSimple();
-            }
-        } else if (page === 'industry') html = renderIndustry();
-        else if (page === 'products') html = renderProducts();
-        else if (page === 'news') html = renderNews();
-        else if (page === 'social') html = renderSocial();
-        else if (page === 'contact') html = renderContact();
-        else html = renderHomeSimple();
+            if (targetSub) html = renderAboutSingle(targetSub);
+            else html = renderHomeSimple();
+        } else if (page === 'industry') {
+            if (targetSub) html = renderIndustrySingle(targetSub);
+            else html = renderIndustryFull();
+        } else if (page === 'products') {
+            if (targetSub) html = renderProductsSingle(targetSub);
+            else html = renderProductsFull();
+        } else if (page === 'news') {
+            if (targetSub) html = renderNewsSingle(targetSub);
+            else html = renderNewsFull();
+        } else if (page === 'social') {
+            if (targetSub) html = renderSocialSingle(targetSub);
+            else html = renderSocialFull();
+        } else if (page === 'contact') {
+            if (targetSub) html = renderContactSingle(targetSub);
+            else html = renderContactFull();
+        } else {
+            html = renderHomeSimple();
+        }
         document.getElementById('app').innerHTML = `<div class="page-section active-page">${html}</div>`;
-        if (page === 'about' && !isDetailMode) {
+        if (page === 'about' && !targetSub) {
             const form = document.getElementById('brochureForm');
             if (form) {
                 form.onsubmit = (e) => {
@@ -799,31 +868,6 @@
             if(a.getAttribute('data-page') === page) a.classList.add('active');
             else a.classList.remove('active');
         });
-        document.querySelectorAll('.dropdown-menu a[data-sub]').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const sub = link.getAttribute('data-sub');
-                const parentPage = link.closest('.dropdown').querySelector('a[data-page]')?.getAttribute('data-page');
-                if (parentPage === 'about') {
-                    if (currentPage !== 'about') {
-                        setActivePage('about', sub);
-                    } else {
-                        loadPage('about', sub);
-                        setTimeout(() => {
-                            const el = document.getElementById(sub);
-                            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }, 100);
-                    }
-                } else if (parentPage) {
-                    if (currentPage !== parentPage) {
-                        setActivePage(parentPage, sub);
-                    } else {
-                        const el = document.getElementById(sub);
-                        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                }
-            });
-        });
         const stmtTitle = document.querySelector('#social-statement-container .social-statement h3');
         const stmtContent = document.querySelector('#social-statement-container .social-statement p');
         const footerAddr = document.querySelector('footer [data-i18n="footer_address"]');
@@ -834,25 +878,36 @@
     }
 
     function setActivePage(page, targetSub = null) {
-        window.history.pushState({}, '', `#${page}`);
+        let hash = page;
+        if (targetSub) hash = `${page}/${targetSub}`;
+        window.history.pushState({}, '', `#${hash}`);
         loadPage(page, targetSub);
     }
 
     function switchLanguage() {
         currentLang = currentLang === 'zh' ? 'en' : 'zh';
         document.getElementById('langToggle').innerText = currentLang === 'zh' ? 'English' : '中文';
-        loadPage(currentPage, isDetailMode ? detailTarget : null);
+        loadPage(currentPage, currentSub);
         document.querySelectorAll('.nav-links > li > a[data-page]').forEach(a => { const key = a.getAttribute('data-i18n'); if(key) a.innerText = t(key); });
     }
 
+    // 绑定一级菜单点击
     document.querySelectorAll('.nav-links > li > a[data-page]').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const page = link.getAttribute('data-page');
-            if (page === 'about') {
-                setActivePage('about', null);
-            } else {
-                setActivePage(page);
+            if (page === 'about') setActivePage('about', null);
+            else setActivePage(page, null);
+        });
+    });
+    // 绑定二级菜单点击（跳转到新页面）
+    document.querySelectorAll('.dropdown-menu a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const sub = link.getAttribute('data-sub');
+            const parentPage = link.closest('.dropdown').querySelector('a[data-page]')?.getAttribute('data-page');
+            if (parentPage && sub) {
+                setActivePage(parentPage, sub);
             }
         });
     });
@@ -860,8 +915,16 @@
     document.getElementById('langToggle').addEventListener('click', switchLanguage);
     document.getElementById('logoHome').addEventListener('click', () => setActivePage('about', null));
 
-    const initialPage = window.location.hash.slice(1) || 'about';
-    setActivePage(initialPage);
+    // 解析初始 hash，支持 #about/intro 格式
+    let initialHash = window.location.hash.slice(1);
+    let initialPage = 'about';
+    let initialSub = null;
+    if (initialHash) {
+        const parts = initialHash.split('/');
+        initialPage = parts[0];
+        if (parts.length > 1) initialSub = parts[1];
+    }
+    setActivePage(initialPage, initialSub);
 </script>
 </body>
 </html>
