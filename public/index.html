@@ -351,23 +351,65 @@
         }
         .footer-links-col a:hover { color: #2563eb; padding-left: 4px; }
         footer { background: #0f172a; color: #cbd5e1; padding: 48px 0 24px; text-align: center; margin-top: 0; }
+        
+        /* 移动端样式修正 */
         @media (max-width: 768px) {
             .footer-links-grid { grid-template-columns: repeat(2, 1fr); }
-            .nav-links { display: none; width: 100%; flex-direction: column; align-items: center; padding: 20px 0; gap: 16px; background: white; }
-            .nav-links.show { display: flex; }
-            .menu-icon { display: block; }
-            .dropdown-menu { position: static; box-shadow: none; padding-left: 20px; background: rgba(255,255,255,0.95); margin-top: 4px; opacity: 1; visibility: visible; transform: none; display: none; }
-            .dropdown.active .dropdown-menu { display: block; }
-            .nav-container .lang-btn { margin-left: auto; margin-right: 16px; }
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                gap: 16px;
+                background: white;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                border-radius: 0 0 20px 20px;
+            }
+            .nav-links.show {
+                display: flex;
+            }
+            .menu-icon {
+                display: block;
+            }
+            .dropdown {
+                width: 100%;
+                text-align: center;
+            }
+            .dropdown-menu {
+                position: static;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: none;
+                box-shadow: none;
+                padding: 0;
+                margin-top: 8px;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                display: none;
+                border: none;
+            }
+            .dropdown.active .dropdown-menu {
+                display: block;
+            }
+            .dropdown-menu a {
+                text-align: center;
+                padding: 8px 0;
+            }
+            .nav-container .lang-btn {
+                margin-left: auto;
+                margin-right: 16px;
+            }
         }
     </style>
 </head>
 <body>
 <nav class="navbar">
     <div class="nav-container">
-        <div class="logo">
-    <img src="捕获2.png" alt="四川井明电子" style="height: 50px; width: auto; display: block;">
-</div>
+        <div class="logo" id="logoHome">
+            <h1>四川井明电子有限公司</h1>
+            <span>SICHUAN KINMING ELECTRONICS CO., LTD</span>
+        </div>
         <div class="menu-icon" id="menuToggle"><i class="fas fa-bars"></i></div>
         <ul class="nav-links" id="navLinks"></ul>
     </div>
@@ -660,47 +702,72 @@
             html += `<li class="dropdown">
                         <a href="#" data-page="${pageKey}" data-i18n="nav_${pageKey}">${menuText}</a>
                         <div class="dropdown-menu">`;
-            for (let item of dropdownItems) {
-                // 需要找到对应的 sub id
-                let subId = '';
-                const map = {
-                    about: ["intro","capability","management","honor","structure","quality"],
-                    industry: ["network","auto","smart","medical","power","consumer"],
-                    products: ["std_pcb","hdi","high_layer","metal_base","process_cap","prod_device","test_device"],
-                    news: ["company_news","industry_news"],
-                    social: ["environment"],
-                    contact: ["offices","message"]
-                };
-                const idx = dropdownItems.indexOf(item);
-                if (idx !== undefined && map[pageKey] && map[pageKey][idx]) {
-                    subId = map[pageKey][idx];
-                }
+            const subIds = {
+                about: ["intro","capability","management","honor","structure","quality"],
+                industry: ["network","auto","smart","medical","power","consumer"],
+                products: ["std_pcb","hdi","high_layer","metal_base","process_cap","prod_device","test_device"],
+                news: ["company_news","industry_news"],
+                social: ["environment"],
+                contact: ["offices","message"]
+            };
+            const ids = subIds[pageKey] || [];
+            for (let i = 0; i < dropdownItems.length; i++) {
+                const item = dropdownItems[i];
+                const subId = ids[i] || '';
                 html += `<a href="#" data-sub="${subId}">${item}</a>`;
             }
             html += `</div></li>`;
         }
         html += `<li><button class="lang-btn" id="langToggle">English</button></li>`;
         navContainer.innerHTML = html;
-        // 重新绑定事件
+        
+        // 重新绑定一级菜单点击
         document.querySelectorAll('.nav-links > li > a[data-page]').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const page = link.getAttribute('data-page');
                 if (page === 'about') setActivePage('about', null);
                 else setActivePage(page, null);
+                // 移动端关闭菜单
+                if (window.innerWidth <= 768) {
+                    document.getElementById('navLinks').classList.remove('show');
+                }
             });
         });
+        // 重新绑定二级菜单点击
         document.querySelectorAll('.dropdown-menu a[data-sub]').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const sub = link.getAttribute('data-sub');
                 const parentPage = link.closest('.dropdown').querySelector('a[data-page]')?.getAttribute('data-page');
                 if (parentPage && sub) setActivePage(parentPage, sub);
+                if (window.innerWidth <= 768) {
+                    document.getElementById('navLinks').classList.remove('show');
+                }
             });
         });
+        // 绑定移动端下拉菜单展开/收起（点击一级菜单标题时展开二级菜单，而不是跳转）
+        // 注意：移动端点击一级标题应展开二级菜单，但我们已经绑定了点击跳转？实际上移动端期望点击一级标题展开二级菜单，再点击二级菜单跳转。
+        // 更好的交互：移动端点击一级标题时切换二级菜单显示，不立即跳转；点击二级菜单才跳转。而我们的代码目前点击一级标题会跳转（到概览页）。需要调整。
+        // 为了移动端体验，我们修改移动端行为：点击一级标题时只展开/收起二级菜单，不跳转。
+        if (window.innerWidth <= 768) {
+            document.querySelectorAll('.nav-links > li > a[data-page]').forEach(link => {
+                link.removeEventListener('click', link.click); // 先移除之前的，重新绑定
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const parentLi = link.closest('.dropdown');
+                    if (parentLi) {
+                        parentLi.classList.toggle('active');
+                    }
+                });
+            });
+        }
+        
         const langBtn = document.getElementById('langToggle');
-        if (langBtn) langBtn.innerText = currentLang === 'zh' ? 'English' : '中文';
-        if (langBtn) langBtn.onclick = switchLanguage;
+        if (langBtn) {
+            langBtn.innerText = currentLang === 'zh' ? 'English' : '中文';
+            langBtn.onclick = switchLanguage;
+        }
     }
 
     // 主页（宣传册表单）
@@ -764,7 +831,7 @@
         `;
     }
 
-    // 子模块详情页面
+    // 子模块详情页面（与之前相同，略写以节省篇幅，实际保留完整函数）
     function renderAboutSingle(subId) {
         const d = t('about_detail');
         const cap = d.capability_table;
@@ -813,7 +880,7 @@
         if (item.desc) content = `<p>${item.desc}</p>`;
         else if (item.table) {
             const t = item.table;
-            content = `<div class="table-wrapper"><table class="capability-table"><thead><tr>${t.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${t.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+            content = `<div class="table-wrapper"><table class="capability-table"><thead><tr>${t.headers.map(h=>`<th>${h}</th>`).join('')}<tr></thead><tbody>${t.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
         } else if (item.list) {
             content = `<div class="grid-2col">${item.list.map(dev=>`<div class="info-card"><i class="fas fa-microchip"></i> ${dev}</div>`).join('')}</div>`;
         }
@@ -881,6 +948,9 @@
                 const page = link.getAttribute('data-page');
                 const sub = link.getAttribute('data-sub');
                 if (page) setActivePage(page, sub);
+                if (window.innerWidth <= 768) {
+                    document.getElementById('navLinks').classList.remove('show');
+                }
             });
         });
     }
@@ -927,7 +997,6 @@
             if(a.getAttribute('data-page') === page) a.classList.add('active');
             else a.classList.remove('active');
         });
-        // 更新底部声明和地址
         const stmtTitle = document.querySelector('#social-statement-container .social-statement h3');
         const stmtContent = document.querySelector('#social-statement-container .social-statement p');
         const footerAddr = document.querySelector('footer [data-i18n="footer_address"]');
@@ -946,9 +1015,8 @@
 
     function switchLanguage() {
         currentLang = currentLang === 'zh' ? 'en' : 'zh';
-        renderNavbar();               // 重新生成导航栏（包括按钮文字）
+        renderNavbar();
         loadPage(currentPage, currentSub);
-        // 更新语言切换按钮文字
         const btn = document.getElementById('langToggle');
         if (btn) btn.innerText = currentLang === 'zh' ? 'English' : '中文';
     }
@@ -968,9 +1036,19 @@
         setActivePage(initPage, initSub);
         // logo 点击事件
         document.getElementById('logoHome').addEventListener('click', () => setActivePage('about', null));
-        // 移动端菜单折叠
-        document.getElementById('menuToggle').addEventListener('click', () => {
+        // 移动端汉堡菜单点击切换
+        const menuToggle = document.getElementById('menuToggle');
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
             document.getElementById('navLinks').classList.toggle('show');
+        });
+        // 移动端点击页面其他地方关闭菜单
+        document.addEventListener('click', function(e) {
+            const nav = document.getElementById('navLinks');
+            const toggle = document.getElementById('menuToggle');
+            if (window.innerWidth <= 768 && nav && !nav.contains(e.target) && !toggle.contains(e.target)) {
+                nav.classList.remove('show');
+            }
         });
     }
     init();
