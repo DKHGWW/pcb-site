@@ -3,26 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>四川井明电子 | 精密PCB智造专家 - 透明质感+按钮动效</title>
+    <title>四川井明电子 | 精密PCB智造专家 - 极致透明玻璃质感</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #eef5ff 0%, #e0edfc 100%);
-            color: #1e293b;
+            background: linear-gradient(135deg, #eef5ff 0%, #d4e2fc 100%);
+            color: #0f2b5e;
             line-height: 1.5;
+            position: relative;
+        }
+        /* 增加背景装饰网格，凸显透明感 */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 25% 40%, rgba(37,99,235,0.03) 2%, transparent 2.5%);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: -1;
         }
         .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
         .navbar {
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
             box-shadow: 0 4px 20px rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid rgba(37, 99, 235, 0.2);
+            border-bottom: 1px solid rgba(37, 99, 235, 0.3);
         }
         .nav-container {
             display: flex;
@@ -35,37 +49,37 @@
         }
         .logo h1 {
             font-size: 1.4rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #0f2b5e, #1e4a7a);
+            font-weight: 800;
+            background: linear-gradient(135deg, #0f2b5e, #2563eb);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
-            margin-bottom: 2px;
         }
-        .logo span { font-size: 0.7rem; color: #4b5563; display: block; letter-spacing: 0.3px; }
+        .logo span { font-size: 0.7rem; color: #1e3a8a; font-weight: 500; display: block; }
         .logo { cursor: pointer; text-decoration: none; display: inline-block; }
         
         .nav-links { display: flex; gap: 28px; list-style: none; flex-wrap: wrap; align-items: center; }
         .nav-links > li { position: relative; }
-        .nav-links > li > a { text-decoration: none; font-weight: 500; color: #1e293b; transition: 0.2s; display: inline-block; padding: 8px 0; }
-        .nav-links > li > a:hover, .nav-links > li > a.active { color: #2563eb; }
+        .nav-links > li > a { text-decoration: none; font-weight: 600; color: #1e293b; transition: 0.2s; padding: 8px 0; display: inline-block; }
+        .nav-links > li > a:hover, .nav-links > li > a.active { color: #2563eb; text-shadow: 0 0 4px rgba(37,99,235,0.3); }
         
+        /* 二级菜单也做透明处理 */
         .dropdown-menu {
             position: absolute;
             top: 100%;
             left: 0;
-            background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            min-width: 210px;
-            padding: 12px 8px;
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(24px);
+            border-radius: 28px;
+            min-width: 220px;
+            padding: 12px 10px;
             opacity: 0;
             visibility: hidden;
             transform: translateY(-12px);
             transition: all 0.25s ease;
             z-index: 200;
-            border: 1px solid rgba(37, 99, 235, 0.25);
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255,255,255,0.6);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
         .dropdown:hover .dropdown-menu {
             opacity: 1;
@@ -75,39 +89,40 @@
         .dropdown-menu a {
             display: block;
             padding: 10px 18px;
-            margin: 4px 0;
-            color: #1e293b;
+            margin: 5px 0;
+            color: #0f2b5e;
+            font-weight: 600;
             font-size: 0.85rem;
-            font-weight: 500;
             text-decoration: none;
             border-radius: 40px;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
+            background: rgba(255,255,255,0.2);
         }
         .dropdown-menu a:hover {
-            background: rgba(37, 99, 235, 0.15);
-            color: #2563eb;
+            background: rgba(37, 99, 235, 0.25);
+            color: white;
             transform: translateX(6px);
             backdrop-filter: blur(4px);
         }
         
         .lang-btn {
-            background: rgba(37, 99, 235, 0.1);
-            border: 1px solid rgba(37, 99, 235, 0.3);
+            background: rgba(37, 99, 235, 0.2);
+            border: 1px solid rgba(37, 99, 235, 0.5);
             border-radius: 40px;
-            padding: 6px 16px;
-            font-size: 0.85rem;
-            font-weight: 500;
+            padding: 6px 18px;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
-            color: #1e293b;
+            color: #0f2b5e;
             margin-left: 8px;
+            backdrop-filter: blur(4px);
         }
         .lang-btn:hover {
             background: #2563eb;
             border-color: #2563eb;
             color: white;
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(37,99,235,0.25);
+            box-shadow: 0 8px 16px rgba(37,99,235,0.3);
         }
         .menu-icon { display: none; font-size: 1.6rem; cursor: pointer; }
         
@@ -115,13 +130,14 @@
             min-height: 60vh;
             padding: 60px 0 40px 0;
         }
+        /* 轮播图也稍微带透明感overlay */
         .carousel {
             position: relative;
             width: 100%;
-            border-radius: 32px;
+            border-radius: 36px;
             overflow: hidden;
             margin-bottom: 48px;
-            box-shadow: 0 15px 30px -10px rgba(0,0,0,0.15);
+            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.2);
         }
         .carousel-inner { position: relative; width: 100%; height: 400px; }
         .carousel-item {
@@ -139,106 +155,91 @@
             justify-content: center;
             text-align: center;
             color: white;
-            background-color: #1e293b;
         }
         .carousel-item.active { opacity: 1; }
         .carousel-caption {
-            background: rgba(0,0,0,0.45);
-            backdrop-filter: blur(8px);
-            padding: 20px 32px;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(12px);
+            padding: 18px 32px;
             border-radius: 60px;
-            max-width: 80%;
-            border: 1px solid rgba(255,255,255,0.3);
+            border: 1px solid rgba(255,255,255,0.4);
         }
-        .carousel-caption h3 { font-size: 2rem; margin-bottom: 10px; }
+        .carousel-caption h3 { font-size: 2rem; font-weight: 700; }
         .carousel-caption p { font-size: 1rem; }
-        .carousel-indicators {
-            position: absolute;
-            bottom: 20px;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            z-index: 10;
-        }
         .carousel-indicators span {
             width: 12px;
             height: 12px;
-            background-color: rgba(255,255,255,0.6);
+            background-color: rgba(255,255,255,0.7);
             border-radius: 50%;
             cursor: pointer;
-            transition: 0.2s;
         }
         .carousel-indicators span.active { background-color: #2563eb; transform: scale(1.2); }
         @media (max-width: 768px) {
             .carousel-inner { height: 280px; }
             .carousel-caption h3 { font-size: 1.2rem; }
-            .carousel-caption p { font-size: 0.8rem; }
         }
         
-        /* ======= 二级页面内容区块 - 半透明毛玻璃 + 按钮级交互效果 ======= */
+        /* ========== 核心：极致透明毛玻璃 + 按钮悬浮效果 ========== */
         .sub-section {
             scroll-margin-top: 100px;
             margin-bottom: 40px;
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(16px);
-            border-radius: 32px;
+            background: rgba(255, 255, 255, 0.28);
+            backdrop-filter: blur(18px);
+            border-radius: 42px;
             padding: 28px 32px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 10px 25px -8px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.2);
             cursor: pointer;
         }
-        /* 按钮悬浮效果：提升、发光边框、阴影增强 */
+        /* 悬浮时增强玻璃质感并提升，按钮般效果 */
         .sub-section:hover {
-            transform: translateY(-6px);
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(20px);
-            box-shadow: 0 20px 35px -12px rgba(37, 99, 235, 0.3);
+            transform: translateY(-6px) scale(1.01);
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(24px);
+            box-shadow: 0 25px 40px -12px rgba(37, 99, 235, 0.35);
             border-color: rgba(37, 99, 235, 0.5);
         }
         .sub-section h2 {
-            font-size: 1.7rem;
-            font-weight: 700;
+            font-size: 1.8rem;
+            font-weight: 800;
             color: #0f2b5e;
             margin-bottom: 20px;
-            border-left: 5px solid #2563eb;
+            border-left: 6px solid #2563eb;
             padding-left: 20px;
             transition: 0.2s;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.5);
         }
         .sub-section:hover h2 {
             color: #1e40af;
-            transform: translateX(4px);
+            transform: translateX(6px);
         }
-        .sub-section p, .sub-section li, .sub-section td {
-            color: #1e293b;
+        .sub-section p, .sub-section li, .sub-section td, .sub-section ul {
+            color: #0f2b5e;
             font-weight: 500;
+            text-shadow: 0 0 2px rgba(255,255,255,0.6);
         }
         .table-wrapper {
             overflow-x: auto;
-            border-radius: 24px;
-            background: rgba(255,255,255,0.4);
+            border-radius: 28px;
+            background: rgba(255,255,255,0.3);
             backdrop-filter: blur(4px);
-            margin-top: 16px;
+            padding: 4px;
         }
         .capability-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.85rem;
         }
         .capability-table th {
-            background: rgba(240, 244, 250, 0.8);
+            background: rgba(240, 244, 250, 0.7);
             padding: 14px 12px;
-            text-align: center;
             font-weight: 700;
             color: #0f2b5e;
         }
         .capability-table td {
             padding: 12px;
-            border-bottom: 1px solid rgba(0,0,0,0.08);
-            text-align: center;
-            background: rgba(255,255,255,0.5);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.4);
         }
         .grid-2col {
             display: grid;
@@ -247,61 +248,55 @@
             margin-top: 24px;
         }
         .info-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(8px);
-            border-radius: 24px;
-            padding: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(12px);
+            border-radius: 28px;
+            padding: 22px;
             transition: 0.25s;
             border: 1px solid rgba(255,255,255,0.5);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
         }
         .info-card:hover {
-            transform: scale(1.02);
-            background: rgba(255,255,255,0.9);
+            transform: translateY(-5px) scale(1.02);
+            background: rgba(255,255,255,0.55);
             border-color: #2563eb;
-            box-shadow: 0 12px 20px -8px rgba(37,99,235,0.3);
+            box-shadow: 0 20px 30px -12px rgba(37,99,235,0.4);
         }
-        /* 首页表单也适配毛玻璃 */
+        /* 首页表单也是透明效果 */
         .home-form-large {
             max-width: 700px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(16px);
-            border-radius: 40px;
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(20px);
+            border-radius: 48px;
             padding: 48px 40px;
-            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
             border: 1px solid rgba(255,255,255,0.7);
             transition: 0.3s;
         }
         .home-form-large:hover {
-            background: rgba(255, 255, 255, 0.85);
-            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.55);
+            transform: translateY(-5px);
         }
         .home-form-large input, .home-form-large textarea, .contact-form input, .contact-form textarea {
             width: 100%;
-            padding: 14px 18px;
-            border: 1px solid rgba(0,0,0,0.15);
-            border-radius: 40px;
+            padding: 14px 20px;
+            background: rgba(255,255,255,0.85);
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 60px;
             margin-bottom: 20px;
-            background: rgba(255,255,255,0.9);
             font-family: inherit;
-            transition: 0.2s;
-        }
-        .home-form-large input:focus, .contact-form input:focus {
-            border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
-            outline: none;
+            backdrop-filter: blur(4px);
         }
         .home-form-large button, .contact-form button {
             background: #2563eb;
             color: white;
             border: none;
-            padding: 14px 28px;
-            border-radius: 40px;
+            padding: 14px;
+            border-radius: 60px;
             font-weight: 700;
             cursor: pointer;
-            width: 100%;
             transition: 0.2s;
+            width: 100%;
         }
         .home-form-large button:hover, .contact-form button:hover {
             background: #1e4a7a;
@@ -309,17 +304,16 @@
             box-shadow: 0 8px 18px rgba(37,99,235,0.4);
         }
         .social-statement {
-            background: rgba(238, 242, 255, 0.7);
-            backdrop-filter: blur(12px);
-            border-radius: 32px;
+            background: rgba(238, 242, 255, 0.5);
+            backdrop-filter: blur(16px);
+            border-radius: 40px;
             padding: 40px 28px;
-            margin: 40px auto 0;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.8);
+            border: 1px solid rgba(255,255,255,0.7);
         }
         .footer-links {
-            background: rgba(255,255,255,0.85);
-            backdrop-filter: blur(12px);
+            background: rgba(255,255,255,0.65);
+            backdrop-filter: blur(16px);
             border-top: 1px solid rgba(37,99,235,0.2);
             border-bottom: 1px solid rgba(37,99,235,0.2);
             padding: 48px 0;
@@ -334,11 +328,10 @@
         @media (max-width: 768px) {
             .sub-section { padding: 20px; }
             .home-form-large { padding: 32px 24px; }
-            .footer-links-grid { grid-template-columns: repeat(2, 1fr); }
-            .nav-links { display: none; width: 100%; flex-direction: column; align-items: center; padding: 20px 0; gap: 16px; background: rgba(255,255,255,0.98); backdrop-filter: blur(20px); }
+            .nav-links { display: none; width: 100%; flex-direction: column; background: rgba(255,255,255,0.9); backdrop-filter: blur(20px); }
             .nav-links.show { display: flex; }
             .menu-icon { display: block; }
-            .dropdown-menu { position: static; box-shadow: none; padding-left: 20px; background: rgba(255,255,255,0.95); margin-top: 4px; opacity: 1; visibility: visible; transform: none; display: none; border: none; }
+            .dropdown-menu { position: static; backdrop-filter: blur(20px); transform: none; opacity: 1; visibility: visible; display: none; background: rgba(255,255,255,0.6); }
             .dropdown.active .dropdown-menu { display: block; }
         }
     </style>
@@ -373,95 +366,94 @@
 </footer>
 
 <script>
-    // ---------- 完整多语言库（所有二级页面数据）----------
+    // 完整多语言 (所有二级页面内容)
     const langText = {
         zh: {
             nav_about: "关于井明", nav_industry: "行业市场", nav_products: "产品技术", nav_news: "新闻中心", nav_social: "社会责任", nav_contact: "联系我们",
-            footer_address: "地址：四川省遂宁市经济技术开发区渠河南路188号电子电路标准厂房一期3号楼 | 通过ISO9001 & IATF16949",
+            footer_address: "地址：四川省遂宁市经济技术开发区渠河南路188号电子电路标准厂房一期3号楼 | ISO9001 & IATF16949",
             statement_title: "🌿 践行绿色制造，共创可持续未来",
-            statement_content: "井明电子始终将环境保护与社会责任融入企业发展战略。我们严格遵守 RoHS、REACH 等国际环保指令，投资建设先进的废水处理与中水回用系统，厂区光伏发电覆盖率已达30%。同时，我们积极参与社区公益，关爱员工成长，致力于成为负责任、有温度的行业标杆。未来，我们将持续加大环保投入，推动低碳生产，与合作伙伴共同守护绿水青山。",
+            statement_content: "井明电子将环保与责任融入战略。严格遵守RoHS/REACH，先进废水处理与中水回用，厂区光伏覆盖率30%。参与社区公益，关爱员工，承诺低碳生产。",
             form_title: "获取宣传册/报价",
-            form_desc: "“以客户为中心”是井明的核心价值观之一，请填写信息获取宣传册或报价。",
-            name_placeholder: "姓名*", email_placeholder: "邮箱*", company_placeholder: "公司名/留言", phone_placeholder: "电话", submit: "提交", thank_you: "感谢您的留言，我们会尽快联系您。",
+            form_desc: "以客户为中心，填写信息获取详细资料。",
+            name_placeholder: "姓名*", email_placeholder: "邮箱*", company_placeholder: "公司名/留言", phone_placeholder: "电话", submit: "提交", thank_you: "感谢留言，我们将尽快联系您。",
             about_detail: {
-                intro: "公司简介", intro_text: "四川井明电子有限公司始创于2012年，前身为遂宁豪尔思电子科技有限公司，坐落于遂宁经开区电子电路产业园，现有员工500余人，是一家专业从事PCB电路板研发、设计、精密生产与配套服务的综合性制造企业。公司深耕线路板行业十余年，主营多层板、高精密HDI板、高多层板、金属基板、IC载板，产品广泛应用于汽车电子、网络通信、工控医疗、军工配套、智能终端等领域，可提供一站式定制量产解决方案。企业资质齐全，拥有IATF16949、ISO9001、ISO14001、UL、CQC权威认证，产品符合RoHS环保标准，全程严格品控，满足工业、汽车及高端精密设备使用要求。",
-                capability: "制程能力", capability_table: { headers: ["核心技术项", "井明标准能力", "特级能力"], rows: [["最大生产层数","24层","30层"],["最小线宽/线距","75/75μm","60/60μm"],["最小机械孔径","0.2mm","0.15mm"],["最大纵横比","20:1","25:1"],["阻抗控制公差","±10%","±7%"],["板翘控制","<0.75%","<0.5%"]] },
-                management: "管理体系", management_text: "通过IATF16949、ISO9001、ISO14001、UL、CQC等权威认证，实施全流程数字化质量管控。",
-                honor: "井明荣誉", honor_list: ["国家高新技术企业", "四川省专精特新企业", "遂宁市PCB工程技术研究中心", "中国电子电路行业协会理事单位"],
-                structure: "组织架构", structure_text: "设有市场中心、研发中心、制造中心、品控中心、供应链管理部及海外事业部。",
-                quality: "品质保证", quality_text: "从IQC进料检验到成品可靠性测试，全程SPC监控，配备AOI、飞针测试、X-ray、显微镜等先进设备。"
+                intro: "公司简介", intro_text: "四川井明电子始创2012年，前身遂宁豪尔思，坐落遂宁经开区电子电路产业园，员工500+，专业PCB研发制造：多层板、HDI、高多层、金属基、IC载板。通过IATF16949、ISO9001、ISO14001、UL、CQC。产品用于汽车电子、通信、工控医疗、智能终端，提供一站式定制。",
+                capability: "制程能力", capability_table: { headers: ["核心技术项", "井明标准能力", "特级能力"], rows: [["最大层数","24层","30层"],["最小线宽/线距","75/75μm","60/60μm"],["最小孔径","0.2mm","0.15mm"],["纵横比","20:1","25:1"],["阻抗公差","±10%","±7%"],["板翘","<0.75%","<0.5%"]] },
+                management: "管理体系", management_text: "IATF16949, ISO9001, ISO14001, UL, CQC，全流程数字化质量管控。",
+                honor: "井明荣誉", honor_list: ["国家高新技术企业", "四川省专精特新企业", "遂宁PCB工程技术研究中心", "CPCA理事单位"],
+                structure: "组织架构", structure_text: "市场中心、研发中心、制造中心、品控中心、供应链管理部、海外事业部。",
+                quality: "品质保证", quality_text: "IQC至可靠性测试，SPC监控，配备AOI、飞针、X-ray、显微镜。"
             },
             industry_detail: {
-                network: "网络通信", network_desc: "高速光模块、路由器、基站天线PCB，采用低损耗高频材料，精准阻抗控制，支持25G/100G高速信号传输。",
-                auto: "汽车电子", auto_desc: "车规级PCB，满足IATF16949，应用于BMS电池管理、ECU控制单元、车载娱乐系统及ADAS辅助驾驶。",
-                smart: "智能终端", smart_desc: "智能手机、平板、可穿戴设备高密度互连板，薄型化设计，线宽线距可达2.5/2.5mil，支持任意层互连。",
-                medical: "工控医疗", medical_desc: "工业控制主板、医疗影像设备、监护仪PCB，高可靠性长寿命，满足Class 3医疗等级要求。",
-                power: "电源", power_desc: "厚铜电源板、金属基板，最大铜厚12oz，优异散热性能，适用于大功率电源模块。",
-                consumer: "消费电子", consumer_desc: "高集成度HDI板，满足轻薄化需求，广泛应用于智能家居、无人机、VR设备等领域。"
+                network: "网络通信", network_desc: "高速光模块、路由器、基站天线PCB，低损耗高频材料，精准阻抗控制，支持25G/100G。",
+                auto: "汽车电子", auto_desc: "车规级PCB，IATF16949，用于BMS、ECU、车载娱乐、ADAS。",
+                smart: "智能终端", smart_desc: "智能手机/平板/穿戴设备HDI，线宽线距2.5/2.5mil，任意层互联。",
+                medical: "工控医疗", medical_desc: "工控主板、医疗影像设备PCB，高可靠性长寿命，Class 3等级。",
+                power: "电源", power_desc: "厚铜电源板、金属基板，最大铜厚12oz，优异散热性能。",
+                consumer: "消费电子", consumer_desc: "高集成度HDI，适用智能家居、无人机、VR设备。"
             },
             products_detail: {
-                std_pcb: "常规电路板", std_pcb_desc: "单双面及多层板，FR-4材料，快速打样及批量生产，最小线宽3mil。",
-                hdi: "高密度互联板", hdi_desc: "任意层互连，盲埋孔技术，线宽线距2.5/2.5mil，阶数1～3阶，适用于旗舰智能设备。",
-                high_layer: "高多层电路板", high_layer_desc: "10-30层，背板、服务器主板，高可靠性，阻抗公差±7%，满足高速数字信号要求。",
-                metal_base: "金属基板", metal_base_desc: "铝基、铜基板，大功率LED、电源模块，导热系数1.0～3.0W/m·K。",
+                std_pcb: "常规电路板", std_pcb_desc: "单双面及多层板，FR-4，快速打样，最小线宽3mil。",
+                hdi: "高密度互联板", hdi_desc: "任意层互连，盲埋孔，线宽线距2.5/2.5mil，1-3阶。",
+                high_layer: "高多层电路板", high_layer_desc: "10-30层，背板、服务器主板，阻抗±7%。",
+                metal_base: "金属基板", metal_base_desc: "铝基/铜基板，大功率LED，导热1.0-3.0W/m·K。",
                 process_cap: "制程能力", process_table: { headers: ["项目", "能力"], rows: [["最小线宽", "2.5mil"], ["最小孔径", "0.15mm"], ["最大板厚", "8.0mm"], ["表面处理", "沉金/沉银/OSP/镀金"]] },
-                prod_device: "生产设备", prod_list: ["数字钻孔机 (6轴)", "填孔脉冲电镀线", "真空蚀刻机", "高层压合机(30层)", "LDI激光直接成像"],
-                test_device: "检测设备", test_list: ["AOI自动光学检测", "飞针测试机(精度1μm)", "X-ray镀层测厚仪", "金相显微镜", "阻抗测试仪(TDR)"]
+                prod_device: "生产设备", prod_list: ["6轴数控钻孔机", "脉冲电镀线", "真空蚀刻机", "30层压合机", "LDI曝光机"],
+                test_device: "检测设备", test_list: ["AOI光学检测", "飞针测试机(1μm)", "X-ray测厚仪", "金相显微镜", "TDR阻抗测试仪"]
             },
             news_detail: {
-                company_news: "公司新闻", company_news_list: ["井明电子荣获国家级专精特新小巨人", "井明电子通过IATF16949换版审核", "井明电子举办年度供应商大会", "井明新一代HDI产线正式投产"],
-                industry_news: "行业动态", industry_news_list: ["PCB行业迎来5G+AI新机遇", "新能源汽车带动车用PCB需求增长", "高频高速材料技术研讨会召开", "全球PCB产值2026年预计突破千亿美元"]
+                company_news: "公司新闻", company_news_list: ["荣获国家级专精特新小巨人", "通过IATF16949换版审核", "年度供应商大会举办", "新一代HDI产线投产"],
+                industry_news: "行业动态", industry_news_list: ["5G+AI驱动PCB新机遇", "新能源汽车带动车用PCB需求", "高频高速材料研讨会", "2026全球PCB市场破千亿美元"]
             },
-            social_detail: { environment: "环境保护", environment_desc: "井明电子坚持绿色制造，严格遵守RoHS、REACH指令，投资建设先进的废水处理系统，实现中水回用率60%，厂区光伏发电覆盖率已达30%。我们采用无铅、无卤素材料，并通过ISO14001环境管理体系认证，承诺2030年实现碳减排35%。" },
-            contact_detail: { offices: "服务据点", office_list: ["总部：四川省遂宁市经济技术开发区渠河南路188号电子电路标准厂房一期3号楼", "华南办事处：深圳南山区科技园", "华东办事处：苏州工业园区星汉街"], message_title: "在线留言", name_placeholder: "您的姓名", email_placeholder: "邮箱地址", msg_placeholder: "留言内容", submit: "提交留言" }
+            social_detail: { environment: "环境保护", environment_desc: "绿色制造，RoHS/REACH，废水处理回用60%，光伏覆盖率30%，ISO14001，2030碳减排35%。" },
+            contact_detail: { offices: "服务据点", office_list: ["总部：四川省遂宁市经济技术开发区渠河南路188号", "华南办事处：深圳南山区科技园", "华东办事处：苏州工业园区星汉街"], message_title: "在线留言", name_placeholder: "您的姓名", email_placeholder: "邮箱", msg_placeholder: "留言内容", submit: "提交" }
         },
         en: {
             nav_about: "About Kinming", nav_industry: "Markets", nav_products: "Products & Tech", nav_news: "News", nav_social: "CSR", nav_contact: "Contact",
-            footer_address: "Address: Building 3, Phase I, Electronic Circuit Standard Plant, No.188 Quhe South Road, Suining City, Sichuan Province | ISO9001 & IATF16949",
+            footer_address: "Address: Building 3, Phase I, Electronic Circuit Standard Plant, No.188 Quhe South Road, Suining City | ISO9001 & IATF16949",
             statement_title: "🌿 Green Manufacturing for a Sustainable Future",
-            statement_content: "Kinming Electronics integrates environmental protection and social responsibility. We comply with RoHS/REACH, advanced water treatment & reuse, 30% solar power, and care for community.",
+            statement_content: "Kinming integrates environmental protection. Comply with RoHS/REACH, advanced water treatment, 30% solar power, community care.",
             form_title: "Get Brochure / Quote",
-            form_desc: "Customer-centric is core value. Fill in info to receive brochure/quote.",
-            name_placeholder: "Name*", email_placeholder: "Email*", company_placeholder: "Company/Message", phone_placeholder: "Phone", submit: "Submit", thank_you: "Thank you! We will contact you soon.",
+            form_desc: "Customer-centric. Fill in to receive brochure/quote.",
+            name_placeholder: "Name*", email_placeholder: "Email*", company_placeholder: "Company/Message", phone_placeholder: "Phone", submit: "Submit", thank_you: "Thank you! We'll contact you soon.",
             about_detail: {
-                intro: "Company Profile", intro_text: "Sichuan Kinming Electronics Co., Ltd. founded in 2012 (formerly Suining Haoersi). 500+ employees, specializing in PCB R&D and production: multilayer, HDI, high-multilayer, metal core. Certifications: IATF16949, ISO9001, ISO14001, UL, CQC, RoHS.",
+                intro: "Company Profile", intro_text: "Sichuan Kinming Electronics founded in 2012, 500+ staff, specializes in PCB: multilayer, HDI, high-multilayer, metal core. Certifications: IATF16949, ISO9001, ISO14001, UL, CQC.",
                 capability: "Process Capability", capability_table: { headers: ["Technology", "Standard", "Special"], rows: [["Max Layers","24","30"],["Line/Space","75/75μm","60/60μm"],["Min Hole","0.2mm","0.15mm"],["Aspect Ratio","20:1","25:1"],["Impedance","±10%","±7%"],["Warpage","<0.75%","<0.5%"]] },
-                management: "Management System", management_text: "Certified IATF16949, ISO9001, ISO14001, UL, CQC. Full digital quality control.",
-                honor: "Honors", honor_list: ["National High-tech Enterprise", "Sichuan Specialized & Sophisticated Enterprise", "Suining PCB Engineering Center", "CPCA Member"],
-                structure: "Organization", structure_text: "Departments: Marketing, R&D, Manufacturing, QC, Supply Chain, Overseas.",
-                quality: "Quality Assurance", quality_text: "SPC monitoring from IQC to reliability test. Equipped with AOI, flying probe, X-ray, microscope."
+                management: "Management System", management_text: "IATF16949, ISO9001, ISO14001, UL, CQC certified. Full digital QC.",
+                honor: "Honors", honor_list: ["National High-tech Enterprise", "Sichuan Specialized & Sophisticated", "Suining PCB Engineering Center", "CPCA Member"],
+                structure: "Organization", structure_text: "Marketing, R&D, Manufacturing, QC, Supply Chain, Overseas.",
+                quality: "Quality Assurance", quality_text: "SPC from IQC to reliability. Equipped with AOI, flying probe, X-ray, microscope."
             },
             industry_detail: {
-                network: "Telecom & Networking", network_desc: "High-speed optical modules, routers, base station PCBs, low-loss materials, precise impedance control.",
-                auto: "Automotive Electronics", auto_desc: "IATF16949 certified PCBs for BMS, ECU, infotainment & ADAS.",
-                smart: "Smart Devices", smart_desc: "HDI for smartphones, tablets, wearables, line/space 2.5/2.5mil, any-layer.",
-                medical: "Industrial & Medical", medical_desc: "High-reliability PCBs for industrial control and medical imaging, long-life.",
-                power: "Power Supply", power_desc: "Heavy copper & metal core PCB, up to 12oz copper, excellent heat dissipation.",
-                consumer: "Consumer Electronics", consumer_desc: "High-integration HDI for smart home, drones, VR devices."
+                network: "Telecom & Networking", network_desc: "High-speed optical modules, routers, base station PCBs, low-loss material.",
+                auto: "Automotive Electronics", auto_desc: "IATF16949 PCBs for BMS, ECU, infotainment, ADAS.",
+                smart: "Smart Devices", smart_desc: "HDI for smartphones, tablets, wearables, 2.5/2.5mil line/space.",
+                medical: "Industrial & Medical", medical_desc: "High-reliability PCBs for industrial control and medical imaging.",
+                power: "Power Supply", power_desc: "Heavy copper & metal core, up to 12oz, excellent heat dissipation.",
+                consumer: "Consumer Electronics", consumer_desc: "High-integration HDI for smart home, drones, VR."
             },
             products_detail: {
                 std_pcb: "Standard PCB", std_pcb_desc: "Single/double/multilayer, FR-4, quick-turn, min line 3mil.",
-                hdi: "HDI PCB", hdi_desc: "Any-layer, microvias, 2.5/2.5mil line/space, 1-3 steps.",
+                hdi: "HDI PCB", hdi_desc: "Any-layer, microvias, 2.5/2.5mil, 1-3 steps.",
                 high_layer: "High Multilayer", high_layer_desc: "10-30 layers, backplanes, server boards, impedance ±7%.",
-                metal_base: "Metal Core PCB", metal_base_desc: "Aluminum/Copper base for high-power LEDs, thermal conductivity 1.0~3.0W/m·K.",
+                metal_base: "Metal Core PCB", metal_base_desc: "Aluminum/Copper base for high-power LEDs, 1.0-3.0W/m·K.",
                 process_cap: "Capability", process_table: { headers: ["Item", "Capability"], rows: [["Min Line", "2.5mil"], ["Min Hole", "0.15mm"], ["Max Thickness", "8.0mm"], ["Finishes", "ENIG/ImmAg/OSP/Hard Gold"]] },
-                prod_device: "Production Equipment", prod_list: ["CNC Drilling (6-spindle)", "Pulse Plating", "Vacuum Etching", "High Layer Press (30L)", "LDI"],
-                test_device: "Testing Equipment", test_list: ["AOI", "Flying Probe (1μm)", "X-ray Thickness", "Metallurgical Microscope", "TDR Impedance Tester"]
+                prod_device: "Production Equipment", prod_list: ["6-Spindle CNC Drilling", "Pulse Plating", "Vacuum Etching", "30L Press", "LDI"],
+                test_device: "Testing Equipment", test_list: ["AOI", "Flying Probe (1μm)", "X-ray Thickness", "Microscope", "TDR Impedance Tester"]
             },
             news_detail: {
-                company_news: "Company News", company_news_list: ["Kinming awarded National 'Little Giant'", "Kinming passed IATF16949 recertification", "Annual supplier conference held", "New HDI production line launched"],
-                industry_news: "Industry Trends", industry_news_list: ["PCB industry embraces 5G+AI", "EV drives automotive PCB demand", "High-frequency materials seminar", "Global PCB market to exceed $100B by 2026"]
+                company_news: "Company News", company_news_list: ["Awarded National 'Little Giant'", "Passed IATF16949 recertification", "Annual supplier conference", "New HDI line launched"],
+                industry_news: "Industry Trends", industry_news_list: ["5G+AI drives PCB", "EV boosts automotive PCB demand", "High-frequency materials seminar", "Global PCB market to exceed $100B by 2026"]
             },
-            social_detail: { environment: "Environmental Protection", environment_desc: "Kinming commits to green manufacturing, RoHS/REACH, advanced wastewater treatment (60% reuse), 30% solar power, ISO14001, target 35% carbon reduction by 2030." },
-            contact_detail: { offices: "Service Locations", office_list: ["HQ: Building 3, Phase I, Electronic Circuit Standard Plant, No.188 Quhe South Road, Suining", "Shenzhen Office: Nanshan District", "Suzhou Office: Suzhou Industrial Park"], message_title: "Online Message", name_placeholder: "Your Name", email_placeholder: "Email", msg_placeholder: "Message", submit: "Submit" }
+            social_detail: { environment: "Environmental Protection", environment_desc: "Green manufacturing, RoHS/REACH, water reuse 60%, 30% solar, ISO14001, 35% carbon reduction by 2030." },
+            contact_detail: { offices: "Service Locations", office_list: ["HQ: Building 3, Phase I, Quhe South Road, Suining", "Shenzhen Office: Nanshan District", "Suzhou Office: Suzhou Industrial Park"], message_title: "Online Message", name_placeholder: "Your Name", email_placeholder: "Email", msg_placeholder: "Message", submit: "Submit" }
         }
     };
 
     let currentLang = 'zh';
-    function getUrlLang() { const urlParams = new URLSearchParams(window.location.search); return urlParams.get('lang') === 'en' ? 'en' : 'zh'; }
-    function t(key) { const keys = key.split('.'); let val = langText[currentLang]; for(let k of keys) if(val && val[k] !== undefined) val = val[k]; else return key; return val; }
+    function getUrlLang() { return new URLSearchParams(location.search).get('lang') === 'en' ? 'en' : 'zh'; }
+    function t(key) { let val = langText[currentLang]; for(let k of key.split('.')) if(val?.[k] !== undefined) val = val[k]; else return key; return val; }
 
-    // 轮播图映射
     const carouselMap = {
         about: ["https://picsum.photos/id/20/1600/500","https://picsum.photos/id/26/1600/500","https://picsum.photos/id/96/1600/500"],
         industry: ["https://picsum.photos/id/0/1600/500","https://picsum.photos/id/106/1600/500","https://picsum.photos/id/116/1600/500"],
@@ -472,80 +464,77 @@
     };
     function renderCarousel(pageKey) {
         const images = carouselMap[pageKey] || carouselMap.about;
-        let indicators='', itemsHtml='';
-        const titles = currentLang==='zh'?['智能工厂','研发中心','全球服务']:['Smart Factory','R&D Center','Global Service'];
-        images.forEach((img,idx)=>{
-            indicators+=`<span class="${idx===0?'active':''}" data-index="${idx}"></span>`;
-            itemsHtml+=`<div class="carousel-item ${idx===0?'active':''}" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${img}');"><div class="carousel-caption"><h3>${titles[idx%titles.length]}</h3><p>${currentLang==='zh'?'领先PCB制造技术':'Advanced PCB Manufacturing'}</p></div></div>`;
+        let ind='', items='';
+        const titles = currentLang==='zh'?['精密智造','创新驱动','全球服务']:['Precision','Innovation','Global'];
+        images.forEach((img,i)=>{
+            ind+=`<span class="${i===0?'active':''}" data-index="${i}"></span>`;
+            items+=`<div class="carousel-item ${i===0?'active':''}" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('${img}');"><div class="carousel-caption"><h3>${titles[i%3]}</h3><p>${currentLang==='zh'?'领先PCB智造':'Advanced PCB Manufacturing'}</p></div></div>`;
         });
-        return `<div class="carousel" id="pageCarousel"><div class="carousel-inner">${itemsHtml}</div><div class="carousel-indicators">${indicators}</div></div>`;
+        return `<div class="carousel" id="pageCarousel"><div class="carousel-inner">${items}</div><div class="carousel-indicators">${ind}</div></div>`;
     }
-    function initCarousel() { 
-        const carouselDiv = document.getElementById('pageCarousel'); 
-        if(!carouselDiv) return; 
-        const items = carouselDiv.querySelectorAll('.carousel-item'), indicators = carouselDiv.querySelectorAll('.carousel-indicators span'); 
-        if(!items.length) return; 
-        let current=0, interval; 
-        function goTo(idx){ items[current].classList.remove('active'); indicators[current].classList.remove('active'); current=idx; items[current].classList.add('active'); indicators[current].classList.add('active'); } 
-        function startTimer(){ if(interval) clearInterval(interval); interval = setInterval(()=>{ let next = (current+1)%items.length; goTo(next); },4000); } 
-        indicators.forEach((ind,i)=>{ ind.addEventListener('click',()=>{ clearInterval(interval); goTo(i); startTimer(); }); }); 
-        startTimer(); 
+    function initCarousel() {
+        const carDiv = document.getElementById('pageCarousel');
+        if(!carDiv) return;
+        const items = carDiv.querySelectorAll('.carousel-item'), inds = carDiv.querySelectorAll('.carousel-indicators span');
+        if(!items.length) return;
+        let cur=0, interval;
+        function goTo(idx){ items[cur].classList.remove('active'); inds[cur].classList.remove('active'); cur=idx; items[cur].classList.add('active'); inds[cur].classList.add('active'); }
+        function start(){ if(interval) clearInterval(interval); interval = setInterval(()=>{ goTo((cur+1)%items.length); },4000); }
+        inds.forEach((d,i)=>{ d.addEventListener('click',()=>{ clearInterval(interval); goTo(i); start(); }); });
+        start();
     }
 
-    // 独立二级页面渲染 (全部应用透明毛玻璃+按钮悬浮)
-    function renderIndependentPage(page, sub) {
-        let innerHtml = renderCarousel(page);
+    function renderPageContent(page, sub) {
+        let html = renderCarousel(page);
         if(page === 'about') {
             const d = t('about_detail');
-            if(sub === 'intro') innerHtml += `<div class="container"><div class="sub-section"><h2>${d.intro}</h2><p>${d.intro_text}</p></div></div>`;
-            else if(sub === 'capability') { const cap = d.capability_table; innerHtml += `<div class="container"><div class="sub-section"><h2>${d.capability}</h2><div class="table-wrapper"><table class="capability-table"><thead><tr>${cap.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${cap.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div></div>`; }
-            else if(sub === 'management') innerHtml += `<div class="container"><div class="sub-section"><h2>${d.management}</h2><p>${d.management_text}</p></div></div>`;
-            else if(sub === 'honor') innerHtml += `<div class="container"><div class="sub-section"><h2>${d.honor}</h2><ul>${d.honor_list.map(h=>`<li>${h}</li>`).join('')}</ul></div></div>`;
-            else if(sub === 'structure') innerHtml += `<div class="container"><div class="sub-section"><h2>${d.structure}</h2><p>${d.structure_text}</p></div></div>`;
-            else if(sub === 'quality') innerHtml += `<div class="container"><div class="sub-section"><h2>${d.quality}</h2><p>${d.quality_text}</p></div></div>`;
-            else innerHtml += `<div class="container"><div class="home-form-large"><h3>${t('form_title')}</h3><p>${t('form_desc')}</p><form id="brochureForm"><input placeholder="${t('name_placeholder')}" required><input type="email" placeholder="${t('email_placeholder')}" required><input placeholder="${t('company_placeholder')}"><input placeholder="${t('phone_placeholder')}"><button type="submit">${t('submit')}</button></form></div></div>`;
+            if(sub === 'intro') html += `<div class="container"><div class="sub-section"><h2>${d.intro}</h2><p>${d.intro_text}</p></div></div>`;
+            else if(sub === 'capability') { const cap = d.capability_table; html += `<div class="container"><div class="sub-section"><h2>${d.capability}</h2><div class="table-wrapper"><table class="capability-table"><thead><tr>${cap.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${cap.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div></div>`; }
+            else if(sub === 'management') html += `<div class="container"><div class="sub-section"><h2>${d.management}</h2><p>${d.management_text}</p></div></div>`;
+            else if(sub === 'honor') html += `<div class="container"><div class="sub-section"><h2>${d.honor}</h2><ul>${d.honor_list.map(h=>`<li>${h}</li>`).join('')}</ul></div></div>`;
+            else if(sub === 'structure') html += `<div class="container"><div class="sub-section"><h2>${d.structure}</h2><p>${d.structure_text}</p></div></div>`;
+            else if(sub === 'quality') html += `<div class="container"><div class="sub-section"><h2>${d.quality}</h2><p>${d.quality_text}</p></div></div>`;
+            else html += `<div class="container"><div class="home-form-large"><h3>${t('form_title')}</h3><p>${t('form_desc')}</p><form id="brochureForm"><input placeholder="${t('name_placeholder')}" required><input type="email" placeholder="${t('email_placeholder')}" required><input placeholder="${t('company_placeholder')}"><input placeholder="${t('phone_placeholder')}"><button type="submit">${t('submit')}</button></form></div></div>`;
         } 
         else if(page === 'industry') {
             const d = t('industry_detail');
-            if(sub && d[sub]) innerHtml += `<div class="container"><div class="sub-section"><h2>${d[sub]}</h2><p>${d[sub+'_desc']}</p></div></div>`;
-            else innerHtml += `<div class="container"><div class="sub-section"><h2>${t('nav_industry')}</h2><p>请从菜单选择具体细分市场。</p></div></div>`;
+            if(sub && d[sub]) html += `<div class="container"><div class="sub-section"><h2>${d[sub]}</h2><p>${d[sub+'_desc']}</p></div></div>`;
+            else html += `<div class="container"><div class="sub-section"><h2>${t('nav_industry')}</h2><p>请选择具体市场</p></div></div>`;
         }
         else if(page === 'products') {
             const d = t('products_detail');
-            if(sub === 'process_cap') { const pt = d.process_table; innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.process_cap}</h2><div class="table-wrapper"><table class="capability-table"><thead><tr>${pt.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${pt.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div></div>`; }
-            else if(sub === 'prod_device') innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.prod_device}</h2><div class="grid-2col">${d.prod_list.map(dev=>`<div class="info-card"><i class="fas fa-microchip"></i> ${dev}</div>`).join('')}</div></div></div>`;
-            else if(sub === 'test_device') innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.test_device}</h2><div class="grid-2col">${d.test_list.map(dev=>`<div class="info-card"><i class="fas fa-chart-line"></i> ${dev}</div>`).join('')}</div></div></div>`;
-            else if(sub && d[sub]) innerHtml+=`<div class="container"><div class="sub-section"><h2>${d[sub]}</h2><p>${d[sub+'_desc']}</p></div></div>`;
-            else innerHtml+=`<div class="container"><div class="sub-section"><h2>${t('nav_products')}</h2><p>请选择产品技术子类。</p></div></div>`;
+            if(sub === 'process_cap') { const pt = d.process_table; html+=`<div class="container"><div class="sub-section"><h2>${d.process_cap}</h2><div class="table-wrapper"><table class="capability-table"><thead><tr>${pt.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${pt.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div></div>`; }
+            else if(sub === 'prod_device') html+=`<div class="container"><div class="sub-section"><h2>${d.prod_device}</h2><div class="grid-2col">${d.prod_list.map(dev=>`<div class="info-card"><i class="fas fa-microchip"></i> ${dev}</div>`).join('')}</div></div></div>`;
+            else if(sub === 'test_device') html+=`<div class="container"><div class="sub-section"><h2>${d.test_device}</h2><div class="grid-2col">${d.test_list.map(dev=>`<div class="info-card"><i class="fas fa-chart-line"></i> ${dev}</div>`).join('')}</div></div></div>`;
+            else if(sub && d[sub]) html+=`<div class="container"><div class="sub-section"><h2>${d[sub]}</h2><p>${d[sub+'_desc']}</p></div></div>`;
+            else html+=`<div class="container"><div class="sub-section"><h2>${t('nav_products')}</h2><p>选择具体产品</p></div></div>`;
         }
         else if(page === 'news') {
             const d = t('news_detail');
-            if(sub === 'company_news') innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.company_news}</h2><ul>${d.company_news_list.map(i=>`<li>${i}</li>`).join('')}</ul></div></div>`;
-            else if(sub === 'industry_news') innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.industry_news}</h2><ul>${d.industry_news_list.map(i=>`<li>${i}</li>`).join('')}</ul></div></div>`;
-            else innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.company_news}</h2><ul>${d.company_news_list.map(i=>`<li>${i}</li>`).join('')}</ul></div><div class="sub-section"><h2>${d.industry_news}</h2><ul>${d.industry_news_list.map(i=>`<li>${i}</li>`).join('')}</ul></div></div>`;
+            if(sub === 'company_news') html+=`<div class="container"><div class="sub-section"><h2>${d.company_news}</h2><ul>${d.company_news_list.map(i=>`<li>${i}</li>`).join('')}</ul></div></div>`;
+            else if(sub === 'industry_news') html+=`<div class="container"><div class="sub-section"><h2>${d.industry_news}</h2><ul>${d.industry_news_list.map(i=>`<li>${i}</li>`).join('')}</ul></div></div>`;
+            else html+=`<div class="container"><div class="sub-section"><h2>${d.company_news}</h2><ul>${d.company_news_list.map(i=>`<li>${i}</li>`).join('')}</ul></div><div class="sub-section"><h2>${d.industry_news}</h2><ul>${d.industry_news_list.map(i=>`<li>${i}</li>`).join('')}</ul></div></div>`;
         }
         else if(page === 'social') {
-            const d = t('social_detail');
-            innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.environment}</h2><p>${d.environment_desc}</p></div></div>`;
+            html+=`<div class="container"><div class="sub-section"><h2>${t('social_detail.environment')}</h2><p>${t('social_detail.environment_desc')}</p></div></div>`;
         }
         else if(page === 'contact') {
             const d = t('contact_detail');
-            if(sub === 'offices') innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.offices}</h2><ul>${d.office_list.map(o=>`<li>${o}</li>`).join('')}</ul></div></div>`;
-            else if(sub === 'message') innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.message_title}</h2><form class="contact-form" id="msgForm"><input placeholder="${d.name_placeholder}" required><input type="email" placeholder="${d.email_placeholder}" required><textarea rows="4" placeholder="${d.msg_placeholder}" required></textarea><button type="submit">${d.submit}</button></form></div></div><script>document.getElementById('msgForm')?.addEventListener('submit',(e)=>{e.preventDefault(); alert('${currentLang==='zh'?'留言已发送，我们会尽快联系您。':'Message sent.'});})<\/script>`;
-            else innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.offices}</h2><ul>${d.office_list.map(o=>`<li>${o}</li>`).join('')}</ul></div><div class="sub-section"><h2>${d.message_title}</h2><form class="contact-form"><input placeholder="${d.name_placeholder}"><input placeholder="${d.email_placeholder}"><textarea rows="3"></textarea><button>${d.submit}</button></form></div></div>`;
+            if(sub === 'offices') html+=`<div class="container"><div class="sub-section"><h2>${d.offices}</h2><ul>${d.office_list.map(o=>`<li>${o}</li>`).join('')}</ul></div></div>`;
+            else if(sub === 'message') html+=`<div class="container"><div class="sub-section"><h2>${d.message_title}</h2><form class="contact-form" id="msgForm"><input placeholder="${d.name_placeholder}" required><input type="email" placeholder="${d.email_placeholder}" required><textarea rows="4" placeholder="${d.msg_placeholder}" required></textarea><button type="submit">${d.submit}</button></form></div></div><script>document.getElementById('msgForm')?.addEventListener('submit',(e)=>{e.preventDefault(); alert('${currentLang==='zh'?'留言已发送，我们会尽快联系您。':'Message sent.'});})<\/script>`;
+            else html+=`<div class="container"><div class="sub-section"><h2>${d.offices}</h2><ul>${d.office_list.map(o=>`<li>${o}</li>`).join('')}</ul></div><div class="sub-section"><h2>${d.message_title}</h2><form class="contact-form"><input placeholder="${d.name_placeholder}"><input placeholder="${d.email_placeholder}"><textarea rows="3"></textarea><button>${d.submit}</button></form></div></div>`;
         }
-        return innerHtml;
+        return html;
     }
 
-    function renderFullPage() {
-        const urlParams = new URLSearchParams(window.location.search);
+    function renderFull() {
+        const urlParams = new URLSearchParams(location.search);
         const page = urlParams.get('page') || 'about';
         const sub = urlParams.get('sub') || null;
-        const contentHtml = renderIndependentPage(page, sub);
-        document.getElementById('app').innerHTML = contentHtml;
+        document.getElementById('app').innerHTML = renderPageContent(page, sub);
         initCarousel();
-        const form = document.getElementById('brochureForm');
-        if(form) form.onsubmit = (e)=>{ e.preventDefault(); alert(t('thank_you')); form.reset(); };
+        const brochureForm = document.getElementById('brochureForm');
+        if(brochureForm) brochureForm.onsubmit = (e)=>{ e.preventDefault(); alert(t('thank_you')); brochureForm.reset(); };
         document.getElementById('socialStatement').innerHTML = `<h3>${t('statement_title')}</h3><p>${t('statement_content')}</p>`;
         document.getElementById('footerAddress').innerText = t('footer_address');
         buildFooterLinks();
@@ -563,7 +552,7 @@
             social: ['environment'],
             contact: ['offices','message']
         };
-        let menuHtml = '';
+        let html = '';
         pages.forEach((p, idx) => {
             let subsHtml = `<div class="dropdown-menu">`;
             subMap[p].forEach(subKey => {
@@ -577,49 +566,47 @@
                 subsHtml += `<a href="?page=${p}&sub=${subKey}&lang=${currentLang}">${subLabel}</a>`;
             });
             subsHtml += `</div>`;
-            menuHtml += `<li class="dropdown"><a href="?page=${p}&lang=${currentLang}" data-page="${p}">${labels[idx]}</a>${subsHtml}</li>`;
+            html += `<li class="dropdown"><a href="?page=${p}&lang=${currentLang}" data-page="${p}">${labels[idx]}</a>${subsHtml}</li>`;
         });
-        menuHtml += `<li><button class="lang-btn" id="langToggle">${currentLang === 'zh' ? 'English' : '中文'}</button></li>`;
-        document.getElementById('navLinks').innerHTML = menuHtml;
+        html += `<li><button class="lang-btn" id="langToggle">${currentLang === 'zh' ? 'English' : '中文'}</button></li>`;
+        document.getElementById('navLinks').innerHTML = html;
         document.getElementById('langToggle')?.addEventListener('click', ()=>{
             const newLang = currentLang === 'zh' ? 'en' : 'zh';
-            const url = new URL(window.location.href);
+            const url = new URL(location.href);
             url.searchParams.set('lang', newLang);
-            window.location.href = url.toString();
+            location.href = url.toString();
         });
     }
-
     function buildFooterLinks() {
         const groups = [
-            { page:'about', subs:['intro','capability','management','honor','structure','quality'], labelsZh:['公司简介','制程能力','管理体系','井明荣誉','组织架构','品质保证'] },
+            { page:'about', subs:['intro','capability','management','honor','structure','quality'], labelsZh:['公司简介','制程能力','管理体系','荣誉','架构','品质'] },
             { page:'industry', subs:['network','auto','smart','medical','power','consumer'], labelsZh:['网络通信','汽车电子','智能终端','工控医疗','电源','消费电子'] },
-            { page:'products', subs:['std_pcb','hdi','high_layer','metal_base','process_cap','prod_device','test_device'], labelsZh:['常规电路板','高密度互联板','高多层电路板','金属基板','制程能力','生产设备','检测设备'] },
+            { page:'products', subs:['std_pcb','hdi','high_layer','metal_base','process_cap','prod_device','test_device'], labelsZh:['常规板','HDI','高多层','金属基','制程能力','生产设备','检测设备'] },
             { page:'news', subs:['company_news','industry_news'], labelsZh:['公司新闻','行业动态'] },
             { page:'social', subs:['environment'], labelsZh:['环境保护'] },
             { page:'contact', subs:['offices','message'], labelsZh:['服务据点','在线留言'] }
         ];
-        let html = '';
+        let ftHtml = '';
         groups.forEach(g => {
-            let title = t(`nav_${g.page}`);
-            html += `<div class="footer-links-col"><h4>${title}</h4><ul>`;
-            g.subs.forEach((sub,idx) => {
-                let display = (currentLang==='zh') ? g.labelsZh[idx] : sub;
-                html += `<li><a href="?page=${g.page}&sub=${sub}&lang=${currentLang}">${display}</a></li>`;
+            ftHtml += `<div class="footer-links-col"><h4>${t(`nav_${g.page}`)}</h4><ul>`;
+            g.subs.forEach((sub, idx) => {
+                let display = currentLang === 'zh' ? g.labelsZh[idx] : sub;
+                ftHtml += `<li><a href="?page=${g.page}&sub=${sub}&lang=${currentLang}">${display}</a></li>`;
             });
-            html += `</ul></div>`;
+            ftHtml += `</ul></div>`;
         });
-        document.getElementById('footerLinksGrid').innerHTML = html;
+        document.getElementById('footerLinksGrid').innerHTML = ftHtml;
     }
 
     function init() {
         currentLang = getUrlLang();
         buildNavLinks();
-        renderFullPage();
+        renderFull();
         document.getElementById('menuToggle')?.addEventListener('click', () => document.getElementById('navLinks').classList.toggle('show'));
-        document.getElementById('logoHome')?.addEventListener('click', (e) => { e.preventDefault(); window.location.href = `?lang=${currentLang}`; });
+        document.getElementById('logoHome')?.addEventListener('click', (e) => { e.preventDefault(); location.href = `?lang=${currentLang}`; });
     }
     init();
-    window.addEventListener('popstate', () => { currentLang = getUrlLang(); buildNavLinks(); renderFullPage(); });
+    window.addEventListener('popstate', () => { currentLang = getUrlLang(); buildNavLinks(); renderFull(); });
 </script>
 </body>
 </html>
