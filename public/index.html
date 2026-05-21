@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>四川井明电子 | 精密PCB智造专家 - 独立二级页面</title>
+    <title>四川井明电子 | 精密PCB智造专家 - 透明质感+按钮动效</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -16,12 +16,13 @@
         }
         .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
         .navbar {
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
             box-shadow: 0 4px 20px rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid #d9e6f7;
+            border-bottom: 1px solid rgba(37, 99, 235, 0.2);
         }
         .nav-container {
             display: flex;
@@ -53,8 +54,8 @@
             position: absolute;
             top: 100%;
             left: 0;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(20px);
             border-radius: 20px;
             min-width: 210px;
             padding: 12px 8px;
@@ -63,8 +64,8 @@
             transform: translateY(-12px);
             transition: all 0.25s ease;
             z-index: 200;
-            border: 1px solid rgba(37, 99, 235, 0.2);
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(37, 99, 235, 0.25);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
         }
         .dropdown:hover .dropdown-menu {
             opacity: 1;
@@ -83,9 +84,10 @@
             transition: all 0.2s ease;
         }
         .dropdown-menu a:hover {
-            background: rgba(37, 99, 235, 0.12);
+            background: rgba(37, 99, 235, 0.15);
             color: #2563eb;
-            transform: translateX(4px);
+            transform: translateX(6px);
+            backdrop-filter: blur(4px);
         }
         
         .lang-btn {
@@ -104,7 +106,8 @@
             background: #2563eb;
             border-color: #2563eb;
             color: white;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(37,99,235,0.25);
         }
         .menu-icon { display: none; font-size: 1.6rem; cursor: pointer; }
         
@@ -115,10 +118,10 @@
         .carousel {
             position: relative;
             width: 100%;
-            border-radius: 28px;
+            border-radius: 32px;
             overflow: hidden;
             margin-bottom: 48px;
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 30px -10px rgba(0,0,0,0.15);
         }
         .carousel-inner { position: relative; width: 100%; height: 400px; }
         .carousel-item {
@@ -140,11 +143,12 @@
         }
         .carousel-item.active { opacity: 1; }
         .carousel-caption {
-            background: rgba(0,0,0,0.5);
-            padding: 20px;
-            border-radius: 20px;
+            background: rgba(0,0,0,0.45);
+            backdrop-filter: blur(8px);
+            padding: 20px 32px;
+            border-radius: 60px;
             max-width: 80%;
-            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.3);
         }
         .carousel-caption h3 { font-size: 2rem; margin-bottom: 10px; }
         .carousel-caption p { font-size: 1rem; }
@@ -173,125 +177,169 @@
             .carousel-caption p { font-size: 0.8rem; }
         }
         
+        /* ======= 二级页面内容区块 - 半透明毛玻璃 + 按钮级交互效果 ======= */
         .sub-section {
             scroll-margin-top: 100px;
-            margin-bottom: 60px;
-            background: white;
-            border-radius: 28px;
-            padding: 32px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            border: 1px solid #d9e6f7;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(16px);
+            border-radius: 32px;
+            padding: 28px 32px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            cursor: pointer;
+        }
+        /* 按钮悬浮效果：提升、发光边框、阴影增强 */
+        .sub-section:hover {
+            transform: translateY(-6px);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 35px -12px rgba(37, 99, 235, 0.3);
+            border-color: rgba(37, 99, 235, 0.5);
         }
         .sub-section h2 {
-            font-size: 1.6rem;
-            font-weight: 600;
+            font-size: 1.7rem;
+            font-weight: 700;
             color: #0f2b5e;
             margin-bottom: 20px;
-            border-left: 4px solid #2563eb;
-            padding-left: 16px;
+            border-left: 5px solid #2563eb;
+            padding-left: 20px;
+            transition: 0.2s;
         }
-        .table-wrapper { overflow-x: auto; border-radius: 20px; background: white; margin-top: 20px; }
-        .capability-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-        .capability-table th { background: #f0f4fa; padding: 14px 12px; text-align: center; font-weight: 600; color: #1e3a5f; }
-        .capability-table td { padding: 12px; border-bottom: 1px solid #eef2f8; text-align: center; }
-        .grid-2col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 24px; }
-        .info-card { background: #f8fafc; border-radius: 20px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+        .sub-section:hover h2 {
+            color: #1e40af;
+            transform: translateX(4px);
+        }
+        .sub-section p, .sub-section li, .sub-section td {
+            color: #1e293b;
+            font-weight: 500;
+        }
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 24px;
+            background: rgba(255,255,255,0.4);
+            backdrop-filter: blur(4px);
+            margin-top: 16px;
+        }
+        .capability-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        .capability-table th {
+            background: rgba(240, 244, 250, 0.8);
+            padding: 14px 12px;
+            text-align: center;
+            font-weight: 700;
+            color: #0f2b5e;
+        }
+        .capability-table td {
+            padding: 12px;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            text-align: center;
+            background: rgba(255,255,255,0.5);
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 24px;
+        }
+        .info-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 24px;
+            padding: 20px;
+            transition: 0.25s;
+            border: 1px solid rgba(255,255,255,0.5);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .info-card:hover {
+            transform: scale(1.02);
+            background: rgba(255,255,255,0.9);
+            border-color: #2563eb;
+            box-shadow: 0 12px 20px -8px rgba(37,99,235,0.3);
+        }
+        /* 首页表单也适配毛玻璃 */
         .home-form-large {
             max-width: 700px;
             margin: 0 auto;
-            background: white;
-            border-radius: 32px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            border-radius: 40px;
             padding: 48px 40px;
             box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
-            text-align: center;
+            border: 1px solid rgba(255,255,255,0.7);
+            transition: 0.3s;
         }
-        .home-form-large input, .home-form-large textarea {
+        .home-form-large:hover {
+            background: rgba(255, 255, 255, 0.85);
+            transform: translateY(-4px);
+        }
+        .home-form-large input, .home-form-large textarea, .contact-form input, .contact-form textarea {
             width: 100%;
             padding: 14px 18px;
-            border: 1px solid #cbd5e1;
+            border: 1px solid rgba(0,0,0,0.15);
             border-radius: 40px;
             margin-bottom: 20px;
+            background: rgba(255,255,255,0.9);
             font-family: inherit;
+            transition: 0.2s;
         }
-        .home-form-large button {
+        .home-form-large input:focus, .contact-form input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
+            outline: none;
+        }
+        .home-form-large button, .contact-form button {
             background: #2563eb;
             color: white;
             border: none;
             padding: 14px 28px;
             border-radius: 40px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             width: 100%;
+            transition: 0.2s;
         }
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 12px;
-            margin-bottom: 16px;
-        }
-        .contact-form button {
-            background: #2563eb;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 40px;
-            cursor: pointer;
+        .home-form-large button:hover, .contact-form button:hover {
+            background: #1e4a7a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(37,99,235,0.4);
         }
         .social-statement {
-            background: #eef2ff;
-            border-radius: 28px;
+            background: rgba(238, 242, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 32px;
             padding: 40px 28px;
             margin: 40px auto 0;
             text-align: center;
+            border: 1px solid rgba(255,255,255,0.8);
         }
         .footer-links {
-            background: #ffffff;
-            border-top: 1px solid #d9e6f7;
-            border-bottom: 1px solid #d9e6f7;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(37,99,235,0.2);
+            border-bottom: 1px solid rgba(37,99,235,0.2);
             padding: 48px 0;
             margin-top: 40px;
         }
-        .footer-links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-            gap: 32px;
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            padding: 48px 0 24px;
+            text-align: center;
         }
-        .footer-links-col h4 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #0f2b5e;
-            margin-bottom: 16px;
-            padding-bottom: 8px;
-            position: relative;
-        }
-        .footer-links-col h4:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 32px;
-            height: 2px;
-            background: #2563eb;
-        }
-        .footer-links-col ul { list-style: none; }
-        .footer-links-col li { margin-bottom: 10px; }
-        .footer-links-col a {
-            text-decoration: none;
-            color: #4b5563;
-            font-size: 0.85rem;
-            transition: 0.2s;
-        }
-        .footer-links-col a:hover { color: #2563eb; padding-left: 4px; }
-        footer { background: #0f172a; color: #cbd5e1; padding: 48px 0 24px; text-align: center; margin-top: 0; }
         @media (max-width: 768px) {
+            .sub-section { padding: 20px; }
+            .home-form-large { padding: 32px 24px; }
             .footer-links-grid { grid-template-columns: repeat(2, 1fr); }
-            .nav-links { display: none; width: 100%; flex-direction: column; align-items: center; padding: 20px 0; gap: 16px; background: white; }
+            .nav-links { display: none; width: 100%; flex-direction: column; align-items: center; padding: 20px 0; gap: 16px; background: rgba(255,255,255,0.98); backdrop-filter: blur(20px); }
             .nav-links.show { display: flex; }
             .menu-icon { display: block; }
-            .dropdown-menu { position: static; box-shadow: none; padding-left: 20px; background: rgba(255,255,255,0.95); margin-top: 4px; opacity: 1; visibility: visible; transform: none; display: none; }
+            .dropdown-menu { position: static; box-shadow: none; padding-left: 20px; background: rgba(255,255,255,0.95); margin-top: 4px; opacity: 1; visibility: visible; transform: none; display: none; border: none; }
             .dropdown.active .dropdown-menu { display: block; }
-            .nav-container .lang-btn { margin-left: auto; margin-right: 16px; }
         }
     </style>
 </head>
@@ -325,7 +373,7 @@
 </footer>
 
 <script>
-    // ---------- 完整的多语言内容库 (包含所有二级页面独立描述) ----------
+    // ---------- 完整多语言库（所有二级页面数据）----------
     const langText = {
         zh: {
             nav_about: "关于井明", nav_industry: "行业市场", nav_products: "产品技术", nav_news: "新闻中心", nav_social: "社会责任", nav_contact: "联系我们",
@@ -335,7 +383,6 @@
             form_title: "获取宣传册/报价",
             form_desc: "“以客户为中心”是井明的核心价值观之一，请填写信息获取宣传册或报价。",
             name_placeholder: "姓名*", email_placeholder: "邮箱*", company_placeholder: "公司名/留言", phone_placeholder: "电话", submit: "提交", thank_you: "感谢您的留言，我们会尽快联系您。",
-            // 关于井明子页面
             about_detail: {
                 intro: "公司简介", intro_text: "四川井明电子有限公司始创于2012年，前身为遂宁豪尔思电子科技有限公司，坐落于遂宁经开区电子电路产业园，现有员工500余人，是一家专业从事PCB电路板研发、设计、精密生产与配套服务的综合性制造企业。公司深耕线路板行业十余年，主营多层板、高精密HDI板、高多层板、金属基板、IC载板，产品广泛应用于汽车电子、网络通信、工控医疗、军工配套、智能终端等领域，可提供一站式定制量产解决方案。企业资质齐全，拥有IATF16949、ISO9001、ISO14001、UL、CQC权威认证，产品符合RoHS环保标准，全程严格品控，满足工业、汽车及高端精密设备使用要求。",
                 capability: "制程能力", capability_table: { headers: ["核心技术项", "井明标准能力", "特级能力"], rows: [["最大生产层数","24层","30层"],["最小线宽/线距","75/75μm","60/60μm"],["最小机械孔径","0.2mm","0.15mm"],["最大纵横比","20:1","25:1"],["阻抗控制公差","±10%","±7%"],["板翘控制","<0.75%","<0.5%"]] },
@@ -344,7 +391,6 @@
                 structure: "组织架构", structure_text: "设有市场中心、研发中心、制造中心、品控中心、供应链管理部及海外事业部。",
                 quality: "品质保证", quality_text: "从IQC进料检验到成品可靠性测试，全程SPC监控，配备AOI、飞针测试、X-ray、显微镜等先进设备。"
             },
-            // 行业市场子页面详情 (每个二级独立)
             industry_detail: {
                 network: "网络通信", network_desc: "高速光模块、路由器、基站天线PCB，采用低损耗高频材料，精准阻抗控制，支持25G/100G高速信号传输。",
                 auto: "汽车电子", auto_desc: "车规级PCB，满足IATF16949，应用于BMS电池管理、ECU控制单元、车载娱乐系统及ADAS辅助驾驶。",
@@ -353,7 +399,6 @@
                 power: "电源", power_desc: "厚铜电源板、金属基板，最大铜厚12oz，优异散热性能，适用于大功率电源模块。",
                 consumer: "消费电子", consumer_desc: "高集成度HDI板，满足轻薄化需求，广泛应用于智能家居、无人机、VR设备等领域。"
             },
-            // 产品技术子页面
             products_detail: {
                 std_pcb: "常规电路板", std_pcb_desc: "单双面及多层板，FR-4材料，快速打样及批量生产，最小线宽3mil。",
                 hdi: "高密度互联板", hdi_desc: "任意层互连，盲埋孔技术，线宽线距2.5/2.5mil，阶数1～3阶，适用于旗舰智能设备。",
@@ -363,14 +408,11 @@
                 prod_device: "生产设备", prod_list: ["数字钻孔机 (6轴)", "填孔脉冲电镀线", "真空蚀刻机", "高层压合机(30层)", "LDI激光直接成像"],
                 test_device: "检测设备", test_list: ["AOI自动光学检测", "飞针测试机(精度1μm)", "X-ray镀层测厚仪", "金相显微镜", "阻抗测试仪(TDR)"]
             },
-            // 新闻中心子页面
             news_detail: {
                 company_news: "公司新闻", company_news_list: ["井明电子荣获国家级专精特新小巨人", "井明电子通过IATF16949换版审核", "井明电子举办年度供应商大会", "井明新一代HDI产线正式投产"],
                 industry_news: "行业动态", industry_news_list: ["PCB行业迎来5G+AI新机遇", "新能源汽车带动车用PCB需求增长", "高频高速材料技术研讨会召开", "全球PCB产值2026年预计突破千亿美元"]
             },
-            // 社会责任子页面
             social_detail: { environment: "环境保护", environment_desc: "井明电子坚持绿色制造，严格遵守RoHS、REACH指令，投资建设先进的废水处理系统，实现中水回用率60%，厂区光伏发电覆盖率已达30%。我们采用无铅、无卤素材料，并通过ISO14001环境管理体系认证，承诺2030年实现碳减排35%。" },
-            // 联系我们子页面
             contact_detail: { offices: "服务据点", office_list: ["总部：四川省遂宁市经济技术开发区渠河南路188号电子电路标准厂房一期3号楼", "华南办事处：深圳南山区科技园", "华东办事处：苏州工业园区星汉街"], message_title: "在线留言", name_placeholder: "您的姓名", email_placeholder: "邮箱地址", msg_placeholder: "留言内容", submit: "提交留言" }
         },
         en: {
@@ -419,7 +461,7 @@
     function getUrlLang() { const urlParams = new URLSearchParams(window.location.search); return urlParams.get('lang') === 'en' ? 'en' : 'zh'; }
     function t(key) { const keys = key.split('.'); let val = langText[currentLang]; for(let k of keys) if(val && val[k] !== undefined) val = val[k]; else return key; return val; }
 
-    // 动态轮播图数据 (根据页面主题)
+    // 轮播图映射
     const carouselMap = {
         about: ["https://picsum.photos/id/20/1600/500","https://picsum.photos/id/26/1600/500","https://picsum.photos/id/96/1600/500"],
         industry: ["https://picsum.photos/id/0/1600/500","https://picsum.photos/id/106/1600/500","https://picsum.photos/id/116/1600/500"],
@@ -450,7 +492,7 @@
         startTimer(); 
     }
 
-    // 核心：根据page和sub渲染独立页面 (二级菜单独立展示)
+    // 独立二级页面渲染 (全部应用透明毛玻璃+按钮悬浮)
     function renderIndependentPage(page, sub) {
         let innerHtml = renderCarousel(page);
         if(page === 'about') {
@@ -470,7 +512,7 @@
         }
         else if(page === 'products') {
             const d = t('products_detail');
-            if(sub === 'process_cap') { const pt = d.process_table; innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.process_cap}</h2><div class="table-wrapper"><table class="capability-table"><thead><tr>${pt.headers.map(h=>`<th>${h}</th>`).join('')}</table></thead><tbody>${pt.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div></div>`; }
+            if(sub === 'process_cap') { const pt = d.process_table; innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.process_cap}</h2><div class="table-wrapper"><table class="capability-table"><thead><tr>${pt.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${pt.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div></div>`; }
             else if(sub === 'prod_device') innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.prod_device}</h2><div class="grid-2col">${d.prod_list.map(dev=>`<div class="info-card"><i class="fas fa-microchip"></i> ${dev}</div>`).join('')}</div></div></div>`;
             else if(sub === 'test_device') innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.test_device}</h2><div class="grid-2col">${d.test_list.map(dev=>`<div class="info-card"><i class="fas fa-chart-line"></i> ${dev}</div>`).join('')}</div></div></div>`;
             else if(sub && d[sub]) innerHtml+=`<div class="container"><div class="sub-section"><h2>${d[sub]}</h2><p>${d[sub+'_desc']}</p></div></div>`;
@@ -502,10 +544,8 @@
         const contentHtml = renderIndependentPage(page, sub);
         document.getElementById('app').innerHTML = contentHtml;
         initCarousel();
-        // 提交表单处理
         const form = document.getElementById('brochureForm');
         if(form) form.onsubmit = (e)=>{ e.preventDefault(); alert(t('thank_you')); form.reset(); };
-        // 更新底部及导航高亮
         document.getElementById('socialStatement').innerHTML = `<h3>${t('statement_title')}</h3><p>${t('statement_content')}</p>`;
         document.getElementById('footerAddress').innerText = t('footer_address');
         buildFooterLinks();
