@@ -32,7 +32,17 @@
             max-width: 1400px;
             margin: 0 auto;
         }
-        .logo { cursor: pointer; }
+        /* Logo 区域 — 非白色背景 */
+        .logo {
+            cursor: pointer;
+            background: #eef2ff;
+            padding: 6px 16px;
+            border-radius: 40px;
+            transition: all 0.2s;
+        }
+        .logo:hover {
+            background: #e0e7ff;
+        }
         .logo h1 {
             font-size: 1.4rem;
             font-weight: 700;
@@ -42,16 +52,21 @@
             color: transparent;
             margin-bottom: 2px;
         }
-        .logo span { font-size: 0.7rem; color: #4b5563; display: block; letter-spacing: 0.3px; }
+        .logo span {
+            font-size: 0.7rem;
+            color: #1e40af;
+            display: block;
+            letter-spacing: 0.3px;
+        }
         .dropdown { position: relative; }
         
-        /* ========== 二级菜单透明毛玻璃效果 ========== */
+        /* 二级菜单 — 与一级菜单底色区分（半透浅灰蓝） */
         .dropdown-menu {
             position: absolute;
             top: 100%;
             left: 0;
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(12px);
+            background: rgba(248, 250, 252, 0.95);
+            backdrop-filter: blur(8px);
             border-radius: 20px;
             min-width: 200px;
             padding: 12px 8px;
@@ -81,14 +96,27 @@
             transition: all 0.2s ease;
         }
         .dropdown-menu a:hover {
-            background: rgba(37, 99, 235, 0.12);
+            background: rgba(37, 99, 235, 0.15);
             color: #2563eb;
             transform: translateX(4px);
         }
         
         .nav-links { display: flex; gap: 28px; list-style: none; flex-wrap: wrap; align-items: center; }
-        .nav-links > li > a { text-decoration: none; font-weight: 500; color: #1e293b; transition: 0.2s; display: inline-block; padding: 8px 0; }
-        .nav-links > li > a:hover, .nav-links > li > a.active { color: #2563eb; }
+        .nav-links > li > a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #1e293b;
+            transition: 0.2s;
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 40px;
+            background: transparent;
+        }
+        .nav-links > li > a:hover,
+        .nav-links > li > a.active {
+            background: rgba(37, 99, 235, 0.1);
+            color: #2563eb;
+        }
         
         .lang-btn {
             background: rgba(37, 99, 235, 0.1);
@@ -378,7 +406,7 @@
             }
             .dropdown-menu {
                 position: static;
-                background: rgba(255, 255, 255, 0.95);
+                background: #f8fafc;
                 backdrop-filter: none;
                 box-shadow: none;
                 padding: 0;
@@ -696,11 +724,10 @@
         const pages = ['about', 'industry', 'products', 'news', 'social', 'contact'];
         let html = '';
         for (let page of pages) {
-            const pageKey = page;
-            const menuText = t(`nav_${pageKey}`);
-            const dropdownItems = t(`dropdown.${pageKey}`);
+            const menuText = t(`nav_${page}`);
+            const dropdownItems = t(`dropdown.${page}`);
             html += `<li class="dropdown">
-                        <a href="#" data-page="${pageKey}" data-i18n="nav_${pageKey}">${menuText}</a>
+                        <a href="#" data-page="${page}" data-i18n="nav_${page}">${menuText}</a>
                         <div class="dropdown-menu">`;
             const subIds = {
                 about: ["intro","capability","management","honor","structure","quality"],
@@ -710,7 +737,7 @@
                 social: ["environment"],
                 contact: ["offices","message"]
             };
-            const ids = subIds[pageKey] || [];
+            const ids = subIds[page] || [];
             for (let i = 0; i < dropdownItems.length; i++) {
                 const item = dropdownItems[i];
                 const subId = ids[i] || '';
@@ -721,16 +748,21 @@
         html += `<li><button class="lang-btn" id="langToggle">English</button></li>`;
         navContainer.innerHTML = html;
         
-        // 重新绑定一级菜单点击
+        // 重新绑定一级菜单点击（桌面端 hover 已支持，点击用于跳转；移动端特殊处理）
+        const isMobile = window.innerWidth <= 768;
         document.querySelectorAll('.nav-links > li > a[data-page]').forEach(link => {
+            link.removeEventListener('click', link.click);
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                const page = link.getAttribute('data-page');
-                if (page === 'about') setActivePage('about', null);
-                else setActivePage(page, null);
-                // 移动端关闭菜单
-                if (window.innerWidth <= 768) {
-                    document.getElementById('navLinks').classList.remove('show');
+                if (isMobile) {
+                    const parentLi = link.closest('.dropdown');
+                    if (parentLi) {
+                        parentLi.classList.toggle('active');
+                    }
+                } else {
+                    const page = link.getAttribute('data-page');
+                    if (page === 'about') setActivePage('about', null);
+                    else setActivePage(page, null);
                 }
             });
         });
@@ -746,23 +778,6 @@
                 }
             });
         });
-        // 绑定移动端下拉菜单展开/收起（点击一级菜单标题时展开二级菜单，而不是跳转）
-        // 注意：移动端点击一级标题应展开二级菜单，但我们已经绑定了点击跳转？实际上移动端期望点击一级标题展开二级菜单，再点击二级菜单跳转。
-        // 更好的交互：移动端点击一级标题时切换二级菜单显示，不立即跳转；点击二级菜单才跳转。而我们的代码目前点击一级标题会跳转（到概览页）。需要调整。
-        // 为了移动端体验，我们修改移动端行为：点击一级标题时只展开/收起二级菜单，不跳转。
-        if (window.innerWidth <= 768) {
-            document.querySelectorAll('.nav-links > li > a[data-page]').forEach(link => {
-                link.removeEventListener('click', link.click); // 先移除之前的，重新绑定
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const parentLi = link.closest('.dropdown');
-                    if (parentLi) {
-                        parentLi.classList.toggle('active');
-                    }
-                });
-            });
-        }
-        
         const langBtn = document.getElementById('langToggle');
         if (langBtn) {
             langBtn.innerText = currentLang === 'zh' ? 'English' : '中文';
@@ -790,7 +805,7 @@
         `;
     }
 
-    // 板块概览页面（一级菜单点击后显示）
+    // 板块概览页面
     function renderOverview(pageKey) {
         const overview = t('overview');
         let title = '', desc = '';
@@ -831,7 +846,7 @@
         `;
     }
 
-    // 子模块详情页面（与之前相同，略写以节省篇幅，实际保留完整函数）
+    // 子模块详情页面（与之前相同）
     function renderAboutSingle(subId) {
         const d = t('about_detail');
         const cap = d.capability_table;
@@ -880,7 +895,7 @@
         if (item.desc) content = `<p>${item.desc}</p>`;
         else if (item.table) {
             const t = item.table;
-            content = `<div class="table-wrapper"><table class="capability-table"><thead><tr>${t.headers.map(h=>`<th>${h}</th>`).join('')}<tr></thead><tbody>${t.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+            content = `<div class="table-wrapper"><table class="capability-table"><thead><tr>${t.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${t.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
         } else if (item.list) {
             content = `<div class="grid-2col">${item.list.map(dev=>`<div class="info-card"><i class="fas fa-microchip"></i> ${dev}</div>`).join('')}</div>`;
         }
@@ -1024,7 +1039,6 @@
     // 初始化
     function init() {
         renderNavbar();
-        // 解析初始 hash
         let initialHash = window.location.hash.slice(1);
         let initPage = 'about';
         let initSub = null;
@@ -1034,15 +1048,12 @@
             if (parts.length > 1) initSub = parts[1];
         }
         setActivePage(initPage, initSub);
-        // logo 点击事件
         document.getElementById('logoHome').addEventListener('click', () => setActivePage('about', null));
-        // 移动端汉堡菜单点击切换
         const menuToggle = document.getElementById('menuToggle');
         menuToggle.addEventListener('click', (e) => {
             e.stopPropagation();
             document.getElementById('navLinks').classList.toggle('show');
         });
-        // 移动端点击页面其他地方关闭菜单
         document.addEventListener('click', function(e) {
             const nav = document.getElementById('navLinks');
             const toggle = document.getElementById('menuToggle');
