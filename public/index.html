@@ -173,14 +173,26 @@
             .carousel-caption p { font-size: 0.8rem; }
         }
         
+        /* ========== 二级页面内容区块 - 半透明毛玻璃 + 按钮级交互效果 ========== */
         .sub-section {
             scroll-margin-top: 100px;
             margin-bottom: 60px;
-            background: white;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(18px);
             border-radius: 28px;
             padding: 32px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            border: 1px solid #d9e6f7;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            cursor: pointer;
+        }
+        /* 悬浮按钮效果：上浮、阴影增强、边框发光 */
+        .sub-section:hover {
+            transform: translateY(-6px);
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(24px);
+            box-shadow: 0 20px 30px -12px rgba(37, 99, 235, 0.3);
+            border-color: rgba(37, 99, 235, 0.6);
         }
         .sub-section h2 {
             font-size: 1.6rem;
@@ -189,31 +201,95 @@
             margin-bottom: 20px;
             border-left: 4px solid #2563eb;
             padding-left: 16px;
+            transition: 0.2s;
         }
-        .table-wrapper { overflow-x: auto; border-radius: 20px; background: white; margin-top: 20px; }
-        .capability-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-        .capability-table th { background: #f0f4fa; padding: 14px 12px; text-align: center; font-weight: 600; color: #1e3a5f; }
-        .capability-table td { padding: 12px; border-bottom: 1px solid #eef2f8; text-align: center; }
-        .grid-2col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 24px; }
-        .info-card { background: #f8fafc; border-radius: 20px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+        .sub-section:hover h2 {
+            transform: translateX(4px);
+            color: #1e40af;
+        }
+        .sub-section p, .sub-section li, .sub-section td {
+            color: #1e293b;
+            font-weight: 500;
+        }
+        /* 表格背景也适配透明风格 */
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(4px);
+            margin-top: 20px;
+        }
+        .capability-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        .capability-table th {
+            background: rgba(240, 244, 250, 0.8);
+            padding: 14px 12px;
+            text-align: center;
+            font-weight: 600;
+            color: #1e3a5f;
+        }
+        .capability-table td {
+            padding: 12px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            text-align: center;
+            background: rgba(255, 255, 255, 0.5);
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 24px;
+        }
+        .info-card {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
+            padding: 20px;
+            transition: 0.25s;
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+        .info-card:hover {
+            transform: scale(1.02);
+            background: rgba(255,255,255,0.5);
+            border-color: #2563eb;
+            box-shadow: 0 12px 20px -8px rgba(37,99,235,0.2);
+        }
+        /* 首页表单同样透明玻璃风格 */
         .home-form-large {
             max-width: 700px;
             margin: 0 auto;
-            background: white;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(16px);
             border-radius: 32px;
             padding: 48px 40px;
             box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
             text-align: center;
+            border: 1px solid rgba(255,255,255,0.6);
+            transition: 0.3s;
         }
-        .home-form-large input, .home-form-large textarea {
+        .home-form-large:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: translateY(-4px);
+        }
+        .home-form-large input, .home-form-large textarea, .contact-form input, .contact-form textarea {
             width: 100%;
             padding: 14px 18px;
-            border: 1px solid #cbd5e1;
+            border: 1px solid rgba(0,0,0,0.15);
             border-radius: 40px;
             margin-bottom: 20px;
+            background: rgba(255,255,255,0.9);
             font-family: inherit;
+            transition: 0.2s;
         }
-        .home-form-large button {
+        .home-form-large input:focus, .contact-form input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
+            outline: none;
+        }
+        .home-form-large button, .contact-form button {
             background: #2563eb;
             color: white;
             border: none;
@@ -222,31 +298,23 @@
             font-weight: 600;
             cursor: pointer;
             width: 100%;
+            transition: 0.2s;
         }
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 12px;
-            margin-bottom: 16px;
-        }
-        .contact-form button {
-            background: #2563eb;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 40px;
-            cursor: pointer;
+        .home-form-large button:hover, .contact-form button:hover {
+            background: #1e4a7a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(37,99,235,0.4);
         }
         .social-statement {
-            background: #eef2ff;
+            background: rgba(238, 242, 255, 0.7);
+            backdrop-filter: blur(12px);
             border-radius: 28px;
             padding: 40px 28px;
             margin: 40px auto 0;
             text-align: center;
         }
         .footer-links {
-            background: #ffffff;
+            background: rgba(255,255,255,0.9);
             border-top: 1px solid #d9e6f7;
             border-bottom: 1px solid #d9e6f7;
             padding: 48px 0;
@@ -470,7 +538,7 @@
         }
         else if(page === 'products') {
             const d = t('products_detail');
-            if(sub === 'process_cap') { const pt = d.process_table; innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.process_cap}</h2><div class="table-wrapper"><table class="capability-table"><thead><tr>${pt.headers.map(h=>`<th>${h}</th>`).join('')}</table></thead><tbody>${pt.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div></div>`; }
+            if(sub === 'process_cap') { const pt = d.process_table; innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.process_cap}</h2><div class="table-wrapper"><table class="capability-table"><thead><tr>${pt.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${pt.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div></div>`; }
             else if(sub === 'prod_device') innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.prod_device}</h2><div class="grid-2col">${d.prod_list.map(dev=>`<div class="info-card"><i class="fas fa-microchip"></i> ${dev}</div>`).join('')}</div></div></div>`;
             else if(sub === 'test_device') innerHtml+=`<div class="container"><div class="sub-section"><h2>${d.test_device}</h2><div class="grid-2col">${d.test_list.map(dev=>`<div class="info-card"><i class="fas fa-chart-line"></i> ${dev}</div>`).join('')}</div></div></div>`;
             else if(sub && d[sub]) innerHtml+=`<div class="container"><div class="sub-section"><h2>${d[sub]}</h2><p>${d[sub+'_desc']}</p></div></div>`;
