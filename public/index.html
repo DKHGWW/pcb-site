@@ -68,7 +68,6 @@
             visibility: visible;
             transform: translateY(0);
         }
-        /* 菜单项 — 圆角胶囊样式 */
         .dropdown-menu a {
             display: block;
             padding: 10px 18px;
@@ -91,7 +90,6 @@
         .nav-links > li > a { text-decoration: none; font-weight: 500; color: #1e293b; transition: 0.2s; display: inline-block; padding: 8px 0; }
         .nav-links > li > a:hover, .nav-links > li > a.active { color: #2563eb; }
         
-        /* 语言切换按钮增强样式 */
         .lang-btn {
             background: rgba(37, 99, 235, 0.1);
             border: 1px solid rgba(37, 99, 235, 0.3);
@@ -178,7 +176,6 @@
             .carousel-caption p { font-size: 0.8rem; }
         }
         
-        /* 板块主页概览卡片 */
         .overview-card {
             max-width: 800px;
             margin: 0 auto;
@@ -368,67 +365,12 @@
 <body>
 <nav class="navbar">
     <div class="nav-container">
-       <div class="logo">
-    <img src="捕获2.png" alt="四川井明电子" style="height: 50px; width: auto; display: block;">
-</div>
+        <div class="logo" id="logoHome">
+            <h1>四川井明电子有限公司</h1>
+            <span>SICHUAN KINMING ELECTRONICS CO., LTD</span>
+        </div>
         <div class="menu-icon" id="menuToggle"><i class="fas fa-bars"></i></div>
-        <ul class="nav-links" id="navLinks">
-            <li class="dropdown">
-                <a href="#" data-page="about" data-i18n="nav_about">关于井明</a>
-                <div class="dropdown-menu">
-                    <a href="#" data-sub="intro">公司简介</a>
-                    <a href="#" data-sub="capability">制程能力</a>
-                    <a href="#" data-sub="management">管理体系</a>
-                    <a href="#" data-sub="honor">井明荣誉</a>
-                    <a href="#" data-sub="structure">组织架构</a>
-                    <a href="#" data-sub="quality">品质保证</a>
-                </div>
-            </li>
-            <li class="dropdown">
-                <a href="#" data-page="industry" data-i18n="nav_industry">行业市场</a>
-                <div class="dropdown-menu">
-                    <a href="#" data-sub="network">网络通信</a>
-                    <a href="#" data-sub="auto">汽车电子</a>
-                    <a href="#" data-sub="smart">智能终端</a>
-                    <a href="#" data-sub="medical">工控医疗</a>
-                    <a href="#" data-sub="power">电源</a>
-                    <a href="#" data-sub="consumer">消费电子</a>
-                </div>
-            </li>
-            <li class="dropdown">
-                <a href="#" data-page="products" data-i18n="nav_products">产品技术</a>
-                <div class="dropdown-menu">
-                    <a href="#" data-sub="std_pcb">常规电路板</a>
-                    <a href="#" data-sub="hdi">高密度互联板</a>
-                    <a href="#" data-sub="high_layer">高多层电路板</a>
-                    <a href="#" data-sub="metal_base">金属基板</a>
-                    <a href="#" data-sub="process_cap">制程能力</a>
-                    <a href="#" data-sub="prod_device">生产设备</a>
-                    <a href="#" data-sub="test_device">检测设备</a>
-                </div>
-            </li>
-            <li class="dropdown">
-                <a href="#" data-page="news" data-i18n="nav_news">新闻中心</a>
-                <div class="dropdown-menu">
-                    <a href="#" data-sub="company_news">公司新闻</a>
-                    <a href="#" data-sub="industry_news">行业动态</a>
-                </div>
-            </li>
-            <li class="dropdown">
-                <a href="#" data-page="social" data-i18n="nav_social">社会责任</a>
-                <div class="dropdown-menu">
-                    <a href="#" data-sub="environment">环境保护</a>
-                </div>
-            </li>
-            <li class="dropdown">
-                <a href="#" data-page="contact" data-i18n="nav_contact">联系我们</a>
-                <div class="dropdown-menu">
-                    <a href="#" data-sub="offices">服务据点</a>
-                    <a href="#" data-sub="message">在线留言</a>
-                </div>
-            </li>
-            <li><button class="lang-btn" id="langToggle">English</button></li>
-        </ul>
+        <ul class="nav-links" id="navLinks"></ul>
     </div>
 </nav>
 <main id="app"></main>
@@ -574,13 +516,13 @@
                 contact: "联系我们",
                 contact_desc: "如您有任何需求或疑问，欢迎通过“服务据点”查找离您最近的办事处，或使用“在线留言”功能与我们取得联系。"
             },
-            footerLinks: {
-                about: { title: "关于井明", items: ["公司简介", "制程能力", "管理体系", "井明荣誉", "组织架构", "品质保证"] },
-                industry: { title: "行业市场", items: ["网络通信", "汽车电子", "智能终端", "工控医疗", "电源", "消费电子"] },
-                products: { title: "产品技术", items: ["常规电路板", "高密度互联板", "高多层电路板", "金属基板", "制程能力", "生产设备", "检测设备"] },
-                news: { title: "新闻中心", items: ["公司新闻", "行业动态"] },
-                social: { title: "社会责任", items: ["环境保护"] },
-                contact: { title: "联系我们", items: ["服务据点", "在线留言"] }
+            dropdown: {
+                about: ["公司简介", "制程能力", "管理体系", "井明荣誉", "组织架构", "品质保证"],
+                industry: ["网络通信", "汽车电子", "智能终端", "工控医疗", "电源", "消费电子"],
+                products: ["常规电路板", "高密度互联板", "高多层电路板", "金属基板", "制程能力", "生产设备", "检测设备"],
+                news: ["公司新闻", "行业动态"],
+                social: ["环境保护"],
+                contact: ["服务据点", "在线留言"]
             },
             about_detail: {
                 intro: "公司简介",
@@ -646,13 +588,13 @@
                 contact: "Contact Us",
                 contact_desc: "For any inquiries, please find your nearest office via 'Service Locations' or use the 'Online Message' form to get in touch with us."
             },
-            footerLinks: {
-                about: { title: "About Kinming", items: ["Company Profile", "Process Capability", "Management System", "Honors", "Organization", "Quality Assurance"] },
-                industry: { title: "Markets", items: ["Telecom & Networking", "Automotive Electronics", "Smart Devices", "Industrial & Medical", "Power Supply", "Consumer Electronics"] },
-                products: { title: "Products & Tech", items: ["Standard PCB", "HDI PCB", "High Multilayer", "Metal Core PCB", "Process Capability", "Production Equipment", "Testing Equipment"] },
-                news: { title: "News", items: ["Company News", "Industry Trends"] },
-                social: { title: "CSR", items: ["Environmental Protection"] },
-                contact: { title: "Contact", items: ["Service Locations", "Online Message"] }
+            dropdown: {
+                about: ["Company Profile", "Process Capability", "Management System", "Honors", "Organization", "Quality Assurance"],
+                industry: ["Telecom & Networking", "Automotive Electronics", "Smart Devices", "Industrial & Medical", "Power Supply", "Consumer Electronics"],
+                products: ["Standard PCB", "HDI PCB", "High Multilayer", "Metal Core PCB", "Process Capability", "Production Equipment", "Testing Equipment"],
+                news: ["Company News", "Industry Trends"],
+                social: ["Environmental Protection"],
+                contact: ["Service Locations", "Online Message"]
             },
             about_detail: {
                 intro: "Company Profile",
@@ -706,6 +648,62 @@
         return val;
     }
 
+    // 渲染导航栏（动态生成，支持中英文）
+    function renderNavbar() {
+        const navContainer = document.getElementById('navLinks');
+        if (!navContainer) return;
+        const pages = ['about', 'industry', 'products', 'news', 'social', 'contact'];
+        let html = '';
+        for (let page of pages) {
+            const pageKey = page;
+            const menuText = t(`nav_${pageKey}`);
+            const dropdownItems = t(`dropdown.${pageKey}`);
+            html += `<li class="dropdown">
+                        <a href="#" data-page="${pageKey}" data-i18n="nav_${pageKey}">${menuText}</a>
+                        <div class="dropdown-menu">`;
+            for (let item of dropdownItems) {
+                // 需要找到对应的 sub id
+                let subId = '';
+                const map = {
+                    about: ["intro","capability","management","honor","structure","quality"],
+                    industry: ["network","auto","smart","medical","power","consumer"],
+                    products: ["std_pcb","hdi","high_layer","metal_base","process_cap","prod_device","test_device"],
+                    news: ["company_news","industry_news"],
+                    social: ["environment"],
+                    contact: ["offices","message"]
+                };
+                const idx = dropdownItems.indexOf(item);
+                if (idx !== undefined && map[pageKey] && map[pageKey][idx]) {
+                    subId = map[pageKey][idx];
+                }
+                html += `<a href="#" data-sub="${subId}">${item}</a>`;
+            }
+            html += `</div></li>`;
+        }
+        html += `<li><button class="lang-btn" id="langToggle">English</button></li>`;
+        navContainer.innerHTML = html;
+        // 重新绑定事件
+        document.querySelectorAll('.nav-links > li > a[data-page]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = link.getAttribute('data-page');
+                if (page === 'about') setActivePage('about', null);
+                else setActivePage(page, null);
+            });
+        });
+        document.querySelectorAll('.dropdown-menu a[data-sub]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const sub = link.getAttribute('data-sub');
+                const parentPage = link.closest('.dropdown').querySelector('a[data-page]')?.getAttribute('data-page');
+                if (parentPage && sub) setActivePage(parentPage, sub);
+            });
+        });
+        const langBtn = document.getElementById('langToggle');
+        if (langBtn) langBtn.innerText = currentLang === 'zh' ? 'English' : '中文';
+        if (langBtn) langBtn.onclick = switchLanguage;
+    }
+
     // 主页（宣传册表单）
     function renderHomeSimple() {
         return `
@@ -752,7 +750,7 @@
                 desc = overview.contact_desc;
                 break;
             default:
-                title = 'Page';
+                title = '';
                 desc = '';
         }
         return `
@@ -860,19 +858,19 @@
             const group = links[key];
             if (!group) continue;
             html += `<div class="footer-links-col"><h4>${group.title}</h4><ul>`;
-            for (let item of group.items) {
-                let targetPage = key;
-                let subId = '';
-                const map = {
-                    about: { "公司简介":"intro","制程能力":"capability","管理体系":"management","井明荣誉":"honor","组织架构":"structure","品质保证":"quality","Company Profile":"intro","Process Capability":"capability","Management System":"management","Honors":"honor","Organization":"structure","Quality Assurance":"quality" },
-                    industry: { "网络通信":"network","汽车电子":"auto","智能终端":"smart","工控医疗":"medical","电源":"power","消费电子":"consumer","Telecom & Networking":"network","Automotive Electronics":"auto","Smart Devices":"smart","Industrial & Medical":"medical","Power Supply":"power","Consumer Electronics":"consumer" },
-                    products: { "常规电路板":"std_pcb","高密度互联板":"hdi","高多层电路板":"high_layer","金属基板":"metal_base","制程能力":"process_cap","生产设备":"prod_device","检测设备":"test_device","Standard PCB":"std_pcb","HDI PCB":"hdi","High Multilayer":"high_layer","Metal Core PCB":"metal_base","Process Capability":"process_cap","Production Equipment":"prod_device","Testing Equipment":"test_device" },
-                    news: { "公司新闻":"company_news","行业动态":"industry_news","Company News":"company_news","Industry Trends":"industry_news" },
-                    social: { "环境保护":"environment","Environmental Protection":"environment" },
-                    contact: { "服务据点":"offices","在线留言":"message","Service Locations":"offices","Online Message":"message" }
-                };
-                subId = map[key]?.[item] || '';
-                html += `<li><a href="#" data-footer-link data-page="${targetPage}" data-sub="${subId}">${item}</a></li>`;
+            const items = group.items;
+            const subIds = {
+                about: ["intro","capability","management","honor","structure","quality"],
+                industry: ["network","auto","smart","medical","power","consumer"],
+                products: ["std_pcb","hdi","high_layer","metal_base","process_cap","prod_device","test_device"],
+                news: ["company_news","industry_news"],
+                social: ["environment"],
+                contact: ["offices","message"]
+            };
+            for (let i=0; i<items.length; i++) {
+                const item = items[i];
+                const subId = subIds[key]?.[i] || '';
+                html += `<li><a href="#" data-footer-link data-page="${key}" data-sub="${subId}">${item}</a></li>`;
             }
             html += `</ul></div>`;
         }
@@ -925,10 +923,12 @@
             }
         }
         initCarousel(page);
+        // 更新导航栏激活状态
         document.querySelectorAll('.nav-links > li > a[data-page]').forEach(a => {
             if(a.getAttribute('data-page') === page) a.classList.add('active');
             else a.classList.remove('active');
         });
+        // 更新底部声明和地址
         const stmtTitle = document.querySelector('#social-statement-container .social-statement h3');
         const stmtContent = document.querySelector('#social-statement-container .social-statement p');
         const footerAddr = document.querySelector('footer [data-i18n="footer_address"]');
@@ -947,44 +947,34 @@
 
     function switchLanguage() {
         currentLang = currentLang === 'zh' ? 'en' : 'zh';
-        document.getElementById('langToggle').innerText = currentLang === 'zh' ? 'English' : '中文';
+        renderNavbar();               // 重新生成导航栏（包括按钮文字）
         loadPage(currentPage, currentSub);
-        document.querySelectorAll('.nav-links > li > a[data-page]').forEach(a => { const key = a.getAttribute('data-i18n'); if(key) a.innerText = t(key); });
+        // 更新语言切换按钮文字
+        const btn = document.getElementById('langToggle');
+        if (btn) btn.innerText = currentLang === 'zh' ? 'English' : '中文';
     }
 
-    // 绑定一级菜单点击
-    document.querySelectorAll('.nav-links > li > a[data-page]').forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const page = link.getAttribute('data-page');
-            if (page === 'about') setActivePage('about', null);
-            else setActivePage(page, null);  // 不传子模块，显示概览页面
+    // 初始化
+    function init() {
+        renderNavbar();
+        // 解析初始 hash
+        let initialHash = window.location.hash.slice(1);
+        let initPage = 'about';
+        let initSub = null;
+        if (initialHash) {
+            const parts = initialHash.split('/');
+            initPage = parts[0];
+            if (parts.length > 1) initSub = parts[1];
+        }
+        setActivePage(initPage, initSub);
+        // logo 点击事件
+        document.getElementById('logoHome').addEventListener('click', () => setActivePage('about', null));
+        // 移动端菜单折叠
+        document.getElementById('menuToggle').addEventListener('click', () => {
+            document.getElementById('navLinks').classList.toggle('show');
         });
-    });
-    // 绑定二级菜单点击（跳转到详细页面）
-    document.querySelectorAll('.dropdown-menu a[data-sub]').forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const sub = link.getAttribute('data-sub');
-            const parentPage = link.closest('.dropdown').querySelector('a[data-page]')?.getAttribute('data-page');
-            if (parentPage && sub) {
-                setActivePage(parentPage, sub);
-            }
-        });
-    });
-    document.getElementById('menuToggle').addEventListener('click', () => { document.getElementById('navLinks').classList.toggle('show'); });
-    document.getElementById('langToggle').addEventListener('click', switchLanguage);
-    document.getElementById('logoHome').addEventListener('click', () => setActivePage('about', null));
-
-    let initialHash = window.location.hash.slice(1);
-    let initialPage = 'about';
-    let initialSub = null;
-    if (initialHash) {
-        const parts = initialHash.split('/');
-        initialPage = parts[0];
-        if (parts.length > 1) initialSub = parts[1];
     }
-    setActivePage(initialPage, initialSub);
+    init();
 </script>
 </body>
 </html>
