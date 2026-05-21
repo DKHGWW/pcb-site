@@ -44,59 +44,74 @@
         }
         .logo span { font-size: 0.7rem; color: #4b5563; display: block; letter-spacing: 0.3px; }
         .dropdown { position: relative; }
+        
+        /* ========== 二级菜单透明毛玻璃效果 ========== */
         .dropdown-menu {
             position: absolute;
             top: 100%;
             left: 0;
-            background: #ffffff;
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
-            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
             min-width: 200px;
-            padding: 8px 0;
+            padding: 12px 8px;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(-8px);
-            transition: all 0.2s ease;
+            transform: translateY(-12px);
+            transition: all 0.25s ease;
             z-index: 200;
-            border: 1px solid #eef2f8;
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
         }
         .dropdown:hover .dropdown-menu {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
+        /* 菜单项 — 圆角胶囊样式 */
         .dropdown-menu a {
             display: block;
-            padding: 8px 20px;
-            color: #334155;
+            padding: 10px 18px;
+            margin: 4px 0;
+            color: #1e293b;
             font-size: 0.85rem;
+            font-weight: 500;
             text-decoration: none;
-            transition: 0.2s;
+            border-radius: 40px;
+            background: transparent;
+            transition: all 0.2s ease;
         }
         .dropdown-menu a:hover {
-            background: #f1f5f9;
+            background: rgba(37, 99, 235, 0.12);
             color: #2563eb;
+            transform: translateX(4px);
         }
+        
         .nav-links { display: flex; gap: 28px; list-style: none; flex-wrap: wrap; align-items: center; }
         .nav-links > li > a { text-decoration: none; font-weight: 500; color: #1e293b; transition: 0.2s; display: inline-block; padding: 8px 0; }
         .nav-links > li > a:hover, .nav-links > li > a.active { color: #2563eb; }
+        
+        /* 语言切换按钮增强样式 */
         .lang-btn {
-            background: #f1f5f9;
-            border: 1px solid #cbd5e1;
+            background: rgba(37, 99, 235, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.3);
             border-radius: 40px;
-            padding: 6px 14px;
+            padding: 6px 16px;
             font-size: 0.85rem;
             font-weight: 500;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.2s;
             color: #1e293b;
             margin-left: 8px;
         }
         .lang-btn:hover {
-            background: #e2e8f0;
+            background: #2563eb;
             border-color: #2563eb;
-            color: #2563eb;
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(37,99,235,0.2);
         }
+        
         .menu-icon { display: none; font-size: 1.6rem; cursor: pointer; }
         .page-section { display: none; animation: fadeIn 0.3s ease; padding: 60px 0 20px 0; border-bottom: 1px solid #d9e6f7; }
         .page-section.active-page { display: block; }
@@ -307,7 +322,7 @@
             .nav-links { display: none; width: 100%; flex-direction: column; align-items: center; padding: 20px 0; gap: 16px; background: white; }
             .nav-links.show { display: flex; }
             .menu-icon { display: block; }
-            .dropdown-menu { position: static; box-shadow: none; padding-left: 20px; background: #f8fafc; margin-top: 4px; opacity: 1; visibility: visible; transform: none; display: none; }
+            .dropdown-menu { position: static; box-shadow: none; padding-left: 20px; background: rgba(255,255,255,0.95); margin-top: 4px; opacity: 1; visibility: visible; transform: none; display: none; }
             .dropdown.active .dropdown-menu { display: block; }
             .nav-container .lang-btn { margin-left: auto; margin-right: 16px; }
         }
@@ -316,9 +331,10 @@
 <body>
 <nav class="navbar">
     <div class="nav-container">
-        <div class="logo">
-    <img src="捕获2.png" alt="四川井明电子" style="height: 50px; width: auto; display: block;">
-</div>
+        <div class="logo" id="logoHome">
+            <h1>四川井明电子有限公司</h1>
+            <span>SICHUAN KINMING ELECTRONICS CO., LTD</span>
+        </div>
         <div class="menu-icon" id="menuToggle"><i class="fas fa-bars"></i></div>
         <ul class="nav-links" id="navLinks">
             <li class="dropdown">
@@ -655,7 +671,7 @@
         const cap = d.capability_table;
         const sections = [
             { id: "intro", title: d.intro, content: `<p>${d.intro_text}</p>` },
-            { id: "capability", title: d.capability, content: `<div class="table-wrapper"><table class="capability-table"><thead><tr>${cap.headers.map(h=>`<th>${h}</th>`).join('')}</table></thead><tbody>${cap.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div>` },
+            { id: "capability", title: d.capability, content: `<div class="table-wrapper"><table class="capability-table"><thead><tr>${cap.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${cap.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div>` },
             { id: "management", title: d.management, content: `<p>${d.management_text}</p>` },
             { id: "honor", title: d.honor, content: `<ul>${d.honor_list.map(h=>`<li>${h}</li>`).join('')}</ul>` },
             { id: "structure", title: d.structure, content: `<p>${d.structure_text}</p>` },
