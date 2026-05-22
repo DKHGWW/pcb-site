@@ -390,7 +390,20 @@
         @media (max-width: 768px) {
             .footer-links-grid { grid-template-columns: repeat(2, 1fr); }
             
-            .nav-container { position: relative; }
+            /* 1. 强制不换行，让 Logo 和菜单按钮保持在同一行 */
+            .nav-container { 
+                position: relative; 
+                flex-wrap: nowrap; 
+            }
+            
+            /* 2. 限制 Logo 宽度使其自动缩放，避免挤压右侧的菜单按钮 */
+            .logo {
+                max-width: 75%; 
+            }
+            .logo img {
+                width: 100%;
+                height: auto !important; /* 覆盖 HTML 中内联的 45px 高度 */
+            }
             
             .nav-links {
                 display: none;
