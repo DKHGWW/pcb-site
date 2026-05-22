@@ -396,24 +396,24 @@
         @media (max-width: 768px) {
             .footer-links-grid { grid-template-columns: repeat(2, 1fr); }
             
-            /* 新增：相对定位的容器以便下拉菜单做绝对定位 */
             .nav-container { position: relative; }
             
             .nav-links {
                 display: none;
-                position: absolute;  /* 修改：脱离文档流，不撑大固定高度的导航栏 */
-                top: 100%;           /* 修改：紧贴导航栏下方悬浮 */
+                position: absolute;  
+                top: 100%;           
                 left: 0;             
                 width: 100%;
                 flex-direction: column;
+                flex-wrap: nowrap; /* [修复核心] 强制不换行，防止内容被挤到隐藏的第二列 */
                 align-items: center;
                 padding: 20px 0 30px 0;
                 gap: 16px;
                 background: white;
-                box-shadow: 0 10px 20px rgba(0,0,0,0.1); /* 修改：加深阴影突出悬浮感 */
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
                 border-radius: 0 0 20px 20px;
-                max-height: calc(100vh - 75px); /* 修改：动态计算最大高度，防止超出屏幕底边 */
-                overflow-y: auto;               /* 修改：确保超出部分可以通过滑动查看 */
+                max-height: calc(100vh - 75px); 
+                overflow-y: auto;               
                 -webkit-overflow-scrolling: touch;
                 z-index: 999;
                 border-top: 1px solid #eef2f8; 
@@ -448,7 +448,7 @@
             }
             .dropdown-menu a {
                 text-align: center;
-                padding: 12px 0; /* 修改：增加点击热区，方便触屏操作 */
+                padding: 12px 0; 
             }
             .nav-container .lang-btn {
                 margin-left: auto;
@@ -721,7 +721,7 @@
             nav_about: "关于井明", nav_industry: "行业市场", nav_products: "产品技术", nav_news: "新闻中心", nav_social: "社会责任", nav_contact: "联系我们",
             footer_address: "地址：四川省遂宁市经济技术开发区渠河南路188号电子电路标准厂房一期3号楼 | 通过ISO9001 & IATF16949",
             statement_title: "🌿 践行绿色制造，共创可持续未来",
-            statement_content: "井明电子始终将环境保护与社会责任融入企业发展战略。我们严格遵守 RoHS、REACH 等国际环保指令，投资建设先进的废水处理与中水回用系统，厂区光伏发电覆盖率已达30%。同时，我们积极参与社区公益，关爱员工成长，致力于成为负责任、有温度的行业标杆。未来，我们将持续加大环保投入，推动低碳生产，与合作伙伴共同守护绿水青山。",
+            statement_content: "井明电子始终将环境保护与社会责任融入企业发展战略。我们严格遵守 RoHS、REACH 等国际环保指令，投资建设先进的废水处理与中水回用系统，厂区光伏发电覆盖率已达30%。同时，我们积极参与社区公益，关关爱员工成长，致力于成为负责任、有温度的行业标杆。未来，我们将持续加大环保投入，推动低碳生产，与合作伙伴共同守护绿水青山。",
             form_title: "获取宣传册/报价",
             form_desc: "“以客户为中心”是井明的核心价值观之一，我们致力于为客户提供高质高效的服务。请填写您的姓名和电子邮件地址以获取宣传册/报价。",
             name_placeholder: "姓名*",
@@ -922,6 +922,7 @@
         }
         html += `<li><button class="lang-btn" id="langToggle">English</button></li>`;
         navContainer.innerHTML = html;
+        
         // 绑定一级菜单点击（移动端展开/收起，桌面端跳转）
         document.querySelectorAll('.nav-links > li > a[data-page]').forEach(link => {
             link.removeEventListener('click', link._clickHandler);
@@ -930,7 +931,14 @@
                 if (isMobile) {
                     const parentLi = link.closest('.dropdown');
                     if (parentLi) {
-                        parentLi.classList.toggle('active');
+                        // 【体验优化】实现手风琴效果：每次只允许展开一个下拉菜单
+                        const wasActive = parentLi.classList.contains('active');
+                        // 先移除所有菜单的展开状态
+                        document.querySelectorAll('.nav-links .dropdown').forEach(d => d.classList.remove('active'));
+                        // 如果当前被点击的菜单原本没展开，就让它展开
+                        if (!wasActive) {
+                            parentLi.classList.add('active');
+                        }
                     }
                 } else {
                     const page = link.getAttribute('data-page');
@@ -941,6 +949,7 @@
             link.addEventListener('click', handler);
             link._clickHandler = handler;
         });
+        
         // 绑定二级菜单点击（总是跳转）
         document.querySelectorAll('.dropdown-menu a[data-sub]').forEach(link => {
             link.removeEventListener('click', link._subHandler);
