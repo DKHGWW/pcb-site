@@ -396,13 +396,17 @@
                 flex-wrap: nowrap; 
             }
             
-            /* 2. 限制 Logo 宽度使其自动缩放，避免挤压右侧的菜单按钮 */
+            /* 2. 限制 Logo 尺寸，避免在移动端放大 */
             .logo {
-                max-width: 75%; 
+                max-width: 70%; 
+                display: flex;
+                align-items: center;
             }
             .logo img {
-                width: 100%;
-                height: auto !important; /* 覆盖 HTML 中内联的 45px 高度 */
+                width: auto !important; 
+                max-width: 100%; 
+                height: 38px !important; /* 移动端高度稍微缩小一点，保证导航栏精致 */
+                object-fit: contain;
             }
             
             .nav-links {
