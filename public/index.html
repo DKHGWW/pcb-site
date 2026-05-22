@@ -45,7 +45,7 @@
         .logo span { font-size: 0.7rem; color: #4b5563; display: block; letter-spacing: 0.3px; }
         .dropdown { position: relative; }
         
-        /* 桌面端二级菜单样式 */
+        /* 二级菜单样式 */
         .dropdown-menu {
             position: absolute;
             top: 100%;
@@ -115,7 +115,7 @@
         .page-section.active-page { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* 轮播图样式 */
+        /* 轮播图容器（支持触摸滑动） */
         .carousel {
             position: relative;
             width: 100%;
@@ -133,7 +133,9 @@
             transition: transform 0.3s ease;
             cursor: grab;
         }
-        .carousel-inner:active { cursor: grabbing; }
+        .carousel-inner:active {
+            cursor: grabbing;
+        }
         .carousel-item {
             flex: 0 0 100%;
             height: 100%;
@@ -174,6 +176,8 @@
             transition: 0.2s;
         }
         .carousel-indicators span.active { background-color: #2563eb; transform: scale(1.2); }
+        
+        /* 左右箭头样式 */
         .carousel-prev, .carousel-next {
             position: absolute;
             top: 50%;
@@ -221,8 +225,17 @@
             text-align: center;
             box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
         }
-        .overview-card h2 { font-size: 2rem; color: #0f2b5e; margin-bottom: 20px; }
-        .overview-card p { color: #4b5563; font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px; }
+        .overview-card h2 {
+            font-size: 2rem;
+            color: #0f2b5e;
+            margin-bottom: 20px;
+        }
+        .overview-card p {
+            color: #4b5563;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
         .overview-card .btn-outline {
             border: 1px solid #2563eb;
             background: transparent;
@@ -234,7 +247,10 @@
             transition: 0.2s;
             display: inline-block;
         }
-        .overview-card .btn-outline:hover { background: #2563eb; color: white; }
+        .overview-card .btn-outline:hover {
+            background: #2563eb;
+            color: white;
+        }
         
         .home-form-large {
             max-width: 700px;
@@ -245,8 +261,17 @@
             box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
             text-align: center;
         }
-        .home-form-large h3 { font-size: 2rem; color: #0f2b5e; margin-bottom: 20px; }
-        .home-form-large p { color: #4b5563; margin-bottom: 32px; font-size: 1rem; line-height: 1.6; }
+        .home-form-large h3 {
+            font-size: 2rem;
+            color: #0f2b5e;
+            margin-bottom: 20px;
+        }
+        .home-form-large p {
+            color: #4b5563;
+            margin-bottom: 32px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
         .home-form-large input, .home-form-large textarea {
             width: 100%;
             padding: 14px 18px;
@@ -367,98 +392,54 @@
         .footer-links-col a:hover { color: #2563eb; padding-left: 4px; }
         footer { background: #0f172a; color: #cbd5e1; padding: 48px 0 24px; text-align: center; margin-top: 0; }
         
-        /* 移动端样式修正：仿景旺电子风格（深色背景、侧滑菜单） */
+        /* 移动端样式修正 */
         @media (max-width: 768px) {
             .footer-links-grid { grid-template-columns: repeat(2, 1fr); }
             .nav-links {
-                display: flex;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 80%;
-                max-width: 320px;
-                height: 100%;
-                background: #000000;
-                box-shadow: 2px 0 20px rgba(0,0,0,0.2);
+                display: none;
+                width: 100%;
                 flex-direction: column;
-                justify-content: flex-start;
-                align-items: stretch;
-                padding: 80px 20px 40px;
-                gap: 0;
-                z-index: 200;
-                transform: translateX(-100%);
-                transition: transform 0.3s ease;
+                align-items: center;
+                padding: 20px 0;
+                gap: 16px;
+                background: white;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                border-radius: 0 0 20px 20px;
+                max-height: 70vh;
                 overflow-y: auto;
-                border-radius: 0;
+                -webkit-overflow-scrolling: touch;
             }
             .nav-links.show {
-                transform: translateX(0);
-            }
-            .menu-overlay {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0,0,0,0.5);
-                z-index: 199;
-                display: none;
-            }
-            .menu-overlay.show {
-                display: block;
+                display: flex;
             }
             .menu-icon {
                 display: block;
-                color: #1e293b;
-                font-size: 1.6rem;
             }
-            .nav-links > li {
+            .dropdown {
                 width: 100%;
-                text-align: left;
-                border-bottom: 1px solid rgba(255,255,255,0.1);
-            }
-            .nav-links > li > a {
-                color: #ffffff;
-                font-size: 16px;
-                padding: 14px 0;
-                display: block;
-                font-weight: 500;
-                background: transparent;
-            }
-            .nav-links > li > a:hover,
-            .nav-links > li > a.active {
-                background: transparent;
-                color: #2563eb;
+                text-align: center;
             }
             .dropdown-menu {
                 position: static;
-                background: #1e293b;
+                background: #f8fafc;
                 backdrop-filter: none;
                 box-shadow: none;
-                padding: 0 0 0 16px;
-                margin-top: 0;
+                padding: 0;
+                margin-top: 8px;
                 opacity: 1;
                 visibility: visible;
                 transform: none;
                 display: none;
                 border: none;
-                border-radius: 0;
+                max-height: none;
+                overflow: visible;
             }
             .dropdown.active .dropdown-menu {
                 display: block;
-                animation: fadeIn 0.2s ease;
             }
             .dropdown-menu a {
-                color: #cbd5e1;
-                text-align: left;
-                padding: 10px 0;
-                font-size: 14px;
-                font-weight: 400;
-            }
-            .dropdown-menu a:hover {
-                background: transparent;
-                color: #ffffff;
-                transform: none;
+                text-align: center;
+                padding: 8px 0;
             }
             .nav-container .lang-btn {
                 margin-left: auto;
@@ -478,7 +459,6 @@
         <ul class="nav-links" id="navLinks"></ul>
     </div>
 </nav>
-<div id="menuOverlay" class="menu-overlay"></div>
 <main id="app"></main>
 <div class="container" id="social-statement-container">
     <div class="social-statement">
@@ -564,7 +544,7 @@
         }
     };
 
-    // 轮播图类（支持触摸滑动 + 左右箭头 + 自动播放）
+    // 轮播图类（支持触摸滑动 + 左右箭头）
     class SwipeCarousel {
         constructor(container, items, indicators, prevBtn, nextBtn, autoInterval = 4000) {
             this.container = container;
@@ -613,7 +593,10 @@
                 this.timer = setInterval(() => this.next(), this.autoInterval);
             }
         }
-        resetAutoPlay() { if (this.timer) clearInterval(this.timer); this.startAutoPlay(); }
+        resetAutoPlay() {
+            if (this.timer) clearInterval(this.timer);
+            this.startAutoPlay();
+        }
         stopAutoPlay() { if (this.timer) clearInterval(this.timer); }
         bindEvents() {
             if (!this.inner) return;
@@ -687,12 +670,20 @@
     function renderCarousel(pageKey, lang) {
         const itemsData = carouselData[pageKey]?.[lang] || carouselData[pageKey]?.zh || [];
         if (!itemsData.length) return '';
-        let itemsHtml = '', indicatorsHtml = '';
+        let itemsHtml = '';
+        let indicatorsHtml = '';
         itemsData.forEach((item, idx) => {
             itemsHtml += `<div class="carousel-item" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${item.image}');"><div class="carousel-caption"><h3>${item.title}</h3><p>${item.desc}</p></div></div>`;
             indicatorsHtml += `<span class="${idx === 0 ? 'active' : ''}" data-index="${idx}"></span>`;
         });
-        return `<div class="carousel" id="carousel-${pageKey}"><div class="carousel-inner">${itemsHtml}</div><div class="carousel-indicators">${indicatorsHtml}</div><button class="carousel-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button><button class="carousel-next" aria-label="Next"><i class="fas fa-chevron-right"></i></button></div>`;
+        return `
+            <div class="carousel" id="carousel-${pageKey}">
+                <div class="carousel-inner">${itemsHtml}</div>
+                <div class="carousel-indicators">${indicatorsHtml}</div>
+                <button class="carousel-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        `;
     }
 
     function initCarousel(pageKey) {
@@ -703,10 +694,16 @@
         const prevBtn = carouselDiv.querySelector('.carousel-prev');
         const nextBtn = carouselDiv.querySelector('.carousel-next');
         if (items.length === 0) return;
-        if (carouselDiv.swipeInstance && carouselDiv.swipeInstance.timer) clearInterval(carouselDiv.swipeInstance.timer);
+        if (carouselDiv.swipeInstance) {
+            if (carouselDiv.swipeInstance.timer) clearInterval(carouselDiv.swipeInstance.timer);
+        }
         const swipe = new SwipeCarousel(carouselDiv, items, indicators, prevBtn, nextBtn, 4000);
         carouselDiv.swipeInstance = swipe;
-        indicators.forEach((ind, idx) => { ind.addEventListener('click', () => swipe.goTo(idx)); });
+        indicators.forEach((ind, idx) => {
+            ind.addEventListener('click', () => {
+                swipe.goTo(idx);
+            });
+        });
     }
 
     // ======================= 多语言文本 =======================
@@ -718,19 +715,31 @@
             statement_content: "井明电子始终将环境保护与社会责任融入企业发展战略。我们严格遵守 RoHS、REACH 等国际环保指令，投资建设先进的废水处理与中水回用系统，厂区光伏发电覆盖率已达30%。同时，我们积极参与社区公益，关爱员工成长，致力于成为负责任、有温度的行业标杆。未来，我们将持续加大环保投入，推动低碳生产，与合作伙伴共同守护绿水青山。",
             form_title: "获取宣传册/报价",
             form_desc: "“以客户为中心”是井明的核心价值观之一，我们致力于为客户提供高质高效的服务。请填写您的姓名和电子邮件地址以获取宣传册/报价。",
-            name_placeholder: "姓名*", email_placeholder: "邮箱*", company_placeholder: "公司名/网址/留言", phone_placeholder: "电话", submit: "提交", thank_you: "感谢您的留言，我们会尽快联系您。",
+            name_placeholder: "姓名*",
+            email_placeholder: "邮箱*",
+            company_placeholder: "公司名/网址/留言",
+            phone_placeholder: "电话",
+            submit: "提交",
+            thank_you: "感谢您的留言，我们会尽快联系您。",
             overview: {
-                industry: "行业市场", industry_desc: "井明电子深度服务多个战略行业，提供高可靠性PCB解决方案。请从上方下拉菜单中选择具体细分市场，查看详细产品信息。",
-                products: "产品技术", products_desc: "我们提供从常规电路板到高精密HDI、高多层板、金属基板等全系列PCB产品。请从下拉菜单中选择具体产品类别，了解制程能力与设备信息。",
-                news: "新闻中心", news_desc: "了解井明电子最新动态、行业资讯及技术突破。请从下拉菜单中选择“公司新闻”或“行业动态”。",
-                social: "社会责任", social_desc: "井明电子积极履行社会责任，坚持绿色制造与可持续发展。请从下拉菜单查看“环境保护”详细举措。",
-                contact: "联系我们", contact_desc: "如您有任何需求或疑问，欢迎通过“服务据点”查找离您最近的办事处，或使用“在线留言”功能与我们取得联系。"
+                industry: "行业市场",
+                industry_desc: "井明电子深度服务多个战略行业，提供高可靠性PCB解决方案。请从上方下拉菜单中选择具体细分市场，查看详细产品信息。",
+                products: "产品技术",
+                products_desc: "我们提供从常规电路板到高精密HDI、高多层板、金属基板等全系列PCB产品。请从下拉菜单中选择具体产品类别，了解制程能力与设备信息。",
+                news: "新闻中心",
+                news_desc: "了解井明电子最新动态、行业资讯及技术突破。请从下拉菜单中选择“公司新闻”或“行业动态”。",
+                social: "社会责任",
+                social_desc: "井明电子积极履行社会责任，坚持绿色制造与可持续发展。请从下拉菜单查看“环境保护”详细举措。",
+                contact: "联系我们",
+                contact_desc: "如您有任何需求或疑问，欢迎通过“服务据点”查找离您最近的办事处，或使用“在线留言”功能与我们取得联系。"
             },
             dropdown: {
                 about: ["公司简介", "制程能力", "管理体系", "井明荣誉", "组织架构", "品质保证"],
                 industry: ["网络通信", "汽车电子", "智能终端", "工控医疗", "电源", "消费电子"],
                 products: ["常规电路板", "高密度互联板", "高多层电路板", "金属基板", "制程能力", "生产设备", "检测设备"],
-                news: ["公司新闻", "行业动态"], social: ["环境保护"], contact: ["服务据点", "在线留言"]
+                news: ["公司新闻", "行业动态"],
+                social: ["环境保护"],
+                contact: ["服务据点", "在线留言"]
             },
             footerLinks: {
                 about: { title: "关于井明", items: ["公司简介", "制程能力", "管理体系", "井明荣誉", "组织架构", "品质保证"] },
@@ -741,8 +750,10 @@
                 contact: { title: "联系我们", items: ["服务据点", "在线留言"] }
             },
             about_detail: {
-                intro: "公司简介", intro_text: "四川井明电子有限公司始创于2012年，前身为遂宁豪尔思电子科技有限公司，坐落于遂宁经开区电子电路产业园，现有员工500余人，是一家专业从事PCB电路板研发、设计、精密生产与配套服务的综合性制造企业。公司深耕线路板行业十余年，主营多层板、高精密HDI板、高多层板、金属基板、IC载板，产品广泛应用于汽车电子、网络通信、工控医疗、军工配套、智能终端等领域，可提供一站式定制量产解决方案。企业资质齐全，拥有IATF16949、ISO9001、ISO14001、UL、CQC权威认证，产品符合RoHS环保标准，全程严格品控，满足工业、汽车及高端精密设备使用要求。公司持续深耕高端PCB领域，以精工品质与稳定交付，致力打造为全国优质线路板制造品牌。",
-                capability: "制程能力", capability_table: { headers: ["核心技术项", "井明标准能力", "特级能力"], rows: [["最大生产层数","24层","30层"],["最小线宽/线距","75/75μm","60/60μm"],["最小机械孔径","0.2mm","0.15mm"],["最大纵横比","20:1","25:1"],["阻抗控制公差","±10%","±7%"],["板翘控制","<0.75%","<0.5%"]] },
+                intro: "公司简介",
+                intro_text: "四川井明电子有限公司始创于2012年，前身为遂宁豪尔思电子科技有限公司，坐落于遂宁经开区电子电路产业园，现有员工500余人，是一家专业从事PCB电路板研发、设计、精密生产与配套服务的综合性制造企业。公司深耕线路板行业十余年，主营多层板、高精密HDI板、高多层板、金属基板、IC载板，产品广泛应用于汽车电子、网络通信、工控医疗、军工配套、智能终端等领域，可提供一站式定制量产解决方案。企业资质齐全，拥有IATF16949、ISO9001、ISO14001、UL、CQC权威认证，产品符合RoHS环保标准，全程严格品控，满足工业、汽车及高端精密设备使用要求。公司持续深耕高端PCB领域，以精工品质与稳定交付，致力打造为全国优质线路板制造品牌。",
+                capability: "制程能力",
+                capability_table: { headers: ["核心技术项", "井明标准能力", "特级能力"], rows: [["最大生产层数","24层","30层"],["最小线宽/线距","75/75μm","60/60μm"],["最小机械孔径","0.2mm","0.15mm"],["最大纵横比","20:1","25:1"],["阻抗控制公差","±10%","±7%"],["板翘控制","<0.75%","<0.5%"]] },
                 management: "管理体系", management_text: "通过IATF16949、ISO9001、ISO14001、UL、CQC等权威认证，实施全流程数字化质量管控。",
                 honor: "井明荣誉", honor_list: ["国家高新技术企业", "四川省专精特新企业", "遂宁市PCB工程技术研究中心", "中国电子电路行业协会理事单位"],
                 structure: "组织架构", structure_text: "设有市场中心、研发中心、制造中心、品控中心、供应链管理部及海外事业部。",
@@ -769,7 +780,9 @@
                 company_news: "公司新闻", company_news_list: ["井明电子荣获国家级专精特新小巨人", "井明电子通过IATF16949换版审核", "井明电子举办年度供应商大会"],
                 industry_news: "行业动态", industry_news_list: ["PCB行业迎来5G+AI新机遇", "新能源汽车带动车用PCB需求增长", "高频高速材料技术研讨会召开"]
             },
-            social_detail: { environment: "环境保护", environment_desc: "井明电子坚持绿色制造，严格遵守RoHS、REACH指令，投资建设先进的废水处理系统，实现中水回用，厂区光伏发电覆盖率已达30%。我们采用无铅、无卤素材料，并通过ISO14001环境管理体系认证。" },
+            social_detail: {
+                environment: "环境保护", environment_desc: "井明电子坚持绿色制造，严格遵守RoHS、REACH指令，投资建设先进的废水处理系统，实现中水回用，厂区光伏发电覆盖率已达30%。我们采用无铅、无卤素材料，并通过ISO14001环境管理体系认证。"
+            },
             contact_detail: {
                 offices: "服务据点", office_list: ["总部：四川省遂宁市经济技术开发区渠河南路188号电子电路标准厂房一期3号楼", "华南办事处：深圳南山区", "华东办事处：苏州工业园区"],
                 message_title: "在线留言", name_placeholder: "您的姓名", email_placeholder: "邮箱地址", msg_placeholder: "留言内容", submit: "提交留言"
@@ -780,20 +793,33 @@
             footer_address: "Address: Building 3, Phase I, Electronic Circuit Standard Plant, No.188 Quhe South Road, Economic Development Zone, Suining City, Sichuan Province | ISO9001 & IATF16949",
             statement_title: "🌿 Green Manufacturing for a Sustainable Future",
             statement_content: "Kinming Electronics integrates environmental protection and social responsibility into our strategy. We strictly comply with RoHS, REACH, have built advanced wastewater treatment and reuse systems, and achieve 30% solar power coverage. We actively participate in community welfare and care for employee growth.",
-            form_title: "Get Brochure / Quote", form_desc: "Customer-centric is one of Kinming's core values. We are committed to providing high-quality and efficient service. Please fill in your name and email address to receive our brochure/quote.",
-            name_placeholder: "Name*", email_placeholder: "Email*", company_placeholder: "Company/Website/Message", phone_placeholder: "Phone", submit: "Submit", thank_you: "Thank you! We will contact you soon.",
+            form_title: "Get Brochure / Quote",
+            form_desc: "Customer-centric is one of Kinming's core values. We are committed to providing high-quality and efficient service. Please fill in your name and email address to receive our brochure/quote.",
+            name_placeholder: "Name*",
+            email_placeholder: "Email*",
+            company_placeholder: "Company/Website/Message",
+            phone_placeholder: "Phone",
+            submit: "Submit",
+            thank_you: "Thank you! We will contact you soon.",
             overview: {
-                industry: "Markets", industry_desc: "Kinming serves multiple strategic industries with high-reliability PCB solutions. Please select a specific market segment from the dropdown menu above to view detailed product information.",
-                products: "Products & Technology", products_desc: "We offer a full range of PCBs from standard to high-precision HDI, high-multilayer, and metal core boards. Select a product category from the dropdown menu to learn about capabilities and equipment.",
-                news: "News Center", news_desc: "Stay updated with Kinming's latest news, industry trends, and technological breakthroughs. Choose 'Company News' or 'Industry Trends' from the dropdown menu.",
-                social: "CSR", social_desc: "Kinming actively fulfills its social responsibilities, adhering to green manufacturing and sustainable development. View 'Environmental Protection' details from the dropdown menu.",
-                contact: "Contact Us", contact_desc: "For any inquiries, please find your nearest office via 'Service Locations' or use the 'Online Message' form to get in touch with us."
+                industry: "Markets",
+                industry_desc: "Kinming serves multiple strategic industries with high-reliability PCB solutions. Please select a specific market segment from the dropdown menu above to view detailed product information.",
+                products: "Products & Technology",
+                products_desc: "We offer a full range of PCBs from standard to high-precision HDI, high-multilayer, and metal core boards. Select a product category from the dropdown menu to learn about capabilities and equipment.",
+                news: "News Center",
+                news_desc: "Stay updated with Kinming's latest news, industry trends, and technological breakthroughs. Choose 'Company News' or 'Industry Trends' from the dropdown menu.",
+                social: "CSR",
+                social_desc: "Kinming actively fulfills its social responsibilities, adhering to green manufacturing and sustainable development. View 'Environmental Protection' details from the dropdown menu.",
+                contact: "Contact Us",
+                contact_desc: "For any inquiries, please find your nearest office via 'Service Locations' or use the 'Online Message' form to get in touch with us."
             },
             dropdown: {
                 about: ["Company Profile", "Process Capability", "Management System", "Honors", "Organization", "Quality Assurance"],
                 industry: ["Telecom & Networking", "Automotive Electronics", "Smart Devices", "Industrial & Medical", "Power Supply", "Consumer Electronics"],
                 products: ["Standard PCB", "HDI PCB", "High Multilayer", "Metal Core PCB", "Process Capability", "Production Equipment", "Testing Equipment"],
-                news: ["Company News", "Industry Trends"], social: ["Environmental Protection"], contact: ["Service Locations", "Online Message"]
+                news: ["Company News", "Industry Trends"],
+                social: ["Environmental Protection"],
+                contact: ["Service Locations", "Online Message"]
             },
             footerLinks: {
                 about: { title: "About Kinming", items: ["Company Profile", "Process Capability", "Management System", "Honors", "Organization", "Quality Assurance"] },
@@ -804,8 +830,10 @@
                 contact: { title: "Contact", items: ["Service Locations", "Online Message"] }
             },
             about_detail: {
-                intro: "Company Profile", intro_text: "Sichuan Kinming Electronics Co., Ltd. was founded in 2012 (formerly Suining Haoersi Electronic Technology). Located in Suining Economic Development Zone Electronic Circuit Industrial Park, we have over 500 employees, specializing in R&D, design, precision production of PCBs. Main products: multilayer, HDI, high multilayer, metal core, IC substrates. Certifications: IATF16949, ISO9001, ISO14001, UL, CQC, RoHS compliant. Committed to becoming a leading PCB brand with high quality and reliable delivery.",
-                capability: "Process Capability", capability_table: { headers: ["Technology", "Standard", "Special"], rows: [["Max Layers","24","30"],["Line/Space","75/75μm","60/60μm"],["Min Hole","0.2mm","0.15mm"],["Aspect Ratio","20:1","25:1"],["Impedance","±10%","±7%"],["Warpage","<0.75%","<0.5%"]] },
+                intro: "Company Profile",
+                intro_text: "Sichuan Kinming Electronics Co., Ltd. was founded in 2012 (formerly Suining Haoersi Electronic Technology). Located in Suining Economic Development Zone Electronic Circuit Industrial Park, we have over 500 employees, specializing in R&D, design, precision production of PCBs. Main products: multilayer, HDI, high multilayer, metal core, IC substrates. Certifications: IATF16949, ISO9001, ISO14001, UL, CQC, RoHS compliant. Committed to becoming a leading PCB brand with high quality and reliable delivery.",
+                capability: "Process Capability",
+                capability_table: { headers: ["Technology", "Standard", "Special"], rows: [["Max Layers","24","30"],["Line/Space","75/75μm","60/60μm"],["Min Hole","0.2mm","0.15mm"],["Aspect Ratio","20:1","25:1"],["Impedance","±10%","±7%"],["Warpage","<0.75%","<0.5%"]] },
                 management: "Management System", management_text: "Certified IATF16949, ISO9001, ISO14001, UL, CQC. Full digital quality control.",
                 honor: "Honors", honor_list: ["National High-tech Enterprise", "Sichuan Specialized & Sophisticated", "Suining PCB Engineering Center", "CPCA Member"],
                 structure: "Organization", structure_text: "Departments: Marketing, R&D, Manufacturing, QC, Supply Chain, Overseas.",
@@ -832,7 +860,9 @@
                 company_news: "Company News", company_news_list: ["Kinming awarded National 'Little Giant'", "Kinming passed IATF16949 recertification", "Kinming held annual supplier conference"],
                 industry_news: "Industry Trends", industry_news_list: ["PCB industry embraces 5G+AI", "EV drives automotive PCB demand", "High-frequency materials seminar"]
             },
-            social_detail: { environment: "Environmental Protection", environment_desc: "Kinming is committed to green manufacturing, strictly following RoHS and REACH. Advanced wastewater treatment and reuse, 30% solar power, ISO14001 certified." },
+            social_detail: {
+                environment: "Environmental Protection", environment_desc: "Kinming is committed to green manufacturing, strictly following RoHS and REACH. Advanced wastewater treatment and reuse, 30% solar power, ISO14001 certified."
+            },
             contact_detail: {
                 offices: "Service Locations", office_list: ["HQ: Building 3, Phase I, Electronic Circuit Standard Plant, No.188 Quhe South Road, Suining", "Shenzhen Office: Nanshan District", "Suzhou Office: SIP"],
                 message_title: "Online Message", name_placeholder: "Your Name", email_placeholder: "Email", msg_placeholder: "Message", submit: "Submit"
@@ -853,7 +883,7 @@
         return val;
     }
 
-    // 渲染导航栏（动态生成）
+    // 渲染导航栏
     function renderNavbar() {
         const navContainer = document.getElementById('navLinks');
         if (!navContainer) return;
@@ -862,7 +892,9 @@
         for (let page of pages) {
             const menuText = t(`nav_${page}`);
             const dropdownItems = t(`dropdown.${page}`);
-            html += `<li class="dropdown"><a href="#" data-page="${page}" data-i18n="nav_${page}">${menuText}</a><div class="dropdown-menu">`;
+            html += `<li class="dropdown">
+                        <a href="#" data-page="${page}" data-i18n="nav_${page}">${menuText}</a>
+                        <div class="dropdown-menu">`;
             const subIds = {
                 about: ["intro","capability","management","honor","structure","quality"],
                 industry: ["network","auto","smart","medical","power","consumer"],
@@ -872,7 +904,7 @@
                 contact: ["offices","message"]
             };
             const ids = subIds[page] || [];
-            for (let i=0; i<dropdownItems.length; i++) {
+            for (let i = 0; i < dropdownItems.length; i++) {
                 const item = dropdownItems[i];
                 const subId = ids[i] || '';
                 html += `<a href="#" data-sub="${subId}">${item}</a>`;
@@ -882,15 +914,16 @@
         html += `<li><button class="lang-btn" id="langToggle">English</button></li>`;
         navContainer.innerHTML = html;
         
-        // 一级菜单点击事件（移动端展开/收起；桌面端跳转）
+        // 绑定一级菜单点击（移动端展开/收起，桌面端跳转）
         document.querySelectorAll('.nav-links > li > a[data-page]').forEach(link => {
             link.removeEventListener('click', link._clickHandler);
             const handler = (e) => {
                 e.preventDefault();
-                e.stopPropagation();  // 关键：防止事件冒泡导致菜单关闭
                 if (isMobile) {
                     const parentLi = link.closest('.dropdown');
-                    if (parentLi) parentLi.classList.toggle('active');
+                    if (parentLi) {
+                        parentLi.classList.toggle('active');
+                    }
                 } else {
                     const page = link.getAttribute('data-page');
                     if (page === 'about') setActivePage('about', null);
@@ -900,30 +933,48 @@
             link.addEventListener('click', handler);
             link._clickHandler = handler;
         });
-        // 二级菜单点击（跳转并关闭菜单）
+        // 绑定二级菜单点击（总是跳转）
         document.querySelectorAll('.dropdown-menu a[data-sub]').forEach(link => {
             link.removeEventListener('click', link._subHandler);
             const handler = (e) => {
                 e.preventDefault();
-                e.stopPropagation();
                 const sub = link.getAttribute('data-sub');
                 const parentPage = link.closest('.dropdown').querySelector('a[data-page]')?.getAttribute('data-page');
-                if (parentPage && sub) setActivePage(parentPage, sub);
+                if (parentPage && sub) {
+                    setActivePage(parentPage, sub);
+                }
                 if (isMobile) {
                     document.getElementById('navLinks').classList.remove('show');
-                    document.getElementById('menuOverlay').classList.remove('show');
                 }
             };
             link.addEventListener('click', handler);
             link._subHandler = handler;
         });
         const langBtn = document.getElementById('langToggle');
-        if (langBtn) { langBtn.innerText = currentLang === 'zh' ? 'English' : '中文'; langBtn.onclick = switchLanguage; }
+        if (langBtn) {
+            langBtn.innerText = currentLang === 'zh' ? 'English' : '中文';
+            langBtn.onclick = switchLanguage;
+        }
     }
 
     // 主页表单
     function renderHomeSimple() {
-        return `${renderCarousel('about', currentLang)}<div class="container"><div class="home-form-large"><h3>${t('form_title')}</h3><p>${t('form_desc')}</p><form id="brochureForm"><input type="text" placeholder="${t('name_placeholder')}" required><input type="email" placeholder="${t('email_placeholder')}" required><input type="text" placeholder="${t('company_placeholder')}"><input type="tel" placeholder="${t('phone_placeholder')}"><button type="submit">${t('submit')}</button></form></div></div>`;
+        return `
+            ${renderCarousel('about', currentLang)}
+            <div class="container">
+                <div class="home-form-large">
+                    <h3>${t('form_title')}</h3>
+                    <p>${t('form_desc')}</p>
+                    <form id="brochureForm">
+                        <input type="text" placeholder="${t('name_placeholder')}" required>
+                        <input type="email" placeholder="${t('email_placeholder')}" required>
+                        <input type="text" placeholder="${t('company_placeholder')}">
+                        <input type="tel" placeholder="${t('phone_placeholder')}">
+                        <button type="submit">${t('submit')}</button>
+                    </form>
+                </div>
+            </div>
+        `;
     }
 
     // 概览页面
@@ -938,16 +989,25 @@
             case 'contact': title = overview.contact; desc = overview.contact_desc; break;
             default: break;
         }
-        return `${renderCarousel(pageKey, currentLang)}<div class="container"><div class="overview-card"><h2>${title}</h2><p>${desc}</p><div class="btn-outline" style="cursor:default;">请从上方下拉菜单选择具体内容</div></div></div>`;
+        return `
+            ${renderCarousel(pageKey, currentLang)}
+            <div class="container">
+                <div class="overview-card">
+                    <h2>${title}</h2>
+                    <p>${desc}</p>
+                    <div class="btn-outline" style="cursor:default;">请从上方下拉菜单选择具体内容</div>
+                </div>
+            </div>
+        `;
     }
 
-    // 子模块渲染函数（完整保留）
+    // 子模块详情（保持原样，略写函数，实际完整保留）
     function renderAboutSingle(subId) {
         const d = t('about_detail');
         const cap = d.capability_table;
         const sections = {
             intro: { title: d.intro, content: `<p>${d.intro_text}</p>` },
-            capability: { title: d.capability, content: `<div class="table-wrapper"><table class="capability-table"><thead><tr>${cap.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${cap.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody><td></div></div>` },
+            capability: { title: d.capability, content: `<div class="table-wrapper"><table class="capability-table"><thead><tr>${cap.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${cap.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div>` },
             management: { title: d.management, content: `<p>${d.management_text}</p>` },
             honor: { title: d.honor, content: `<ul>${d.honor_list.map(h=>`<li>${h}</li>`).join('')}</ul>` },
             structure: { title: d.structure, content: `<p>${d.structure_text}</p>` },
@@ -988,7 +1048,7 @@
         if (item.desc) content = `<p>${item.desc}</p>`;
         else if (item.table) {
             const t = item.table;
-            content = `<div class="table-wrapper"><table class="capability-table"><thead><tr>${t.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${t.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}<tr>`).join('')}</tbody></table></div>`;
+            content = `<div class="table-wrapper"><table class="capability-table"><thead><tr>${t.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${t.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
         } else if (item.list) {
             content = `<div class="grid-2col">${item.list.map(dev=>`<div class="info-card"><i class="fas fa-microchip"></i> ${dev}</div>`).join('')}</div>`;
         }
@@ -1023,7 +1083,7 @@
 
     function renderFooterLinks() {
         const links = t('footerLinks');
-        const order = ['about','industry','products','news','social','contact'];
+        const order = ['about', 'industry', 'products', 'news', 'social', 'contact'];
         let html = '';
         for (let key of order) {
             const group = links[key];
@@ -1053,10 +1113,7 @@
                 const page = link.getAttribute('data-page');
                 const sub = link.getAttribute('data-sub');
                 if (page) setActivePage(page, sub);
-                if (isMobile) {
-                    document.getElementById('navLinks').classList.remove('show');
-                    document.getElementById('menuOverlay').classList.remove('show');
-                }
+                if (isMobile) document.getElementById('navLinks').classList.remove('show');
             });
         });
     }
@@ -1083,11 +1140,19 @@
         } else if (page === 'contact') {
             if (targetSub) html = renderContactSingle(targetSub);
             else html = renderOverview('contact');
-        } else html = renderHomeSimple();
+        } else {
+            html = renderHomeSimple();
+        }
         document.getElementById('app').innerHTML = `<div class="page-section active-page">${html}</div>`;
         if (page === 'about' && !targetSub) {
             const form = document.getElementById('brochureForm');
-            if (form) form.onsubmit = (e) => { e.preventDefault(); alert(t('thank_you')); form.reset(); };
+            if (form) {
+                form.onsubmit = (e) => {
+                    e.preventDefault();
+                    alert(t('thank_you'));
+                    form.reset();
+                };
+            }
         }
         initCarousel(page);
         document.querySelectorAll('.nav-links > li > a[data-page]').forEach(a => {
@@ -1121,7 +1186,8 @@
     function init() {
         renderNavbar();
         let initialHash = window.location.hash.slice(1);
-        let initPage = 'about', initSub = null;
+        let initPage = 'about';
+        let initSub = null;
         if (initialHash) {
             const parts = initialHash.split('/');
             initPage = parts[0];
@@ -1129,24 +1195,16 @@
         }
         setActivePage(initPage, initSub);
         document.getElementById('logoHome').addEventListener('click', () => setActivePage('about', null));
-        const menuToggle = document.getElementById('menuToggle');
-        const overlay = document.getElementById('menuOverlay');
-        menuToggle.addEventListener('click', (e) => {
+        document.getElementById('menuToggle').addEventListener('click', (e) => {
             e.stopPropagation();
-            const nav = document.getElementById('navLinks');
-            nav.classList.toggle('show');
-            overlay.classList.toggle('show');
+            document.getElementById('navLinks').classList.toggle('show');
         });
-        overlay.addEventListener('click', () => {
-            document.getElementById('navLinks').classList.remove('show');
-            overlay.classList.remove('show');
-        });
+        // 点击页面其他区域关闭移动端菜单
         document.addEventListener('click', function(e) {
             const nav = document.getElementById('navLinks');
             const toggle = document.getElementById('menuToggle');
-            if (isMobile && nav && nav.classList.contains('show') && !nav.contains(e.target) && !toggle.contains(e.target) && !overlay.contains(e.target)) {
+            if (isMobile && nav && nav.classList.contains('show') && !nav.contains(e.target) && !toggle.contains(e.target)) {
                 nav.classList.remove('show');
-                overlay.classList.remove('show');
             }
         });
     }
