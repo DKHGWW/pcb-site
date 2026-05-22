@@ -395,19 +395,28 @@
         /* 移动端样式修正 */
         @media (max-width: 768px) {
             .footer-links-grid { grid-template-columns: repeat(2, 1fr); }
+            
+            /* 新增：相对定位的容器以便下拉菜单做绝对定位 */
+            .nav-container { position: relative; }
+            
             .nav-links {
                 display: none;
+                position: absolute;  /* 修改：脱离文档流，不撑大固定高度的导航栏 */
+                top: 100%;           /* 修改：紧贴导航栏下方悬浮 */
+                left: 0;             
                 width: 100%;
                 flex-direction: column;
                 align-items: center;
-                padding: 20px 0;
+                padding: 20px 0 30px 0;
                 gap: 16px;
                 background: white;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1); /* 修改：加深阴影突出悬浮感 */
                 border-radius: 0 0 20px 20px;
-                max-height: 70vh;
-                overflow-y: auto;
+                max-height: calc(100vh - 75px); /* 修改：动态计算最大高度，防止超出屏幕底边 */
+                overflow-y: auto;               /* 修改：确保超出部分可以通过滑动查看 */
                 -webkit-overflow-scrolling: touch;
+                z-index: 999;
+                border-top: 1px solid #eef2f8; 
             }
             .nav-links.show {
                 display: flex;
@@ -439,7 +448,7 @@
             }
             .dropdown-menu a {
                 text-align: center;
-                padding: 8px 0;
+                padding: 12px 0; /* 修改：增加点击热区，方便触屏操作 */
             }
             .nav-container .lang-btn {
                 margin-left: auto;
@@ -514,14 +523,14 @@
             en: [
                 { image: "https://picsum.photos/id/91/1600/500", title: "High Multilayer", desc: "Up to 30 layers" },
                 { image: "https://picsum.photos/id/38/1600/500", title: "HDI PCB", desc: "Any-layer" }
-            ]
+             ]
         },
         news: {
             zh: [
                 { image: "https://picsum.photos/id/29/1600/500", title: "行业展会", desc: "亮相国际电子电路展" },
                 { image: "https://picsum.photos/id/43/1600/500", title: "技术突破", desc: "25:1纵横比电镀孔" }
             ],
-            en: [
+             en: [
                 { image: "https://picsum.photos/id/29/1600/500", title: "Industry Expo", desc: "Kinming at CPCA Show" },
                 { image: "https://picsum.photos/id/43/1600/500", title: "Tech Breakthrough", desc: "25:1 AR plated holes" }
             ]
@@ -622,7 +631,7 @@
                 this.isDragging = false;
                 const diff = this.currentX - this.startX;
                 if (Math.abs(diff) > 50) {
-                    if (diff > 0) this.prev();
+                     if (diff > 0) this.prev();
                     else this.next();
                 } else {
                     this.updateCarousel();
@@ -660,7 +669,7 @@
                     this.updateCarousel();
                 }
                 this.startAutoPlay();
-                this.inner.style.cursor = 'grab';
+                 this.inner.style.cursor = 'grab';
                 this.startX = 0;
                 this.currentX = 0;
             });
@@ -682,7 +691,7 @@
                 <div class="carousel-indicators">${indicatorsHtml}</div>
                 <button class="carousel-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
                 <button class="carousel-next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
-            </div>
+             </div>
         `;
     }
 
@@ -733,7 +742,7 @@
                 contact: "联系我们",
                 contact_desc: "如您有任何需求或疑问，欢迎通过“服务据点”查找离您最近的办事处，或使用“在线留言”功能与我们取得联系。"
             },
-            dropdown: {
+             dropdown: {
                 about: ["公司简介", "制程能力", "管理体系", "井明荣誉", "组织架构", "品质保证"],
                 industry: ["网络通信", "汽车电子", "智能终端", "工控医疗", "电源", "消费电子"],
                 products: ["常规电路板", "高密度互联板", "高多层电路板", "金属基板", "制程能力", "生产设备", "检测设备"],
@@ -748,7 +757,7 @@
                 news: { title: "新闻中心", items: ["公司新闻", "行业动态"] },
                 social: { title: "社会责任", items: ["环境保护"] },
                 contact: { title: "联系我们", items: ["服务据点", "在线留言"] }
-            },
+             },
             about_detail: {
                 intro: "公司简介",
                 intro_text: "四川井明电子有限公司始创于2012年，前身为遂宁豪尔思电子科技有限公司，坐落于遂宁经开区电子电路产业园，现有员工500余人，是一家专业从事PCB电路板研发、设计、精密生产与配套服务的综合性制造企业。公司深耕线路板行业十余年，主营多层板、高精密HDI板、高多层板、金属基板、IC载板，产品广泛应用于汽车电子、网络通信、工控医疗、军工配套、智能终端等领域，可提供一站式定制量产解决方案。企业资质齐全，拥有IATF16949、ISO9001、ISO14001、UL、CQC权威认证，产品符合RoHS环保标准，全程严格品控，满足工业、汽车及高端精密设备使用要求。公司持续深耕高端PCB领域，以精工品质与稳定交付，致力打造为全国优质线路板制造品牌。",
@@ -814,7 +823,7 @@
                 contact_desc: "For any inquiries, please find your nearest office via 'Service Locations' or use the 'Online Message' form to get in touch with us."
             },
             dropdown: {
-                about: ["Company Profile", "Process Capability", "Management System", "Honors", "Organization", "Quality Assurance"],
+                 about: ["Company Profile", "Process Capability", "Management System", "Honors", "Organization", "Quality Assurance"],
                 industry: ["Telecom & Networking", "Automotive Electronics", "Smart Devices", "Industrial & Medical", "Power Supply", "Consumer Electronics"],
                 products: ["Standard PCB", "HDI PCB", "High Multilayer", "Metal Core PCB", "Process Capability", "Production Equipment", "Testing Equipment"],
                 news: ["Company News", "Industry Trends"],
@@ -913,7 +922,6 @@
         }
         html += `<li><button class="lang-btn" id="langToggle">English</button></li>`;
         navContainer.innerHTML = html;
-        
         // 绑定一级菜单点击（移动端展开/收起，桌面端跳转）
         document.querySelectorAll('.nav-links > li > a[data-page]').forEach(link => {
             link.removeEventListener('click', link._clickHandler);
@@ -972,7 +980,7 @@
                         <input type="tel" placeholder="${t('phone_placeholder')}">
                         <button type="submit">${t('submit')}</button>
                     </form>
-                </div>
+                 </div>
             </div>
         `;
     }
@@ -1025,7 +1033,7 @@
             smart: { title: d.smart, desc: d.smart_desc },
             medical: { title: d.medical, desc: d.medical_desc },
             power: { title: d.power, desc: d.power_desc },
-            consumer: { title: d.consumer, desc: d.consumer_desc }
+             consumer: { title: d.consumer, desc: d.consumer_desc }
         };
         const item = map[subId];
         if (!item) return renderOverview('industry');
@@ -1039,7 +1047,7 @@
             high_layer: { title: d.high_layer, desc: d.high_layer_desc },
             metal_base: { title: d.metal_base, desc: d.metal_base_desc },
             process_cap: { title: d.process_cap, desc: null, table: d.process_table },
-            prod_device: { title: d.prod_device, desc: null, list: d.prod_list },
+             prod_device: { title: d.prod_device, desc: null, list: d.prod_list },
             test_device: { title: d.test_device, desc: null, list: d.test_list }
         };
         const item = prodMap[subId];
