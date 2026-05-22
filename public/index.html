@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>四川井明电子 | 精密PCB智造专家</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -123,6 +123,9 @@
             display: flex;
             transition: transform 0.3s ease;
             cursor: grab;
+            /* 防止拖拽导致事件中断 */
+            user-select: none;
+            -webkit-user-select: none;
         }
         .carousel-inner:active {
             cursor: grabbing;
@@ -413,13 +416,13 @@
                 display: flex;
             }
             
-            /* 【修改部分】在移动端给三横岗图标设置深蓝色底色 */
+            /* 深蓝色三横岗图标样式 */
             .menu-icon {
                 display: block;
-                background-color: #2563eb; /* 源颜色，与轮播图激活原点一致 */
-                color: white;             /* 将图标颜色改为白色以提高对比度 */
-                padding: 8px;              /* 添加内边距，使其更像按钮 */
-                border-radius: 8px;       /* 添加圆角 */
+                background-color: #2563eb; /* 与轮播图圆点一致的深蓝色 */
+                color: white;             
+                padding: 8px 12px;        
+                border-radius: 8px;       
             }
             
             .dropdown {
@@ -604,15 +607,18 @@
             this.startAutoPlay();
         }
         stopAutoPlay() { if (this.timer) clearInterval(this.timer); }
+        
         bindEvents() {
             if (!this.inner) return;
-            // 触摸滑动
-            this.inner.addEventListener('touchstart', (e) => {
+            
+            // 【重要修复】将触摸事件绑定到固定不动的外层容器(container)上，防止inner移动后脱离触摸范围
+            this.container.addEventListener('touchstart', (e) => {
                 this.stopAutoPlay();
                 this.startX = e.touches[0].clientX;
                 this.isDragging = true;
-            });
-            this.inner.addEventListener('touchmove', (e) => {
+            }, { passive: true });
+            
+            this.container.addEventListener('touchmove', (e) => {
                 if (!this.isDragging) return;
                 this.currentX = e.touches[0].clientX;
                 const diff = this.currentX - this.startX;
@@ -621,9 +627,14 @@
                 if (newTransform > 0) newTransform = 0;
                 if (newTransform < -(this.items.length - 1) * 100) newTransform = -(this.items.length - 1) * 100;
                 this.inner.style.transform = `translateX(${newTransform}%)`;
-                e.preventDefault();
-            });
-            this.inner.addEventListener('touchend', () => {
+                
+                // 判断是否是水平滑动，是的话阻止页面上下滚动
+                if (Math.abs(diff) > 5 && e.cancelable) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            this.container.addEventListener('touchend', () => {
                 if (!this.isDragging) return;
                 this.isDragging = false;
                 const diff = this.currentX - this.startX;
@@ -637,8 +648,17 @@
                 this.startX = 0;
                 this.currentX = 0;
             });
-            // 鼠标拖拽支持（桌面端）
-            this.inner.addEventListener('mousedown', (e) => {
+            
+            // 兜底处理触摸取消事件
+            this.container.addEventListener('touchcancel', () => {
+                if (!this.isDragging) return;
+                this.isDragging = false;
+                this.updateCarousel();
+                this.startAutoPlay();
+            });
+
+            // 鼠标拖拽支持（桌面端）同理绑定到 container
+            this.container.addEventListener('mousedown', (e) => {
                 e.preventDefault();
                 this.stopAutoPlay();
                 this.startX = e.clientX;
@@ -790,7 +810,7 @@
                 environment: "环境保护", environment_desc: "井明电子坚持绿色制造，严格遵守RoHS、REACH指令，投资建设先进的废水处理系统，实现中水回用，厂区光伏发电覆盖率已达30%。我们采用无铅、无卤素材料，并通过ISO14001环境管理体系认证。"
             },
             contact_detail: {
-                offices: "服务据点", office_list: ["总部：四川省遂宁市经济技术开发区渠河南路188号电子电路标准厂房一期号楼", "华南办事处：深圳南山区", "华东办事处：苏州工业园区"],
+                offices: "服务据点", office_list: ["总部：四川省遂宁市经济技术开发区渠河南路188号电子电路标准厂房一期3号楼", "华南办事处：深圳南山区", "华东办事处：苏州工业园区"],
                 message_title: "在线留言", name_placeholder: "您的姓名", email_placeholder: "邮箱地址", msg_placeholder: "留言内容", submit: "提交留言"
             }
         },
@@ -928,11 +948,8 @@
                 if (isMobile) {
                     const parentLi = link.closest('.dropdown');
                     if (parentLi) {
-                        // 【体验优化】实现手风琴效果：每次只允许展开一个下拉菜单
                         const wasActive = parentLi.classList.contains('active');
-                        // 先移除所有菜单的展开状态
                         document.querySelectorAll('.nav-links .dropdown').forEach(d => d.classList.remove('active'));
-                        // 如果当前被点击的菜单原本没展开，就让它展开
                         if (!wasActive) {
                             parentLi.classList.add('active');
                         }
@@ -1015,7 +1032,7 @@
         `;
     }
 
-    // 子模块详情（保持原样，略写函数，实际完整保留）
+    // 子模块详情
     function renderAboutSingle(subId) {
         const d = t('about_detail');
         const cap = d.capability_table;
@@ -1031,6 +1048,7 @@
         if (!sec) return renderHomeSimple();
         return `${renderCarousel('about', currentLang)}<div class="container"><div class="sub-section"><h2>${sec.title}</h2>${sec.content}</div></div>`;
     }
+    
     function renderIndustrySingle(subId) {
         const d = t('industry_detail');
         const map = {
@@ -1039,12 +1057,13 @@
             smart: { title: d.smart, desc: d.smart_desc },
             medical: { title: d.medical, desc: d.medical_desc },
             power: { title: d.power, desc: d.power_desc },
-             consumer: { title: d.consumer, desc: d.consumer_desc }
+            consumer: { title: d.consumer, desc: d.consumer_desc }
         };
         const item = map[subId];
         if (!item) return renderOverview('industry');
         return `${renderCarousel('industry', currentLang)}<div class="container"><div class="sub-section"><h2>${item.title}</h2><p>${item.desc}</p></div></div>`;
     }
+    
     function renderProductsSingle(subId) {
         const d = t('products_detail');
         const prodMap = {
@@ -1053,7 +1072,7 @@
             high_layer: { title: d.high_layer, desc: d.high_layer_desc },
             metal_base: { title: d.metal_base, desc: d.metal_base_desc },
             process_cap: { title: d.process_cap, desc: null, table: d.process_table },
-             prod_device: { title: d.prod_device, desc: null, list: d.prod_list },
+            prod_device: { title: d.prod_device, desc: null, list: d.prod_list },
             test_device: { title: d.test_device, desc: null, list: d.test_list }
         };
         const item = prodMap[subId];
@@ -1068,6 +1087,7 @@
         }
         return `${renderCarousel('products', currentLang)}<div class="container"><div class="sub-section"><h2>${item.title}</h2>${content}</div></div>`;
     }
+    
     function renderNewsSingle(subId) {
         const d = t('news_detail');
         if (subId === 'company_news') {
@@ -1077,6 +1097,7 @@
         }
         return renderOverview('news');
     }
+    
     function renderSocialSingle(subId) {
         const d = t('social_detail');
         if (subId === 'environment') {
@@ -1084,6 +1105,7 @@
         }
         return renderOverview('social');
     }
+    
     function renderContactSingle(subId) {
         const d = t('contact_detail');
         if (subId === 'offices') {
@@ -1211,7 +1233,6 @@
         }
         setActivePage(initPage, initSub);
         
-        // Logo 点击返回主页的功能在这里绑定，只要 html 里保持 id="logoHome" 即可
         document.getElementById('logoHome').addEventListener('click', () => setActivePage('about', null));
         
         document.getElementById('menuToggle').addEventListener('click', (e) => {
