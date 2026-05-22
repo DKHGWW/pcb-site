@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>四川井明电子 | 精密PCB智造专家</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -33,16 +33,7 @@
             margin: 0 auto;
         }
         .logo { cursor: pointer; }
-        .logo h1 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #0f2b5e, #1e4a7a);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            margin-bottom: 2px;
-        }
-        .logo span { font-size: 0.7rem; color: #4b5563; display: block; letter-spacing: 0.3px; }
+        
         .dropdown { position: relative; }
         
         /* 二级菜单样式 */
@@ -405,7 +396,7 @@
                 left: 0;             
                 width: 100%;
                 flex-direction: column;
-                flex-wrap: nowrap; /* [修复核心] 强制不换行，防止内容被挤到隐藏的第二列 */
+                flex-wrap: nowrap; 
                 align-items: center;
                 padding: 20px 0 30px 0;
                 gap: 16px;
@@ -461,8 +452,7 @@
 <nav class="navbar">
     <div class="nav-container">
         <div class="logo" id="logoHome">
-            <h1>四川井明电子有限公司</h1>
-            <span>SICHUAN KINMING ELECTRONICS CO., LTD</span>
+            <img src="捕获2.png" alt="Sichuan Kinming Electronics Co., Ltd. Logo" style="height: 50px; width: auto; display: block;">
         </div>
         <div class="menu-icon" id="menuToggle"><i class="fas fa-bars"></i></div>
         <ul class="nav-links" id="navLinks"></ul>
@@ -472,7 +462,7 @@
 <div class="container" id="social-statement-container">
     <div class="social-statement">
         <h3 data-i18n="statement_title">🌿 践行绿色制造，共创可持续未来</h3>
-        <p data-i18n="statement_content">井明电子始终将环境保护与社会责任融入企业发展战略。我们严格遵守 RoHS、REACH 等国际环保指令，投资建设先进的废水处理与中水回用系统，厂区光伏发电覆盖率已达30%。同时，我们积极参与社区公益，关爱员工成长，致力于成为负责任、有温度的行业标杆。未来，我们将持续加大环保投入，推动低碳生产，与合作伙伴共同守护绿水青山。</p>
+        <p data-i18n="statement_content">井明电子始终将环境保护与社会责任融入企业发展战略。我们严格遵守 RoHS、REACH 等国际环保指令，投资建设先进的废水处理与中水回用系统，厂区光伏发电覆盖率已达30%。同时，我们积极参与社区公益，关关爱员工成长，致力于成为负责任、有温度的行业标杆。未来，我们将持续加大环保投入，推动低碳生产，与合作伙伴共同守护绿水青山。</p>
     </div>
 </div>
 <div class="footer-links">
@@ -1056,176 +1046,16 @@
             high_layer: { title: d.high_layer, desc: d.high_layer_desc },
             metal_base: { title: d.metal_base, desc: d.metal_base_desc },
             process_cap: { title: d.process_cap, desc: null, table: d.process_table },
-             prod_device: { title: d.prod_device, desc: null, list: d.prod_list },
-            test_device: { title: d.test_device, desc: null, list: d.test_list }
-        };
-        const item = prodMap[subId];
-        if (!item) return renderOverview('products');
-        let content = '';
-        if (item.desc) content = `<p>${item.desc}</p>`;
-        else if (item.table) {
-            const t = item.table;
-            content = `<div class="table-wrapper"><table class="capability-table"><thead><tr>${t.headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${t.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
-        } else if (item.list) {
-            content = `<div class="grid-2col">${item.list.map(dev=>`<div class="info-card"><i class="fas fa-microchip"></i> ${dev}</div>`).join('')}</div>`;
-        }
-        return `${renderCarousel('products', currentLang)}<div class="container"><div class="sub-section"><h2>${item.title}</h2>${content}</div></div>`;
-    }
-    function renderNewsSingle(subId) {
-        const d = t('news_detail');
-        if (subId === 'company_news') {
-            return `${renderCarousel('news', currentLang)}<div class="container"><div class="sub-section"><h2>${d.company_news}</h2><ul>${d.company_news_list.map(item=>`<li>${item}</li>`).join('')}</ul></div></div>`;
-        } else if (subId === 'industry_news') {
-            return `${renderCarousel('news', currentLang)}<div class="container"><div class="sub-section"><h2>${d.industry_news}</h2><ul>${d.industry_news_list.map(item=>`<li>${item}</li>`).join('')}</ul></div></div>`;
-        }
-        return renderOverview('news');
-    }
-    function renderSocialSingle(subId) {
-        const d = t('social_detail');
-        if (subId === 'environment') {
-            return `${renderCarousel('social', currentLang)}<div class="container"><div class="sub-section"><h2>${d.environment}</h2><p>${d.environment_desc}</p></div></div>`;
-        }
-        return renderOverview('social');
-    }
-    function renderContactSingle(subId) {
-        const d = t('contact_detail');
-        if (subId === 'offices') {
-            return `${renderCarousel('contact', currentLang)}<div class="container"><div class="sub-section"><h2>${d.offices}</h2><ul>${d.office_list.map(o=>`<li>${o}</li>`).join('')}</ul></div></div>`;
-        } else if (subId === 'message') {
-            const msgHtml = `<div class="sub-section"><h2>${d.message_title}</h2><form class="contact-form" onsubmit="alert('${currentLang ==='zh'?'留言已发送，我们会尽快联系您。':'Message sent. We will contact you soon.'}'); return false;"><input type="text" placeholder="${d.name_placeholder}" required><input type="email" placeholder="${d.email_placeholder}" required><textarea rows="4" placeholder="${d.msg_placeholder}" required></textarea><button type="submit">${d.submit}</button></form></div>`;
-            return `${renderCarousel('contact', currentLang)}<div class="container">${msgHtml}</div>`;
-        }
-        return renderOverview('contact');
-    }
+             prod_device:把第一个logo换成第二个，点击之后原有的功能不能改变我明白了。您想将原本的文字标志替换为您提供的第二个标志（图像文件 `e7af5013ff6f7f414c0eff4a6de2f6e4.png`），并且确保点击该标志依然能发挥返回主页的功能。
 
-    function renderFooterLinks() {
-        const links = t('footerLinks');
-        const order = ['about', 'industry', 'products', 'news', 'social', 'contact'];
-        let html = '';
-        for (let key of order) {
-            const group = links[key];
-            if (!group) continue;
-            html += `<div class="footer-links-col"><h4>${group.title}</h4><ul>`;
-            const items = group.items;
-            const subIds = {
-                about: ["intro","capability","management","honor","structure","quality"],
-                industry: ["network","auto","smart","medical","power","consumer"],
-                products: ["std_pcb","hdi","high_layer","metal_base","process_cap","prod_device","test_device"],
-                news: ["company_news","industry_news"],
-                social: ["environment"],
-                contact: ["offices","message"]
-            };
-            for (let i=0; i<items.length; i++) {
-                const item = items[i];
-                const subId = subIds[key]?.[i] || '';
-                html += `<li><a href="#" data-footer-link data-page="${key}" data-sub="${subId}">${item}</a></li>`;
-            }
-            html += `</ul></div>`;
-        }
-        const container = document.getElementById('footerLinksGrid');
-        if (container) container.innerHTML = html;
-        document.querySelectorAll('[data-footer-link]').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const page = link.getAttribute('data-page');
-                const sub = link.getAttribute('data-sub');
-                if (page) setActivePage(page, sub);
-                if (isMobile) document.getElementById('navLinks').classList.remove('show');
-            });
-        });
-    }
+核心在于保持包裹标志的 `<div class="logo" id="logoHome">` 不变，因为 JavaScript 是通过 `id="logoHome"` 来绑定点击功能的。
 
-    function loadPage(page, targetSub = null) {
-        currentPage = page;
-        currentSub = targetSub;
-        let html = '';
-        if (page === 'about') {
-            if (targetSub) html = renderAboutSingle(targetSub);
-            else html = renderHomeSimple();
-        } else if (page === 'industry') {
-            if (targetSub) html = renderIndustrySingle(targetSub);
-            else html = renderOverview('industry');
-        } else if (page === 'products') {
-            if (targetSub) html = renderProductsSingle(targetSub);
-            else html = renderOverview('products');
-        } else if (page === 'news') {
-            if (targetSub) html = renderNewsSingle(targetSub);
-            else html = renderOverview('news');
-        } else if (page === 'social') {
-            if (targetSub) html = renderSocialSingle(targetSub);
-            else html = renderOverview('social');
-        } else if (page === 'contact') {
-            if (targetSub) html = renderContactSingle(targetSub);
-            else html = renderOverview('contact');
-        } else {
-            html = renderHomeSimple();
-        }
-        document.getElementById('app').innerHTML = `<div class="page-section active-page">${html}</div>`;
-        if (page === 'about' && !targetSub) {
-            const form = document.getElementById('brochureForm');
-            if (form) {
-                form.onsubmit = (e) => {
-                    e.preventDefault();
-                    alert(t('thank_you'));
-                    form.reset();
-                };
-            }
-        }
-        initCarousel(page);
-        document.querySelectorAll('.nav-links > li > a[data-page]').forEach(a => {
-            if(a.getAttribute('data-page') === page) a.classList.add('active');
-            else a.classList.remove('active');
-        });
-        const stmtTitle = document.querySelector('#social-statement-container .social-statement h3');
-        const stmtContent = document.querySelector('#social-statement-container .social-statement p');
-        const footerAddr = document.querySelector('footer [data-i18n="footer_address"]');
-        if (stmtTitle) stmtTitle.innerText = t('statement_title');
-        if (stmtContent) stmtContent.innerText = t('statement_content');
-        if (footerAddr) footerAddr.innerText = t('footer_address');
-        renderFooterLinks();
-    }
+### 操作步骤：
 
-    function setActivePage(page, targetSub = null) {
-        let hash = page;
-        if (targetSub) hash = `${page}/${targetSub}`;
-        window.history.pushState({}, '', `#${hash}`);
-        loadPage(page, targetSub);
-    }
+1.  将您的 HTML 文件中的以下原有代码块：
 
-    function switchLanguage() {
-        currentLang = currentLang === 'zh' ? 'en' : 'zh';
-        renderNavbar();
-        loadPage(currentPage, currentSub);
-        const btn = document.getElementById('langToggle');
-        if (btn) btn.innerText = currentLang === 'zh' ? 'English' : '中文';
-    }
-
-    function init() {
-        renderNavbar();
-        let initialHash = window.location.hash.slice(1);
-        let initPage = 'about';
-        let initSub = null;
-        if (initialHash) {
-            const parts = initialHash.split('/');
-            initPage = parts[0];
-            if (parts.length > 1) initSub = parts[1];
-        }
-        setActivePage(initPage, initSub);
-        document.getElementById('logoHome').addEventListener('click', () => setActivePage('about', null));
-        document.getElementById('menuToggle').addEventListener('click', (e) => {
-            e.stopPropagation();
-            document.getElementById('navLinks').classList.toggle('show');
-        });
-        // 点击页面其他区域关闭移动端菜单
-        document.addEventListener('click', function(e) {
-            const nav = document.getElementById('navLinks');
-            const toggle = document.getElementById('menuToggle');
-            if (isMobile && nav && nav.classList.contains('show') && !nav.contains(e.target) && !toggle.contains(e.target)) {
-                nav.classList.remove('show');
-            }
-        });
-    }
-    init();
-</script>
-</body>
-</html>
+```html
+<div class="logo" id="logoHome">
+    <h1>四川井明电子有限公司</h1>
+    <span>SICHUAN KINMING ELECTRONICS CO., LTD</span>
+</div>
