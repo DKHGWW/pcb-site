@@ -32,41 +32,17 @@
             max-width: 1400px;
             margin: 0 auto;
         }
-        /* Logo 区域 — 非白色背景 */
-        .logo {
-            cursor: pointer;
-            background: #eef2ff;
-            padding: 6px 16px;
-            border-radius: 40px;
-            transition: all 0.2s;
-        }
-        .logo:hover {
-            background: #e0e7ff;
-        }
-        .logo h1 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #0f2b5e, #1e4a7a);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            margin-bottom: 2px;
-        }
-        .logo span {
-            font-size: 0.7rem;
-            color: #1e40af;
-            display: block;
-            letter-spacing: 0.3px;
-        }
+        .logo { cursor: pointer; }
+        
         .dropdown { position: relative; }
         
-        /* 二级菜单 — 与一级菜单底色区分（半透浅灰蓝） */
+        /* 二级菜单样式 */
         .dropdown-menu {
             position: absolute;
             top: 100%;
             left: 0;
-            background: rgba(248, 250, 252, 0.95);
-            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
             border-radius: 20px;
             min-width: 200px;
             padding: 12px 8px;
@@ -96,27 +72,14 @@
             transition: all 0.2s ease;
         }
         .dropdown-menu a:hover {
-            background: rgba(37, 99, 235, 0.15);
+            background: rgba(37, 99, 235, 0.12);
             color: #2563eb;
             transform: translateX(4px);
         }
         
         .nav-links { display: flex; gap: 28px; list-style: none; flex-wrap: wrap; align-items: center; }
-        .nav-links > li > a {
-            text-decoration: none;
-            font-weight: 500;
-            color: #1e293b;
-            transition: 0.2s;
-            display: inline-block;
-            padding: 8px 16px;
-            border-radius: 40px;
-            background: transparent;
-        }
-        .nav-links > li > a:hover,
-        .nav-links > li > a.active {
-            background: rgba(37, 99, 235, 0.1);
-            color: #2563eb;
-        }
+        .nav-links > li > a { text-decoration: none; font-weight: 500; color: #1e293b; transition: 0.2s; display: inline-block; padding: 8px 0; }
+        .nav-links > li > a:hover, .nav-links > li > a.active { color: #2563eb; }
         
         .lang-btn {
             background: rgba(37, 99, 235, 0.1);
@@ -143,6 +106,7 @@
         .page-section.active-page { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
         
+        /* 轮播图容器（支持触摸滑动） */
         .carousel {
             position: relative;
             width: 100%;
@@ -150,16 +114,25 @@
             overflow: hidden;
             margin-bottom: 48px;
             box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+            touch-action: pan-y pinch-zoom;
         }
-        .carousel-inner { position: relative; width: 100%; height: 400px; }
-        .carousel-item {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .carousel-inner {
+            position: relative;
             width: 100%;
+            height: 400px;
+            display: flex;
+            transition: transform 0.3s ease;
+            cursor: grab;
+            /* 防止拖拽导致事件中断 */
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .carousel-inner:active {
+            cursor: grabbing;
+        }
+        .carousel-item {
+            flex: 0 0 100%;
             height: 100%;
-            opacity: 0;
-            transition: opacity 0.6s ease;
             background-size: cover;
             background-position: center;
             display: flex;
@@ -169,7 +142,6 @@
             color: white;
             background-color: #1e293b;
         }
-        .carousel-item.active { opacity: 1; }
         .carousel-caption {
             background: rgba(0,0,0,0.5);
             padding: 20px;
@@ -198,10 +170,44 @@
             transition: 0.2s;
         }
         .carousel-indicators span.active { background-color: #2563eb; transform: scale(1.2); }
+        
+        /* 左右箭头样式 */
+        .carousel-prev, .carousel-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.4);
+            color: white;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 15;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            backdrop-filter: blur(4px);
+        }
+        .carousel-prev { left: 16px; }
+        .carousel-next { right: 16px; }
+        .carousel-prev:hover, .carousel-next:hover {
+            background: rgba(0,0,0,0.7);
+            transform: translateY(-50%) scale(1.05);
+        }
         @media (max-width: 768px) {
             .carousel-inner { height: 280px; }
             .carousel-caption h3 { font-size: 1.2rem; }
             .carousel-caption p { font-size: 0.8rem; }
+            .carousel-prev, .carousel-next {
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
+            }
+            .carousel-prev { left: 8px; }
+            .carousel-next { right: 8px; }
         }
         
         .overview-card {
@@ -383,23 +389,59 @@
         /* 移动端样式修正 */
         @media (max-width: 768px) {
             .footer-links-grid { grid-template-columns: repeat(2, 1fr); }
+            
+            /* 1. 强制不换行，让 Logo 和菜单按钮保持在同一行 */
+            .nav-container { 
+                position: relative; 
+                flex-wrap: nowrap; 
+            }
+            
+            /* 2. 限制 Logo 尺寸，避免在移动端放大 */
+            .logo {
+                max-width: 70%; 
+                display: flex;
+                align-items: center;
+            }
+            .logo img {
+                width: auto !important; 
+                max-width: 100%; 
+                height: 38px !important; /* 移动端高度稍微缩小一点，保证导航栏精致 */
+                object-fit: contain;
+            }
+            
             .nav-links {
                 display: none;
+                position: absolute;  
+                top: 100%;           
+                left: 0;             
                 width: 100%;
                 flex-direction: column;
+                flex-wrap: nowrap; 
                 align-items: center;
-                padding: 20px 0;
+                padding: 20px 0 30px 0;
                 gap: 16px;
                 background: white;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
                 border-radius: 0 0 20px 20px;
+                max-height: calc(100vh - 75px); 
+                overflow-y: auto;               
+                -webkit-overflow-scrolling: touch;
+                z-index: 999;
+                border-top: 1px solid #eef2f8; 
             }
             .nav-links.show {
                 display: flex;
             }
+            
+            /* 深蓝色三横岗图标样式 */
             .menu-icon {
                 display: block;
+                background-color: #2563eb; /* 与轮播图圆点一致的深蓝色 */
+                color: white;             
+                padding: 8px 12px;        
+                border-radius: 8px;       
             }
+            
             .dropdown {
                 width: 100%;
                 text-align: center;
@@ -416,13 +458,15 @@
                 transform: none;
                 display: none;
                 border: none;
+                max-height: none;
+                overflow: visible;
             }
             .dropdown.active .dropdown-menu {
                 display: block;
             }
             .dropdown-menu a {
                 text-align: center;
-                padding: 8px 0;
+                padding: 12px 0; 
             }
             .nav-container .lang-btn {
                 margin-left: auto;
@@ -435,8 +479,7 @@
 <nav class="navbar">
     <div class="nav-container">
         <div class="logo" id="logoHome">
-            <h1>四川井明电子有限公司</h1>
-            <span>SICHUAN KINMING ELECTRONICS CO., LTD</span>
+            <img src="e7af5013ff6f7f414c0eff4a6de2f6e4.png" alt="Sichuan Kinming Electronics Co., Ltd. Logo" style="height: 45px; width: auto; display: block;">
         </div>
         <div class="menu-icon" id="menuToggle"><i class="fas fa-bars"></i></div>
         <ul class="nav-links" id="navLinks"></ul>
@@ -497,14 +540,14 @@
             en: [
                 { image: "https://picsum.photos/id/91/1600/500", title: "High Multilayer", desc: "Up to 30 layers" },
                 { image: "https://picsum.photos/id/38/1600/500", title: "HDI PCB", desc: "Any-layer" }
-            ]
+             ]
         },
         news: {
             zh: [
                 { image: "https://picsum.photos/id/29/1600/500", title: "行业展会", desc: "亮相国际电子电路展" },
                 { image: "https://picsum.photos/id/43/1600/500", title: "技术突破", desc: "25:1纵横比电镀孔" }
             ],
-            en: [
+             en: [
                 { image: "https://picsum.photos/id/29/1600/500", title: "Industry Expo", desc: "Kinming at CPCA Show" },
                 { image: "https://picsum.photos/id/43/1600/500", title: "Tech Breakthrough", desc: "25:1 AR plated holes" }
             ]
@@ -527,15 +570,163 @@
         }
     };
 
+    // 轮播图类（支持触摸滑动 + 左右箭头）
+    class SwipeCarousel {
+        constructor(container, items, indicators, prevBtn, nextBtn, autoInterval = 4000) {
+            this.container = container;
+            this.inner = container.querySelector('.carousel-inner');
+            this.items = items;
+            this.indicators = indicators;
+            this.prevBtn = prevBtn;
+            this.nextBtn = nextBtn;
+            this.currentIndex = 0;
+            this.autoInterval = autoInterval;
+            this.timer = null;
+            this.startX = 0;
+            this.currentX = 0;
+            this.isDragging = false;
+            this.init();
+        }
+        init() {
+            this.updateCarousel();
+            this.startAutoPlay();
+            this.bindEvents();
+            if (this.prevBtn) this.prevBtn.addEventListener('click', () => this.prev());
+            if (this.nextBtn) this.nextBtn.addEventListener('click', () => this.next());
+        }
+        updateCarousel() {
+            if (!this.inner) return;
+            this.inner.style.transform = `translateX(-${this.currentIndex * 100}%)`;
+            if (this.indicators) {
+                this.indicators.forEach((ind, i) => {
+                    if (i === this.currentIndex) ind.classList.add('active');
+                    else ind.classList.remove('active');
+                });
+            }
+        }
+        goTo(index) {
+            if (index < 0) index = this.items.length - 1;
+            if (index >= this.items.length) index = 0;
+            this.currentIndex = index;
+            this.updateCarousel();
+            this.resetAutoPlay();
+        }
+        next() { this.goTo(this.currentIndex + 1); }
+        prev() { this.goTo(this.currentIndex - 1); }
+        startAutoPlay() {
+            if (this.timer) clearInterval(this.timer);
+            if (this.autoInterval > 0) {
+                this.timer = setInterval(() => this.next(), this.autoInterval);
+            }
+        }
+        resetAutoPlay() {
+            if (this.timer) clearInterval(this.timer);
+            this.startAutoPlay();
+        }
+        stopAutoPlay() { if (this.timer) clearInterval(this.timer); }
+        
+        bindEvents() {
+            if (!this.inner) return;
+            
+            // 【重要修复】将触摸事件绑定到固定不动的外层容器(container)上，防止inner移动后脱离触摸范围
+            this.container.addEventListener('touchstart', (e) => {
+                this.stopAutoPlay();
+                this.startX = e.touches[0].clientX;
+                this.isDragging = true;
+            }, { passive: true });
+            
+            this.container.addEventListener('touchmove', (e) => {
+                if (!this.isDragging) return;
+                this.currentX = e.touches[0].clientX;
+                const diff = this.currentX - this.startX;
+                const movePercent = (diff / this.container.offsetWidth) * 100;
+                let newTransform = -this.currentIndex * 100 + movePercent;
+                if (newTransform > 0) newTransform = 0;
+                if (newTransform < -(this.items.length - 1) * 100) newTransform = -(this.items.length - 1) * 100;
+                this.inner.style.transform = `translateX(${newTransform}%)`;
+                
+                // 判断是否是水平滑动，是的话阻止页面上下滚动
+                if (Math.abs(diff) > 5 && e.cancelable) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            this.container.addEventListener('touchend', () => {
+                if (!this.isDragging) return;
+                this.isDragging = false;
+                const diff = this.currentX - this.startX;
+                if (Math.abs(diff) > 50) {
+                     if (diff > 0) this.prev();
+                    else this.next();
+                } else {
+                    this.updateCarousel();
+                }
+                this.startAutoPlay();
+                this.startX = 0;
+                this.currentX = 0;
+            });
+            
+            // 兜底处理触摸取消事件
+            this.container.addEventListener('touchcancel', () => {
+                if (!this.isDragging) return;
+                this.isDragging = false;
+                this.updateCarousel();
+                this.startAutoPlay();
+            });
+
+            // 鼠标拖拽支持（桌面端）同理绑定到 container
+            this.container.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                this.stopAutoPlay();
+                this.startX = e.clientX;
+                this.isDragging = true;
+                this.inner.style.cursor = 'grabbing';
+            });
+            window.addEventListener('mousemove', (e) => {
+                if (!this.isDragging) return;
+                this.currentX = e.clientX;
+                const diff = this.currentX - this.startX;
+                const movePercent = (diff / this.container.offsetWidth) * 100;
+                let newTransform = -this.currentIndex * 100 + movePercent;
+                if (newTransform > 0) newTransform = 0;
+                if (newTransform < -(this.items.length - 1) * 100) newTransform = -(this.items.length - 1) * 100;
+                this.inner.style.transform = `translateX(${newTransform}%)`;
+            });
+            window.addEventListener('mouseup', () => {
+                if (!this.isDragging) return;
+                this.isDragging = false;
+                const diff = this.currentX - this.startX;
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) this.prev();
+                    else this.next();
+                } else {
+                    this.updateCarousel();
+                }
+                this.startAutoPlay();
+                 this.inner.style.cursor = 'grab';
+                this.startX = 0;
+                this.currentX = 0;
+            });
+        }
+    }
+
     function renderCarousel(pageKey, lang) {
-        const items = carouselData[pageKey]?.[lang] || carouselData[pageKey]?.zh || [];
-        if (!items.length) return '';
-        let indicators = '', itemsHtml = '';
-        items.forEach((item, idx) => {
-            indicators += `<span class="${idx === 0 ? 'active' : ''}" data-index="${idx}"></span>`;
-            itemsHtml += `<div class="carousel-item ${idx === 0 ? 'active' : ''}" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${item.image}');"><div class="carousel-caption"><h3>${item.title}</h3><p>${item.desc}</p></div></div>`;
+        const itemsData = carouselData[pageKey]?.[lang] || carouselData[pageKey]?.zh || [];
+        if (!itemsData.length) return '';
+        let itemsHtml = '';
+        let indicatorsHtml = '';
+        itemsData.forEach((item, idx) => {
+            itemsHtml += `<div class="carousel-item" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${item.image}');"><div class="carousel-caption"><h3>${item.title}</h3><p>${item.desc}</p></div></div>`;
+            indicatorsHtml += `<span class="${idx === 0 ? 'active' : ''}" data-index="${idx}"></span>`;
         });
-        return `<div class="carousel" id="carousel-${pageKey}"><div class="carousel-inner">${itemsHtml}</div><div class="carousel-indicators">${indicators}</div></div>`;
+        return `
+            <div class="carousel" id="carousel-${pageKey}">
+                <div class="carousel-inner">${itemsHtml}</div>
+                <div class="carousel-indicators">${indicatorsHtml}</div>
+                <button class="carousel-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+             </div>
+        `;
     }
 
     function initCarousel(pageKey) {
@@ -543,18 +734,18 @@
         if (!carouselDiv) return;
         const items = carouselDiv.querySelectorAll('.carousel-item');
         const indicators = carouselDiv.querySelectorAll('.carousel-indicators span');
+        const prevBtn = carouselDiv.querySelector('.carousel-prev');
+        const nextBtn = carouselDiv.querySelector('.carousel-next');
         if (items.length === 0) return;
-        let current = 0;
-        let interval = setInterval(() => { let next = (current + 1) % items.length; goTo(next); }, 4000);
-        function goTo(idx) {
-            items[current].classList.remove('active');
-            indicators[current].classList.remove('active');
-            current = idx;
-            items[current].classList.add('active');
-            indicators[current].classList.add('active');
+        if (carouselDiv.swipeInstance) {
+            if (carouselDiv.swipeInstance.timer) clearInterval(carouselDiv.swipeInstance.timer);
         }
-        indicators.forEach((ind, i) => {
-            ind.addEventListener('click', () => { clearInterval(interval); goTo(i); interval = setInterval(() => { let next = (current + 1) % items.length; goTo(next); }, 4000); });
+        const swipe = new SwipeCarousel(carouselDiv, items, indicators, prevBtn, nextBtn, 4000);
+        carouselDiv.swipeInstance = swipe;
+        indicators.forEach((ind, idx) => {
+            ind.addEventListener('click', () => {
+                swipe.goTo(idx);
+            });
         });
     }
 
@@ -585,7 +776,7 @@
                 contact: "联系我们",
                 contact_desc: "如您有任何需求或疑问，欢迎通过“服务据点”查找离您最近的办事处，或使用“在线留言”功能与我们取得联系。"
             },
-            dropdown: {
+             dropdown: {
                 about: ["公司简介", "制程能力", "管理体系", "井明荣誉", "组织架构", "品质保证"],
                 industry: ["网络通信", "汽车电子", "智能终端", "工控医疗", "电源", "消费电子"],
                 products: ["常规电路板", "高密度互联板", "高多层电路板", "金属基板", "制程能力", "生产设备", "检测设备"],
@@ -593,6 +784,14 @@
                 social: ["环境保护"],
                 contact: ["服务据点", "在线留言"]
             },
+            footerLinks: {
+                about: { title: "关于井明", items: ["公司简介", "制程能力", "管理体系", "井明荣誉", "组织架构", "品质保证"] },
+                industry: { title: "行业市场", items: ["网络通信", "汽车电子", "智能终端", "工控医疗", "电源", "消费电子"] },
+                products: { title: "产品技术", items: ["常规电路板", "高密度互联板", "高多层电路板", "金属基板", "制程能力", "生产设备", "检测设备"] },
+                news: { title: "新闻中心", items: ["公司新闻", "行业动态"] },
+                social: { title: "社会责任", items: ["环境保护"] },
+                contact: { title: "联系我们", items: ["服务据点", "在线留言"] }
+             },
             about_detail: {
                 intro: "公司简介",
                 intro_text: "四川井明电子有限公司始创于2012年，前身为遂宁豪尔思电子科技有限公司，坐落于遂宁经开区电子电路产业园，现有员工500余人，是一家专业从事PCB电路板研发、设计、精密生产与配套服务的综合性制造企业。公司深耕线路板行业十余年，主营多层板、高精密HDI板、高多层板、金属基板、IC载板，产品广泛应用于汽车电子、网络通信、工控医疗、军工配套、智能终端等领域，可提供一站式定制量产解决方案。企业资质齐全，拥有IATF16949、ISO9001、ISO14001、UL、CQC权威认证，产品符合RoHS环保标准，全程严格品控，满足工业、汽车及高端精密设备使用要求。公司持续深耕高端PCB领域，以精工品质与稳定交付，致力打造为全国优质线路板制造品牌。",
@@ -658,12 +857,20 @@
                 contact_desc: "For any inquiries, please find your nearest office via 'Service Locations' or use the 'Online Message' form to get in touch with us."
             },
             dropdown: {
-                about: ["Company Profile", "Process Capability", "Management System", "Honors", "Organization", "Quality Assurance"],
+                 about: ["Company Profile", "Process Capability", "Management System", "Honors", "Organization", "Quality Assurance"],
                 industry: ["Telecom & Networking", "Automotive Electronics", "Smart Devices", "Industrial & Medical", "Power Supply", "Consumer Electronics"],
                 products: ["Standard PCB", "HDI PCB", "High Multilayer", "Metal Core PCB", "Process Capability", "Production Equipment", "Testing Equipment"],
                 news: ["Company News", "Industry Trends"],
                 social: ["Environmental Protection"],
                 contact: ["Service Locations", "Online Message"]
+            },
+            footerLinks: {
+                about: { title: "About Kinming", items: ["Company Profile", "Process Capability", "Management System", "Honors", "Organization", "Quality Assurance"] },
+                industry: { title: "Markets", items: ["Telecom & Networking", "Automotive Electronics", "Smart Devices", "Industrial & Medical", "Power Supply", "Consumer Electronics"] },
+                products: { title: "Products & Tech", items: ["Standard PCB", "HDI PCB", "High Multilayer", "Metal Core PCB", "Process Capability", "Production Equipment", "Testing Equipment"] },
+                news: { title: "News", items: ["Company News", "Industry Trends"] },
+                social: { title: "CSR", items: ["Environmental Protection"] },
+                contact: { title: "Contact", items: ["Service Locations", "Online Message"] }
             },
             about_detail: {
                 intro: "Company Profile",
@@ -709,6 +916,8 @@
     let currentLang = 'zh';
     let currentPage = 'about';
     let currentSub = null;
+    let isMobile = window.innerWidth <= 768;
+    window.addEventListener('resize', () => { isMobile = window.innerWidth <= 768; });
 
     function t(key) {
         const keys = key.split('.');
@@ -717,7 +926,7 @@
         return val;
     }
 
-    // 渲染导航栏（动态生成，支持中英文）
+    // 渲染导航栏
     function renderNavbar() {
         const navContainer = document.getElementById('navLinks');
         if (!navContainer) return;
@@ -748,35 +957,46 @@
         html += `<li><button class="lang-btn" id="langToggle">English</button></li>`;
         navContainer.innerHTML = html;
         
-        // 重新绑定一级菜单点击（桌面端 hover 已支持，点击用于跳转；移动端特殊处理）
-        const isMobile = window.innerWidth <= 768;
+        // 绑定一级菜单点击（移动端展开/收起，桌面端跳转）
         document.querySelectorAll('.nav-links > li > a[data-page]').forEach(link => {
-            link.removeEventListener('click', link.click);
-            link.addEventListener('click', (e) => {
+            link.removeEventListener('click', link._clickHandler);
+            const handler = (e) => {
                 e.preventDefault();
                 if (isMobile) {
                     const parentLi = link.closest('.dropdown');
                     if (parentLi) {
-                        parentLi.classList.toggle('active');
+                        const wasActive = parentLi.classList.contains('active');
+                        document.querySelectorAll('.nav-links .dropdown').forEach(d => d.classList.remove('active'));
+                        if (!wasActive) {
+                            parentLi.classList.add('active');
+                        }
                     }
                 } else {
                     const page = link.getAttribute('data-page');
                     if (page === 'about') setActivePage('about', null);
                     else setActivePage(page, null);
                 }
-            });
+            };
+            link.addEventListener('click', handler);
+            link._clickHandler = handler;
         });
-        // 重新绑定二级菜单点击
+        
+        // 绑定二级菜单点击（总是跳转）
         document.querySelectorAll('.dropdown-menu a[data-sub]').forEach(link => {
-            link.addEventListener('click', (e) => {
+            link.removeEventListener('click', link._subHandler);
+            const handler = (e) => {
                 e.preventDefault();
                 const sub = link.getAttribute('data-sub');
                 const parentPage = link.closest('.dropdown').querySelector('a[data-page]')?.getAttribute('data-page');
-                if (parentPage && sub) setActivePage(parentPage, sub);
-                if (window.innerWidth <= 768) {
+                if (parentPage && sub) {
+                    setActivePage(parentPage, sub);
+                }
+                if (isMobile) {
                     document.getElementById('navLinks').classList.remove('show');
                 }
-            });
+            };
+            link.addEventListener('click', handler);
+            link._subHandler = handler;
         });
         const langBtn = document.getElementById('langToggle');
         if (langBtn) {
@@ -785,7 +1005,7 @@
         }
     }
 
-    // 主页（宣传册表单）
+    // 主页表单
     function renderHomeSimple() {
         return `
             ${renderCarousel('about', currentLang)}
@@ -800,39 +1020,22 @@
                         <input type="tel" placeholder="${t('phone_placeholder')}">
                         <button type="submit">${t('submit')}</button>
                     </form>
-                </div>
+                 </div>
             </div>
         `;
     }
 
-    // 板块概览页面
+    // 概览页面
     function renderOverview(pageKey) {
         const overview = t('overview');
         let title = '', desc = '';
         switch(pageKey) {
-            case 'industry':
-                title = overview.industry;
-                desc = overview.industry_desc;
-                break;
-            case 'products':
-                title = overview.products;
-                desc = overview.products_desc;
-                break;
-            case 'news':
-                title = overview.news;
-                desc = overview.news_desc;
-                break;
-            case 'social':
-                title = overview.social;
-                desc = overview.social_desc;
-                break;
-            case 'contact':
-                title = overview.contact;
-                desc = overview.contact_desc;
-                break;
-            default:
-                title = '';
-                desc = '';
+            case 'industry': title = overview.industry; desc = overview.industry_desc; break;
+            case 'products': title = overview.products; desc = overview.products_desc; break;
+            case 'news': title = overview.news; desc = overview.news_desc; break;
+            case 'social': title = overview.social; desc = overview.social_desc; break;
+            case 'contact': title = overview.contact; desc = overview.contact_desc; break;
+            default: break;
         }
         return `
             ${renderCarousel(pageKey, currentLang)}
@@ -846,7 +1049,7 @@
         `;
     }
 
-    // 子模块详情页面（与之前相同）
+    // 子模块详情
     function renderAboutSingle(subId) {
         const d = t('about_detail');
         const cap = d.capability_table;
@@ -862,7 +1065,7 @@
         if (!sec) return renderHomeSimple();
         return `${renderCarousel('about', currentLang)}<div class="container"><div class="sub-section"><h2>${sec.title}</h2>${sec.content}</div></div>`;
     }
-
+    
     function renderIndustrySingle(subId) {
         const d = t('industry_detail');
         const map = {
@@ -877,7 +1080,7 @@
         if (!item) return renderOverview('industry');
         return `${renderCarousel('industry', currentLang)}<div class="container"><div class="sub-section"><h2>${item.title}</h2><p>${item.desc}</p></div></div>`;
     }
-
+    
     function renderProductsSingle(subId) {
         const d = t('products_detail');
         const prodMap = {
@@ -901,7 +1104,7 @@
         }
         return `${renderCarousel('products', currentLang)}<div class="container"><div class="sub-section"><h2>${item.title}</h2>${content}</div></div>`;
     }
-
+    
     function renderNewsSingle(subId) {
         const d = t('news_detail');
         if (subId === 'company_news') {
@@ -911,7 +1114,7 @@
         }
         return renderOverview('news');
     }
-
+    
     function renderSocialSingle(subId) {
         const d = t('social_detail');
         if (subId === 'environment') {
@@ -919,7 +1122,7 @@
         }
         return renderOverview('social');
     }
-
+    
     function renderContactSingle(subId) {
         const d = t('contact_detail');
         if (subId === 'offices') {
@@ -963,9 +1166,7 @@
                 const page = link.getAttribute('data-page');
                 const sub = link.getAttribute('data-sub');
                 if (page) setActivePage(page, sub);
-                if (window.innerWidth <= 768) {
-                    document.getElementById('navLinks').classList.remove('show');
-                }
+                if (isMobile) document.getElementById('navLinks').classList.remove('show');
             });
         });
     }
@@ -996,6 +1197,7 @@
             html = renderHomeSimple();
         }
         document.getElementById('app').innerHTML = `<div class="page-section active-page">${html}</div>`;
+        
         if (page === 'about' && !targetSub) {
             const form = document.getElementById('brochureForm');
             if (form) {
@@ -1007,11 +1209,11 @@
             }
         }
         initCarousel(page);
-        // 更新导航栏激活状态
         document.querySelectorAll('.nav-links > li > a[data-page]').forEach(a => {
             if(a.getAttribute('data-page') === page) a.classList.add('active');
             else a.classList.remove('active');
         });
+        
         const stmtTitle = document.querySelector('#social-statement-container .social-statement h3');
         const stmtContent = document.querySelector('#social-statement-container .social-statement p');
         const footerAddr = document.querySelector('footer [data-i18n="footer_address"]');
@@ -1036,7 +1238,6 @@
         if (btn) btn.innerText = currentLang === 'zh' ? 'English' : '中文';
     }
 
-    // 初始化
     function init() {
         renderNavbar();
         let initialHash = window.location.hash.slice(1);
@@ -1048,20 +1249,24 @@
             if (parts.length > 1) initSub = parts[1];
         }
         setActivePage(initPage, initSub);
+        
         document.getElementById('logoHome').addEventListener('click', () => setActivePage('about', null));
-        const menuToggle = document.getElementById('menuToggle');
-        menuToggle.addEventListener('click', (e) => {
+        
+        document.getElementById('menuToggle').addEventListener('click', (e) => {
             e.stopPropagation();
             document.getElementById('navLinks').classList.toggle('show');
         });
+        
+        // 点击页面其他区域关闭移动端菜单
         document.addEventListener('click', function(e) {
             const nav = document.getElementById('navLinks');
             const toggle = document.getElementById('menuToggle');
-            if (window.innerWidth <= 768 && nav && !nav.contains(e.target) && !toggle.contains(e.target)) {
+            if (isMobile && nav && nav.classList.contains('show') && !nav.contains(e.target) && !toggle.contains(e.target)) {
                 nav.classList.remove('show');
             }
         });
     }
+    
     init();
 </script>
 </body>
