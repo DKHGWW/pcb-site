@@ -15,6 +15,8 @@
             line-height: 1.5;
         }
         .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+        
+        /* ================= 桌面端两层导航栏样式 ================= */
         .navbar {
             background: #ffffff;
             box-shadow: 0 4px 20px rgba(0,0,0,0.05);
@@ -23,41 +25,84 @@
             z-index: 100;
             border-bottom: 1px solid #d9e6f7;
         }
-        .nav-container {
+
+        .nav-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            padding: 16px 24px;
             max-width: 1400px;
             margin: 0 auto;
+            padding: 16px 24px 0 24px;
+            position: relative;
         }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+        }
+
         .logo { cursor: pointer; }
-        
+
+        /* 右上角工具栏（仅中英文切换） */
+        .top-utils {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* 导航链接 */
+        .nav-links { 
+            display: flex; 
+            width: 100%;
+            justify-content: space-around; 
+            list-style: none; 
+            flex-wrap: wrap; 
+            align-items: center; 
+        }
+
+        .nav-links > li > a { 
+            text-decoration: none; 
+            font-weight: 500; 
+            color: #4b5563;
+            transition: 0.2s; 
+            display: inline-block; 
+            padding: 8px 0; 
+            font-size: 15px;
+        }
+        .nav-links > li > a:hover, .nav-links > li > a.active { color: #2563eb; }
+
         .dropdown { position: relative; }
         
         /* 二级菜单样式 */
         .dropdown-menu {
             position: absolute;
             top: 100%;
-            left: 0;
-            background: rgba(255, 255, 255, 0.6);
+            left: 50%;
+            transform: translateX(-50%) translateY(-12px);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(12px);
             border-radius: 20px;
-            min-width: 200px;
+            min-width: 180px;
             padding: 12px 8px;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(-12px);
             transition: all 0.25s ease;
             z-index: 200;
             border: 1px solid rgba(37, 99, 235, 0.2);
             box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+            text-align: center;
         }
         .dropdown:hover .dropdown-menu {
             opacity: 1;
             visibility: visible;
-            transform: translateY(0);
+            transform: translateX(-50%) translateY(0);
         }
         .dropdown-menu a {
             display: block;
@@ -74,39 +119,34 @@
         .dropdown-menu a:hover {
             background: rgba(37, 99, 235, 0.12);
             color: #2563eb;
-            transform: translateX(4px);
         }
         
-        .nav-links { display: flex; gap: 28px; list-style: none; flex-wrap: wrap; align-items: center; }
-        .nav-links > li > a { text-decoration: none; font-weight: 500; color: #1e293b; transition: 0.2s; display: inline-block; padding: 8px 0; }
-        .nav-links > li > a:hover, .nav-links > li > a.active { color: #2563eb; }
-        
+        /* 语言切换按钮统一样式 (白色背景风格) */
         .lang-btn {
-            background: rgba(37, 99, 235, 0.1);
-            border: 1px solid rgba(37, 99, 235, 0.3);
+            background: transparent;
+            border: 1px solid #cbd5e1;
             border-radius: 40px;
-            padding: 6px 16px;
+            padding: 6px 18px;
             font-size: 0.85rem;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
             color: #1e293b;
-            margin-left: 8px;
         }
         .lang-btn:hover {
-            background: #2563eb;
+            background: #f8fafc;
             border-color: #2563eb;
-            color: white;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(37,99,235,0.2);
+            color: #2563eb;
         }
-        
+
+        .mobile-lang-wrapper { display: none; }
         .menu-icon { display: none; font-size: 1.6rem; cursor: pointer; }
+        
+        /* 页面其他内容样式 */
         .page-section { display: none; animation: fadeIn 0.3s ease; padding: 60px 0 20px 0; border-bottom: 1px solid #d9e6f7; }
         .page-section.active-page { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* 轮播图容器（支持触摸滑动） */
         .carousel {
             position: relative;
             width: 100%;
@@ -123,13 +163,10 @@
             display: flex;
             transition: transform 0.3s ease;
             cursor: grab;
-            /* 防止拖拽导致事件中断 */
             user-select: none;
             -webkit-user-select: none;
         }
-        .carousel-inner:active {
-            cursor: grabbing;
-        }
+        .carousel-inner:active { cursor: grabbing; }
         .carousel-item {
             flex: 0 0 100%;
             height: 100%;
@@ -171,7 +208,6 @@
         }
         .carousel-indicators span.active { background-color: #2563eb; transform: scale(1.2); }
         
-        /* 左右箭头样式 */
         .carousel-prev, .carousel-next {
             position: absolute;
             top: 50%;
@@ -197,18 +233,6 @@
             background: rgba(0,0,0,0.7);
             transform: translateY(-50%) scale(1.05);
         }
-        @media (max-width: 768px) {
-            .carousel-inner { height: 280px; }
-            .carousel-caption h3 { font-size: 1.2rem; }
-            .carousel-caption p { font-size: 0.8rem; }
-            .carousel-prev, .carousel-next {
-                width: 32px;
-                height: 32px;
-                font-size: 16px;
-            }
-            .carousel-prev { left: 8px; }
-            .carousel-next { right: 8px; }
-        }
         
         .overview-card {
             max-width: 800px;
@@ -219,100 +243,41 @@
             text-align: center;
             box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
         }
-        .overview-card h2 {
-            font-size: 2rem;
-            color: #0f2b5e;
-            margin-bottom: 20px;
-        }
-        .overview-card p {
-            color: #4b5563;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
+        .overview-card h2 { font-size: 2rem; color: #0f2b5e; margin-bottom: 20px; }
+        .overview-card p { color: #4b5563; font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px; }
         .overview-card .btn-outline {
-            border: 1px solid #2563eb;
-            background: transparent;
-            padding: 10px 28px;
-            border-radius: 40px;
-            font-weight: 500;
-            text-decoration: none;
-            color: #2563eb;
-            transition: 0.2s;
-            display: inline-block;
+            border: 1px solid #2563eb; background: transparent; padding: 10px 28px;
+            border-radius: 40px; font-weight: 500; text-decoration: none; color: #2563eb;
+            transition: 0.2s; display: inline-block;
         }
-        .overview-card .btn-outline:hover {
-            background: #2563eb;
-            color: white;
-        }
+        .overview-card .btn-outline:hover { background: #2563eb; color: white; }
         
         .home-form-large {
-            max-width: 700px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 32px;
-            padding: 48px 40px;
-            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
-            text-align: center;
+            max-width: 700px; margin: 0 auto; background: white; border-radius: 32px;
+            padding: 48px 40px; box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1); text-align: center;
         }
-        .home-form-large h3 {
-            font-size: 2rem;
-            color: #0f2b5e;
-            margin-bottom: 20px;
-        }
-        .home-form-large p {
-            color: #4b5563;
-            margin-bottom: 32px;
-            font-size: 1rem;
-            line-height: 1.6;
-        }
+        .home-form-large h3 { font-size: 2rem; color: #0f2b5e; margin-bottom: 20px; }
+        .home-form-large p { color: #4b5563; margin-bottom: 32px; font-size: 1rem; line-height: 1.6; }
         .home-form-large input, .home-form-large textarea {
-            width: 100%;
-            padding: 14px 18px;
-            border: 1px solid #cbd5e1;
-            border-radius: 40px;
-            margin-bottom: 20px;
-            font-family: inherit;
-            font-size: 0.95rem;
+            width: 100%; padding: 14px 18px; border: 1px solid #cbd5e1;
+            border-radius: 40px; margin-bottom: 20px; font-family: inherit; font-size: 0.95rem;
         }
         .home-form-large input:focus, .home-form-large textarea:focus {
-            outline: none;
-            border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+            outline: none; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
         }
         .home-form-large button {
-            background: #2563eb;
-            color: white;
-            border: none;
-            padding: 14px 28px;
-            border-radius: 40px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
+            background: #2563eb; color: white; border: none; padding: 14px 28px;
+            border-radius: 40px; font-size: 1rem; font-weight: 600; cursor: pointer; width: 100%;
         }
         .home-form-large button:hover { background: #1e4a7a; }
-        @media (max-width: 768px) {
-            .home-form-large { padding: 32px 24px; }
-            .home-form-large h3 { font-size: 1.5rem; }
-        }
 
         .sub-section {
-            scroll-margin-top: 100px;
-            margin-bottom: 60px;
-            background: white;
-            border-radius: 28px;
-            padding: 32px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            border: 1px solid #d9e6f7;
+            scroll-margin-top: 100px; margin-bottom: 60px; background: white;
+            border-radius: 28px; padding: 32px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #d9e6f7;
         }
         .sub-section h2 {
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: #0f2b5e;
-            margin-bottom: 20px;
-            border-left: 4px solid #2563eb;
-            padding-left: 16px;
+            font-size: 1.6rem; font-weight: 600; color: #0f2b5e; margin-bottom: 20px;
+            border-left: 4px solid #2563eb; padding-left: 16px;
         }
         .table-wrapper { overflow-x: auto; border-radius: 20px; background: white; margin-top: 20px; }
         .capability-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
@@ -322,92 +287,56 @@
         .info-card { background: #f8fafc; border-radius: 20px; padding: 20px; }
         .info-card h3 { margin-bottom: 12px; color: #1e4a7a; }
         .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 12px;
-            margin-bottom: 16px;
+            width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 12px; margin-bottom: 16px;
         }
         .contact-form button {
-            background: #2563eb;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 40px;
-            cursor: pointer;
+            background: #2563eb; color: white; border: none; padding: 12px 24px; border-radius: 40px; cursor: pointer;
         }
+        
         .social-statement {
-            background: #eef2ff;
-            border-radius: 28px;
-            padding: 40px 28px;
-            margin: 60px auto 0;
-            text-align: center;
-            max-width: 1200px;
+            background: #eef2ff; border-radius: 28px; padding: 40px 28px; margin: 60px auto 0;
+            text-align: center; max-width: 1200px;
         }
         .social-statement h3 { font-size: 1.5rem; color: #0f2b5e; margin-bottom: 20px; }
         .social-statement p { color: #334155; line-height: 1.7; max-width: 900px; margin: 0 auto; }
-        .footer-links {
-            background: #ffffff;
-            border-top: 1px solid #d9e6f7;
-            border-bottom: 1px solid #d9e6f7;
-            padding: 48px 0;
-            margin-top: 40px;
-        }
-        .footer-links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-            gap: 32px;
-        }
-        .footer-links-col h4 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #0f2b5e;
-            margin-bottom: 16px;
-            padding-bottom: 8px;
-            position: relative;
-        }
-        .footer-links-col h4:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 32px;
-            height: 2px;
-            background: #2563eb;
-        }
+        
+        .footer-links { background: #ffffff; border-top: 1px solid #d9e6f7; border-bottom: 1px solid #d9e6f7; padding: 48px 0; margin-top: 40px; }
+        .footer-links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 32px; }
+        .footer-links-col h4 { font-size: 1.1rem; font-weight: 700; color: #0f2b5e; margin-bottom: 16px; padding-bottom: 8px; position: relative; }
+        .footer-links-col h4:after { content: ''; position: absolute; bottom: 0; left: 0; width: 32px; height: 2px; background: #2563eb; }
         .footer-links-col ul { list-style: none; }
         .footer-links-col li { margin-bottom: 10px; }
-        .footer-links-col a {
-            text-decoration: none;
-            color: #4b5563;
-            font-size: 0.85rem;
-            transition: 0.2s;
-        }
+        .footer-links-col a { text-decoration: none; color: #4b5563; font-size: 0.85rem; transition: 0.2s; }
         .footer-links-col a:hover { color: #2563eb; padding-left: 4px; }
+        
         footer { background: #0f172a; color: #cbd5e1; padding: 48px 0 24px; text-align: center; margin-top: 0; }
         
         /* 移动端样式修正 */
         @media (max-width: 768px) {
+            .carousel-inner { height: 280px; }
+            .carousel-caption h3 { font-size: 1.2rem; }
+            .carousel-caption p { font-size: 0.8rem; }
+            .carousel-prev, .carousel-next { width: 32px; height: 32px; font-size: 16px; }
+            .carousel-prev { left: 8px; }
+            .carousel-next { right: 8px; }
+            
+            .home-form-large { padding: 32px 24px; }
+            .home-form-large h3 { font-size: 1.5rem; }
+            
             .footer-links-grid { grid-template-columns: repeat(2, 1fr); }
             
-            /* 1. 强制不换行，让 Logo 和菜单按钮保持在同一行 */
-            .nav-container { 
-                position: relative; 
-                flex-wrap: nowrap; 
-            }
+            /* 1. 移动端隐藏底部目录 */
+            .footer-links { display: none; }
             
-            /* 2. 限制 Logo 尺寸，避免在移动端放大 */
-            .logo {
-                max-width: 70%; 
-                display: flex;
-                align-items: center;
-            }
-            .logo img {
-                width: auto !important; 
-                max-width: 100%; 
-                height: 38px !important; /* 移动端高度稍微缩小一点，保证导航栏精致 */
-                object-fit: contain;
-            }
+            /* 2. 移动端隐藏顶部工具栏（语言切换移至菜单内） */
+            .top-utils { display: none; }
+            
+            .nav-top { padding: 16px 24px; position: relative; }
+            .nav-bottom { padding: 0; }
+            
+            /* 保证Logo样式 */
+            .logo { max-width: 70%; display: flex; align-items: center; }
+            .logo img { width: auto !important; max-width: 100%; height: 38px !important; object-fit: contain; }
             
             .nav-links {
                 display: none;
@@ -428,75 +357,59 @@
                 -webkit-overflow-scrolling: touch;
                 z-index: 999;
                 border-top: 1px solid #eef2f8; 
+                justify-content: flex-start;
             }
-            .nav-links.show {
-                display: flex;
-            }
+            .nav-links.show { display: flex; }
             
-            /* 深蓝色三横岗图标样式 */
-            .menu-icon {
-                display: block;
-                background-color: #2563eb; /* 与轮播图圆点一致的深蓝色 */
-                color: white;             
-                padding: 8px 12px;        
-                border-radius: 8px;       
-            }
+            .menu-icon { display: block; background-color: #2563eb; color: white; padding: 8px 12px; border-radius: 8px; }
             
-            .dropdown {
-                width: 100%;
-                text-align: center;
-            }
+            .dropdown { width: 100%; text-align: center; }
             .dropdown-menu {
-                position: static;
-                background: #f8fafc;
-                backdrop-filter: none;
-                box-shadow: none;
-                padding: 0;
-                margin-top: 8px;
-                opacity: 1;
-                visibility: visible;
-                transform: none;
-                display: none;
-                border: none;
-                max-height: none;
-                overflow: visible;
+                position: static; background: #f8fafc; backdrop-filter: none; box-shadow: none;
+                padding: 0; margin-top: 8px; opacity: 1; visibility: visible; transform: none;
+                display: none; border: none; max-height: none; overflow: visible;
             }
-            .dropdown.active .dropdown-menu {
-                display: block;
-            }
-            .dropdown-menu a {
-                text-align: center;
-                padding: 12px 0; 
-            }
-            .nav-container .lang-btn {
-                margin-left: auto;
-                margin-right: 16px;
-            }
+            .dropdown.active .dropdown-menu { display: block; }
+            .dropdown-menu a { text-align: center; padding: 12px 0; }
+            
+            .mobile-lang-wrapper { display: block; margin-top: 10px; }
         }
     </style>
 </head>
 <body>
 <nav class="navbar">
-    <div class="nav-container">
-        <div class="logo" id="logoHome">
-            <img src="e7af5013ff6f7f414c0eff4a6de2f6e4.png" alt="Sichuan Kinming Electronics Co., Ltd. Logo" style="height: 45px; width: auto; display: block;">
+    <div class="nav-top">
+        <div class="logo-group">
+            <div class="logo" id="logoHome">
+                <img src="e7af5013ff6f7f414c0eff4a6de2f6e4.png" alt="Sichuan Kinming Electronics Co., Ltd. Logo" style="height: 45px; width: auto; display: block;">
+            </div>
         </div>
         <div class="menu-icon" id="menuToggle"><i class="fas fa-bars"></i></div>
+        
+        <div class="top-utils">
+            <button class="lang-btn" id="langToggle">ENGLISH</button>
+        </div>
+    </div>
+    <div class="nav-bottom">
         <ul class="nav-links" id="navLinks"></ul>
     </div>
 </nav>
+
 <main id="app"></main>
+
 <div class="container" id="social-statement-container">
     <div class="social-statement">
         <h3 data-i18n="statement_title">🌿 践行绿色制造，共创可持续未来</h3>
         <p data-i18n="statement_content">井明电子始终将环境保护与社会责任融入企业发展战略。我们严格遵守 RoHS、REACH 等国际环保指令，投资建设先进的废水处理与中水回用系统，厂区光伏发电覆盖率已达30%。同时，我们积极参与社区公益，关爱员工成长，致力于成为负责任、有温度的行业标杆。未来，我们将持续加大环保投入，推动低碳生产，与合作伙伴共同守护绿水青山。</p>
     </div>
 </div>
+
 <div class="footer-links">
     <div class="container">
         <div class="footer-links-grid" id="footerLinksGrid"></div>
     </div>
 </div>
+
 <footer>
     <div class="container">
         <div>© 2025 四川井明电子有限公司 | 精密PCB 智造全球</div>
@@ -628,7 +541,6 @@
         bindEvents() {
             if (!this.inner) return;
             
-            // 【重要修复】将触摸事件绑定到固定不动的外层容器(container)上，防止inner移动后脱离触摸范围
             this.container.addEventListener('touchstart', (e) => {
                 this.stopAutoPlay();
                 this.startX = e.touches[0].clientX;
@@ -645,7 +557,6 @@
                 if (newTransform < -(this.items.length - 1) * 100) newTransform = -(this.items.length - 1) * 100;
                 this.inner.style.transform = `translateX(${newTransform}%)`;
                 
-                // 判断是否是水平滑动，是的话阻止页面上下滚动
                 if (Math.abs(diff) > 5 && e.cancelable) {
                     e.preventDefault();
                 }
@@ -666,7 +577,6 @@
                 this.currentX = 0;
             });
             
-            // 兜底处理触摸取消事件
             this.container.addEventListener('touchcancel', () => {
                 if (!this.isDragging) return;
                 this.isDragging = false;
@@ -674,7 +584,6 @@
                 this.startAutoPlay();
             });
 
-            // 鼠标拖拽支持（桌面端）同理绑定到 container
             this.container.addEventListener('mousedown', (e) => {
                 e.preventDefault();
                 this.stopAutoPlay();
@@ -752,7 +661,7 @@
     // ======================= 多语言文本 =======================
     const langText = {
         zh: {
-            nav_about: "关于井明", nav_industry: "行业市场", nav_products: "产品技术", nav_news: "新闻中心", nav_social: "社会责任", nav_contact: "联系我们",
+            nav_about: "关于井明", nav_industry: "市场", nav_products: "产品与服务", nav_news: "新闻", nav_social: "供应链", nav_contact: "联系我们",
             footer_address: "地址：四川省遂宁市经济技术开发区渠河南路188号电子电路标准厂房一期3号楼 | 通过ISO9001 & IATF16949",
             statement_title: "🌿 践行绿色制造，共创可持续未来",
             statement_content: "井明电子始终将环境保护与社会责任融入企业发展战略。我们严格遵守 RoHS、REACH 等国际环保指令，投资建设先进的废水处理与中水回用系统，厂区光伏发电覆盖率已达30%。同时，我们积极参与社区公益，关爱员工成长，致力于成为负责任、有温度的行业标杆。未来，我们将持续加大环保投入，推动低碳生产，与合作伙伴共同守护绿水青山。",
@@ -765,13 +674,13 @@
             submit: "提交",
             thank_you: "感谢您的留言，我们会尽快联系您。",
             overview: {
-                industry: "行业市场",
+                industry: "市场",
                 industry_desc: "井明电子深度服务多个战略行业，提供高可靠性PCB解决方案。请从上方下拉菜单中选择具体细分市场，查看详细产品信息。",
-                products: "产品技术",
+                products: "产品与服务",
                 products_desc: "我们提供从常规电路板到高精密HDI、高多层板、金属基板等全系列PCB产品。请从下拉菜单中选择具体产品类别，了解制程能力与设备信息。",
                 news: "新闻中心",
                 news_desc: "了解井明电子最新动态、行业资讯及技术突破。请从下拉菜单中选择“公司新闻”或“行业动态”。",
-                social: "社会责任",
+                social: "供应链",
                 social_desc: "井明电子积极履行社会责任，坚持绿色制造与可持续发展。请从下拉菜单查看“环境保护”详细举措。",
                 contact: "联系我们",
                 contact_desc: "如您有任何需求或疑问，欢迎通过“服务据点”查找离您最近的办事处，或使用“在线留言”功能与我们取得联系。"
@@ -786,10 +695,10 @@
             },
             footerLinks: {
                 about: { title: "关于井明", items: ["公司简介", "制程能力", "管理体系", "井明荣誉", "组织架构", "品质保证"] },
-                industry: { title: "行业市场", items: ["网络通信", "汽车电子", "智能终端", "工控医疗", "电源", "消费电子"] },
-                products: { title: "产品技术", items: ["常规电路板", "高密度互联板", "高多层电路板", "金属基板", "制程能力", "生产设备", "检测设备"] },
-                news: { title: "新闻中心", items: ["公司新闻", "行业动态"] },
-                social: { title: "社会责任", items: ["环境保护"] },
+                industry: { title: "市场", items: ["网络通信", "汽车电子", "智能终端", "工控医疗", "电源", "消费电子"] },
+                products: { title: "产品与服务", items: ["常规电路板", "高密度互联板", "高多层电路板", "金属基板", "制程能力", "生产设备", "检测设备"] },
+                news: { title: "新闻", items: ["公司新闻", "行业动态"] },
+                social: { title: "供应链", items: ["环境保护"] },
                 contact: { title: "联系我们", items: ["服务据点", "在线留言"] }
              },
             about_detail: {
@@ -832,7 +741,7 @@
             }
         },
         en: {
-            nav_about: "About Kinming", nav_industry: "Markets", nav_products: "Products & Tech", nav_news: "News", nav_social: "CSR", nav_contact: "Contact",
+            nav_about: "About", nav_industry: "Markets", nav_products: "Products", nav_news: "News", nav_social: "Supply Chain", nav_contact: "Contact",
             footer_address: "Address: Building 3, Phase I, Electronic Circuit Standard Plant, No.188 Quhe South Road, Economic Development Zone, Suining City, Sichuan Province | ISO9001 & IATF16949",
             statement_title: "🌿 Green Manufacturing for a Sustainable Future",
             statement_content: "Kinming Electronics integrates environmental protection and social responsibility into our strategy. We strictly comply with RoHS, REACH, have built advanced wastewater treatment and reuse systems, and achieve 30% solar power coverage. We actively participate in community welfare and care for employee growth.",
@@ -851,7 +760,7 @@
                 products_desc: "We offer a full range of PCBs from standard to high-precision HDI, high-multilayer, and metal core boards. Select a product category from the dropdown menu to learn about capabilities and equipment.",
                 news: "News Center",
                 news_desc: "Stay updated with Kinming's latest news, industry trends, and technological breakthroughs. Choose 'Company News' or 'Industry Trends' from the dropdown menu.",
-                social: "CSR",
+                social: "Supply Chain",
                 social_desc: "Kinming actively fulfills its social responsibilities, adhering to green manufacturing and sustainable development. View 'Environmental Protection' details from the dropdown menu.",
                 contact: "Contact Us",
                 contact_desc: "For any inquiries, please find your nearest office via 'Service Locations' or use the 'Online Message' form to get in touch with us."
@@ -865,11 +774,11 @@
                 contact: ["Service Locations", "Online Message"]
             },
             footerLinks: {
-                about: { title: "About Kinming", items: ["Company Profile", "Process Capability", "Management System", "Honors", "Organization", "Quality Assurance"] },
+                about: { title: "About", items: ["Company Profile", "Process Capability", "Management System", "Honors", "Organization", "Quality Assurance"] },
                 industry: { title: "Markets", items: ["Telecom & Networking", "Automotive Electronics", "Smart Devices", "Industrial & Medical", "Power Supply", "Consumer Electronics"] },
-                products: { title: "Products & Tech", items: ["Standard PCB", "HDI PCB", "High Multilayer", "Metal Core PCB", "Process Capability", "Production Equipment", "Testing Equipment"] },
+                products: { title: "Products", items: ["Standard PCB", "HDI PCB", "High Multilayer", "Metal Core PCB", "Process Capability", "Production Equipment", "Testing Equipment"] },
                 news: { title: "News", items: ["Company News", "Industry Trends"] },
-                social: { title: "CSR", items: ["Environmental Protection"] },
+                social: { title: "Supply Chain", items: ["Environmental Protection"] },
                 contact: { title: "Contact", items: ["Service Locations", "Online Message"] }
             },
             about_detail: {
@@ -926,7 +835,6 @@
         return val;
     }
 
-    // 渲染导航栏
     function renderNavbar() {
         const navContainer = document.getElementById('navLinks');
         if (!navContainer) return;
@@ -954,10 +862,12 @@
             }
             html += `</div></li>`;
         }
-        html += `<li><button class="lang-btn" id="langToggle">English</button></li>`;
+        
+        // 为移动端菜单内单独插入一个语言切换按钮
+        html += `<li class="mobile-lang-wrapper"><button class="lang-btn" id="langToggleMobile">English</button></li>`;
         navContainer.innerHTML = html;
         
-        // 绑定一级菜单点击（移动端展开/收起，桌面端跳转）
+        // 绑定事件
         document.querySelectorAll('.nav-links > li > a[data-page]').forEach(link => {
             link.removeEventListener('click', link._clickHandler);
             const handler = (e) => {
@@ -967,9 +877,7 @@
                     if (parentLi) {
                         const wasActive = parentLi.classList.contains('active');
                         document.querySelectorAll('.nav-links .dropdown').forEach(d => d.classList.remove('active'));
-                        if (!wasActive) {
-                            parentLi.classList.add('active');
-                        }
+                        if (!wasActive) parentLi.classList.add('active');
                     }
                 } else {
                     const page = link.getAttribute('data-page');
@@ -981,28 +889,38 @@
             link._clickHandler = handler;
         });
         
-        // 绑定二级菜单点击（总是跳转）
         document.querySelectorAll('.dropdown-menu a[data-sub]').forEach(link => {
             link.removeEventListener('click', link._subHandler);
             const handler = (e) => {
                 e.preventDefault();
                 const sub = link.getAttribute('data-sub');
                 const parentPage = link.closest('.dropdown').querySelector('a[data-page]')?.getAttribute('data-page');
-                if (parentPage && sub) {
-                    setActivePage(parentPage, sub);
-                }
-                if (isMobile) {
-                    document.getElementById('navLinks').classList.remove('show');
-                }
+                if (parentPage && sub) setActivePage(parentPage, sub);
+                if (isMobile) document.getElementById('navLinks').classList.remove('show');
             };
             link.addEventListener('click', handler);
             link._subHandler = handler;
         });
-        const langBtn = document.getElementById('langToggle');
-        if (langBtn) {
-            langBtn.innerText = currentLang === 'zh' ? 'English' : '中文';
-            langBtn.onclick = switchLanguage;
+
+        // 统一处理双端语言切换按钮逻辑
+        const langBtnDesktop = document.getElementById('langToggle');
+        const langBtnMobile = document.getElementById('langToggleMobile');
+        const langTextTarget = currentLang === 'zh' ? 'ENGLISH' : '中文';
+        
+        if (langBtnDesktop) {
+            langBtnDesktop.innerText = langTextTarget;
+            langBtnDesktop.onclick = switchLanguage;
         }
+        if (langBtnMobile) {
+            langBtnMobile.innerText = langTextTarget;
+            langBtnMobile.onclick = switchLanguage;
+        }
+    }
+
+    function switchLanguage() {
+        currentLang = currentLang === 'zh' ? 'en' : 'zh';
+        renderNavbar(); 
+        loadPage(currentPage, currentSub);
     }
 
     // 主页表单
@@ -1230,14 +1148,6 @@
         loadPage(page, targetSub);
     }
 
-    function switchLanguage() {
-        currentLang = currentLang === 'zh' ? 'en' : 'zh';
-        renderNavbar();
-        loadPage(currentPage, currentSub);
-        const btn = document.getElementById('langToggle');
-        if (btn) btn.innerText = currentLang === 'zh' ? 'English' : '中文';
-    }
-
     function init() {
         renderNavbar();
         let initialHash = window.location.hash.slice(1);
@@ -1257,7 +1167,6 @@
             document.getElementById('navLinks').classList.toggle('show');
         });
         
-        // 点击页面其他区域关闭移动端菜单
         document.addEventListener('click', function(e) {
             const nav = document.getElementById('navLinks');
             const toggle = document.getElementById('menuToggle');
